@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escritorio para el Aula 2.0 - Funcional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+
+    <style>
+        :root {
+            --color-bg: #F4F8D3;
+            --color-widget-bg: #F7CFD8;
+            --color-widget-header: #8E7DBE;
+            --color-accent: #A6D6D6;
+            --color-text-light: #F4F8D3;
+            --color-text-dark: #493e6a;
+        }
+        body { font-family: 'Inter', sans-serif; overflow: hidden; background-color: var(--color-bg); }
+        #screen { width: 100vw; height: 100vh; background-size: cover; background-position: center; position: relative; }
+        .widget { position: absolute; min-height: 200px; background-color: var(--color-widget-bg); color: var(--color-text-dark); border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); display: flex; flex-direction: column; overflow: hidden; border: 2px solid var(--color-widget-header); resize: both; }
+        .widget-header { background-color: var(--color-widget-header); padding: 8px 12px; cursor: move; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: var(--color-text-light); flex-shrink: 0; }
+        .widget-close-btn { cursor: pointer; background: none; border: none; color: var(--color-text-light); font-size: 20px; line-height: 1; }
+        .widget-body { padding: 16px; flex-grow: 1; overflow-y: auto; }
+        #toolbar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px); padding: 10px; border-radius: 16px; display: flex; gap: 16px; box-shadow: 0 -5px 20px rgba(0,0,0,0.2); z-index: 10000; }
+        .toolbar-group { display: flex; gap: 8px; position: relative; padding: 0 8px; }
+        .toolbar-group:not(:last-child)::after { content: ''; position: absolute; right: -8px; top: 50%; transform: translateY(-50%); width: 2px; height: 30px; background-color: rgba(255, 255, 255, 0.3); }
+        .tool-btn { background-color: var(--color-widget-header); color: var(--color-text-light); border: none; border-radius: 8px; width: 50px; height: 50px; font-size: 24px; cursor: pointer; transition: background-color 0.2s, transform 0.2s; }
+        .tool-btn:hover { background-color: #7b69b1; transform: translateY(-3px); }
+        .custom-tooltip { position: fixed; background-color: var(--color-text-dark); color: white; padding: 5px 10px; border-radius: 6px; font-size: 14px; z-index: 10001; pointer-events: none; display: none; white-space: nowrap; transition: opacity 0.2s; }
+        .widget input, .widget textarea { background-color: var(--color-bg); color: var(--color-text-dark); border: 2px solid var(--color-accent); border-radius: 6px; padding: 8px; width: 100%; }
+        .widget input:focus, .widget textarea:focus { outline: none; border-color: var(--color-widget-header); }
+        .widget button { transition: background-color 0.2s; padding: 8px 12px; border-radius: 6px; font-weight: 600; }
+        .widget .btn-primary { background-color: var(--color-widget-header); color: var(--color-text-light); }
+        .widget .btn-primary:hover { background-color: #7b69b1; }
+        .widget .btn-secondary { background-color: var(--color-accent); color: var(--color-text-dark); }
+        .widget .btn-secondary:hover { background-color: #8ec9c9; }
+        .widget .btn-tertiary { background-color: var(--color-bg); color: var(--color-text-dark); }
+        .widget .btn-tertiary:hover { background-color: #e1e6b9; }
+        .traffic-light-body { background-color: #333; border-radius: 10px; display: flex; flex-direction: column; gap: 10px; padding: 10px; width: fit-content; margin: auto; cursor: pointer; }
+        .light { width: 60px; height: 60px; border-radius: 50%; background-color: #1a1a1a; border: 2px solid #555; }
+        .light.red.active { background-color: #ff4136; box-shadow: 0 0 20px #ff4136; }
+        .light.yellow.active { background-color: #ffdc00; box-shadow: 0 0 20px #ffdc00; }
+        .light.green.active { background-color: #2ecc40; box-shadow: 0 0 20px #2ecc40; }
+        .media-embed-container iframe, .media-embed-container img { width: 100%; height: 100%; border: none; border-radius: 6px; flex-grow: 1;}
+        .calendar-day-name { font-weight: 600; text-align: center; }
+        .calendar-day { text-align: center; padding: 8px; border-radius: 50%; cursor: pointer; }
+        .calendar-day:hover { background-color: var(--color-accent); }
+        .calendar-day.current-day { background-color: var(--color-widget-header); color: var(--color-text-light); }
+        .calendar-day.other-month { opacity: 0.3; }
+        .scoreboard-player { display: flex; justify-content: space-between; align-items: center; padding: 8px; border-bottom: 1px solid var(--color-accent); }
+        .scoreboard-player .score { font-size: 1.5rem; font-weight: bold; }
+        .scoreboard-player .controls button { width: 30px; height: 30px; line-height: 1; padding: 0; }
+        .gesture-card { background-color: var(--color-bg); border-radius: 8px; padding: 16px; text-align: center; cursor: pointer; border: 3px solid transparent; transition: border-color 0.2s, transform 0.2s; }
+        .gesture-card:hover { transform: scale(1.05); }
+        .gesture-card.active { border-color: var(--color-widget-header); }
+        .gesture-card .icon { font-size: 4rem; line-height: 1; margin-bottom: 8px; }
+        .task-list { list-style: none; padding: 0; }
+        .task-list li { display: flex; align-items: center; gap: 8px; padding: 8px; border-bottom: 1px solid var(--color-accent); }
+        .task-list li.completed label { text-decoration: line-through; opacity: 0.6; }
+        .task-list li input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--color-widget-header); }
+        .dice-results { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+        .dice-face { display: grid; grid-template-areas: "a . c" "e g f" "d . b"; flex-shrink: 0; padding: 8px; background-color: #F4F8D3; width: 70px; height: 70px; border-radius: 10px; border: 2px solid var(--color-accent); }
+        .dice-pip { display: block; align-self: center; justify-self: center; width: 15px; height: 15px; border-radius: 50%; background: var(--color-text-dark); }
+        .dice-pip:nth-child(1) { grid-area: g; } .dice-pip:nth-child(2) { grid-area: a; } .dice-pip:nth-child(3) { grid-area: b; } .dice-pip:nth-child(4) { grid-area: c; } .dice-pip:nth-child(5) { grid-area: d; } .dice-pip:nth-child(6) { grid-area: e; } .dice-pip:nth-child(7) { grid-area: f; }
+        .pip-map { 1: [1], 2: [2, 3], 3: [1, 2, 3], 4: [2, 3, 4, 5], 5: [1, 2, 3, 4, 5], 6: [2, 3, 4, 5, 6, 7] } /* Helper for dice */
+    </style>
+</head>
+<body>
+
+    <div id="screen"></div>
+
+    <div id="toolbar">
+        <div class="toolbar-group">
+            <button class="tool-btn" data-title="Temporizador" data-tool="Timer">⏱️</button>
+            <button class="tool-btn" data-title="Medidor de Sonido" data-tool="SoundMeter">🔊</button>
+            <button class="tool-btn" data-title="Semáforo" data-tool="TrafficLight">🚦</button>
+            <button class="tool-btn" data-title="Calendario" data-tool="Calendar">📅</button>
+            <button class="tool-btn" data-title="Lista de Trabajo" data-tool="WorkList">✅</button>
+        </div>
+        <div class="toolbar-group">
+            <button class="tool-btn" data-title="Bloc de Notas" data-tool="Notes">📝</button>
+            <button class="tool-btn" data-title="Agregador de Medios" data-tool="MediaEmbed">🖼️</button>
+            <button class="tool-btn" data-title="Gestos de Trabajo" data-tool="WorkGestures">🤫</button>
+            <button class="tool-btn" data-title="Generador QR" data-tool="QrGenerator">📱</button>
+        </div>
+        <div class="toolbar-group">
+            <button class="tool-btn" data-title="Grupos Aleatorios" data-tool="RandomGroups">🧑‍🤝‍🧑</button>
+            <button class="tool-btn" data-title="Selector Aleatorio" data-tool="StudentPicker">🎯</button>
+            <button class="tool-btn" data-title="Lanzar Dados" data-tool="Dice">🎲</button>
+            <button class="tool-btn" data-title="Marcador" data-tool="Scoreboard">💯</button>
+        </div>
+    </div>
+    
+    <div id="custom-tooltip" class="custom-tooltip"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    /**
+     * ------------------------------------------------------------------------
+     * Clase base para todos los Widgets
+     * ------------------------------------------------------------------------
+     */
+    class Widget {
+        constructor(toolId, title, state, desktop) {
+            this.id = state?.id || `${toolId}-${Date.now()}`;
+            this.toolId = toolId;
+            this.title = title;
+            this.desktop = desktop;
+            this.element = this.createBaseElement(state);
+            this.body = this.element.querySelector('.widget-body');
+            this.header = this.element.querySelector('.widget-header');
+            this.desktop.screen.appendChild(this.element);
+            this.makeDraggable();
+            this.body.innerHTML = this.getHTML();
+            this.init();
+            if (state?.data) this.restoreState(state.data);
+        }
+        getHTML() { return ''; }
+        init() { }
+        getState() { return {}; }
+        restoreState(data) { }
+        onClose() { }
+        createBaseElement(state) {
+            const widget = document.createElement('div');
+            widget.id = this.id;
+            widget.className = 'widget';
+            widget.style.left = state?.left || `${Math.random() * (window.innerWidth - 400)}px`;
+            widget.style.top = state?.top || `${Math.random() * (window.innerHeight - 300)}px`;
+            widget.style.width = state?.width || '400px';
+            widget.style.height = state?.height || 'auto';
+            widget.style.zIndex = state?.zIndex || this.desktop.getNextZIndex();
+            widget.innerHTML = `<div class="widget-header"><span>${this.title}</span><button class="widget-close-btn">×</button></div><div class="widget-body"></div>`;
+            widget.querySelector('.widget-close-btn').addEventListener('click', () => this.close());
+            return widget;
+        }
+        makeDraggable() {
+            let isDragging = false, offsetX, offsetY;
+            this.header.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                this.element.style.zIndex = this.desktop.getNextZIndex();
+                offsetX = e.clientX - this.element.offsetLeft;
+                offsetY = e.clientY - this.element.offsetTop;
+                const onMouseMove = (ev) => { if (isDragging) { this.element.style.left = `${ev.clientX - offsetX}px`; this.element.style.top = `${ev.clientY - offsetY}px`; } };
+                const onMouseUp = () => { isDragging = false; document.removeEventListener('mousemove', onMouseMove); document.removeEventListener('mouseup', onMouseUp); this.desktop.saveWidgetsState(); };
+                document.addEventListener('mousemove', onMouseMove);
+                document.addEventListener('mouseup', onMouseUp);
+            });
+            new ResizeObserver(() => this.desktop.saveWidgetsStateDebounced()).observe(this.element);
+        }
+        close() { this.onClose(); this.element.remove(); this.desktop.removeWidget(this.id); }
+    }
+
+    /**
+     * ------------------------------------------------------------------------
+     * Clases para cada Herramienta específica
+     * ------------------------------------------------------------------------
+     */
+
+    class Notes extends Widget {
+        getHTML() { return `<textarea class="notes-area w-full h-full p-2 text-lg" placeholder="Escribe aquí..." style="min-height: 150px;"></textarea>`; }
+        init() { this.textarea = this.body.querySelector('.notes-area'); this.textarea.addEventListener('input', () => this.desktop.saveWidgetsState()); }
+        getState() { return { text: this.textarea.value }; }
+        restoreState(data) { this.textarea.value = data.text; }
+    }
+
+    class MediaEmbed extends Widget {
+        getHTML() { return `<div class="flex flex-col h-full"><div class="flex gap-2 mb-2"><input type="text" class="media-url-input flex-grow" placeholder="Pega una URL..."><button class="media-load-btn btn-primary">Cargar</button></div><div class="media-embed-container flex-grow bg-black/20 rounded flex items-center justify-center"></div></div>`; }
+        init() { this.urlInput = this.body.querySelector('.media-url-input'); this.container = this.body.querySelector('.media-embed-container'); this.body.querySelector('.media-load-btn').addEventListener('click', () => { this.loadMedia(this.urlInput.value); this.desktop.saveWidgetsState(); }); }
+        loadMedia(url) {
+            this.currentUrl = url.trim(); if (!this.currentUrl) return; this.container.innerHTML = '';
+            const youtubeMatch = this.currentUrl.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+            if (youtubeMatch) this.container.innerHTML = `<iframe src="https://www.youtube.com/embed/${youtubeMatch[1]}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            else if (/\.(jpeg|jpg|gif|png|svg|webp)$/i.test(this.currentUrl)) this.container.innerHTML = `<img src="${this.currentUrl}" style="object-fit: contain;">`;
+            else this.container.innerHTML = `<iframe src="${this.currentUrl}"></iframe>`;
+        }
+        getState() { return { url: this.currentUrl || '' }; }
+        restoreState(data) { if (data.url) { this.urlInput.value = data.url; this.loadMedia(data.url); } }
+    }
+    
+    class Timer extends Widget {
+        getHTML() { return `<div class="text-center"><div class="timer-display text-6xl font-mono font-bold mb-4">00:00</div><div class="flex flex-wrap justify-center items-center gap-2 mb-4"><input type="number" min="0" max="59" value="5" class="timer-minutes w-16 p-1 text-center"><span class="font-semibold">m</span><input type="number" min="0" max="59" value="0" class="timer-seconds w-16 p-1 text-center"><span class="font-semibold">s</span></div><div class="flex justify-center gap-2"><button class="timer-start btn-primary">Iniciar</button><button class="timer-pause btn-secondary">Pausar</button><button class="timer-reset btn-tertiary">Reiniciar</button></div></div>`; }
+        init() {
+            this.display = this.body.querySelector('.timer-display'); this.minutesInput = this.body.querySelector('.timer-minutes'); this.secondsInput = this.body.querySelector('.timer-seconds');
+            this.timerInterval = null; this.totalSeconds = 0; this.initialMinutes = 5; this.initialSeconds = 0;
+            this.updateDisplay = () => { const min = String(Math.floor(this.totalSeconds / 60)).padStart(2, '0'); const sec = String(this.totalSeconds % 60).padStart(2, '0'); this.display.textContent = `${min}:${sec}`; this.display.style.color = this.totalSeconds <= 10 && this.totalSeconds > 0 ? '#d9534f' : 'var(--color-text-dark)'; };
+            this.setInitialTime = () => { this.initialMinutes = parseInt(this.minutesInput.value) || 0; this.initialSeconds = parseInt(this.secondsInput.value) || 0; this.totalSeconds = this.initialMinutes * 60 + this.initialSeconds; this.updateDisplay(); this.desktop.saveWidgetsState(); };
+            this.body.querySelector('.timer-start').addEventListener('click', () => { if (this.timerInterval) return; this.setInitialTime(); if (this.totalSeconds <= 0) return; this.timerInterval = setInterval(() => { this.totalSeconds--; this.updateDisplay(); if (this.totalSeconds <= 0) { clearInterval(this.timerInterval); this.timerInterval = null; this.display.textContent = "¡FIN!"; if(window.Tone) new Tone.Synth().toDestination().triggerAttackRelease("C5", "0.5s"); } }, 1000); });
+            this.body.querySelector('.timer-pause').addEventListener('click', () => { clearInterval(this.timerInterval); this.timerInterval = null; });
+            this.body.querySelector('.timer-reset').addEventListener('click', () => { clearInterval(this.timerInterval); this.timerInterval = null; this.setInitialTime(); });
+            this.minutesInput.addEventListener('change', this.setInitialTime); this.secondsInput.addEventListener('change', this.setInitialTime);
+            this.setInitialTime();
+        }
+        onClose() { clearInterval(this.timerInterval); }
+        getState() { return { minutes: this.initialMinutes, seconds: this.initialSeconds }; }
+        restoreState(data) { this.minutesInput.value = data.minutes; this.secondsInput.value = data.seconds; this.setInitialTime(); }
+    }
+
+    class Dice extends Widget {
+        getHTML() { return `<div class="text-center"><div class="flex justify-center items-center gap-4 mb-4"><label class="font-medium">Dados:</label><input type="number" min="1" max="10" value="2" class="dice-count w-20 p-1 text-center"></div><button class="dice-roll w-full btn-secondary text-xl">¡Lanzar!</button><div class="dice-results mt-4"></div></div>`; }
+        init() {
+            this.countInput = this.body.querySelector('.dice-count'); this.resultsDiv = this.body.querySelector('.dice-results');
+            this.body.querySelector('.dice-roll').addEventListener('click', () => { this.roll(); this.desktop.saveWidgetsState(); });
+        }
+        roll() {
+            const count = parseInt(this.countInput.value) || 1; this.resultsDiv.innerHTML = ''; const pipMap = { 1: [4], 2: [1, 7], 3: [1, 4, 7], 4: [1, 3, 5, 7], 5: [1, 3, 4, 5, 7], 6: [1, 2, 3, 5, 6, 7] };
+            for (let i = 0; i < count; i++) {
+                const value = Math.floor(Math.random() * 6) + 1; const face = document.createElement('div'); face.className = 'dice-face';
+                pipMap[value].forEach(pos => { const pip = document.createElement('span'); pip.className = 'dice-pip'; pip.style.gridArea = ['a', 'b', 'c', 'g', 'd', 'e', 'f'][pos - 1]; face.appendChild(pip); });
+                this.resultsDiv.appendChild(face);
+            }
+        }
+        getState() { return { count: this.countInput.value }; }
+        restoreState(data) { this.countInput.value = data.count; }
+    }
+
+    class StudentPicker extends Widget {
+        getHTML() { return `<div class="flex flex-col h-full"><h3 class="text-lg font-semibold">Lista</h3><textarea class="sp-names w-full h-24 p-2 mb-2" placeholder="Un nombre por línea..."></textarea><div class="flex items-center gap-2 mb-2"><p class="text-sm">Restantes: <span class="sp-student-count font-bold">0</span></p><button class="sp-reset py-1 px-3 btn-tertiary">Reiniciar</button></div><div class="sp-result w-full h-24 flex items-center justify-center bg-[#F4F8D3] rounded-lg text-3xl font-bold p-4 mb-2">?</div><button class="sp-pick w-full btn-secondary text-lg">¡Seleccionar!</button></div>`; }
+        init() {
+            this.namesArea = this.body.querySelector('.sp-names'); this.pickBtn = this.body.querySelector('.sp-pick'); this.resetBtn = this.body.querySelector('.sp-reset'); this.resultDiv = this.body.querySelector('.sp-result'); this.countSpan = this.body.querySelector('.sp-student-count');
+            this.allStudents = []; this.availableStudents = [];
+            this.updateLists = () => { const names = this.namesArea.value.split('\n').filter(n => n.trim() !== ''); this.allStudents = [...names]; this.availableStudents = [...names]; this.countSpan.textContent = this.availableStudents.length; this.desktop.saveWidgetsState(); };
+            this.namesArea.addEventListener('input', this.updateLists); this.resetBtn.addEventListener('click', this.updateLists);
+            this.pickBtn.addEventListener('click', () => {
+                if (this.availableStudents.length === 0) { this.resultDiv.textContent = this.allStudents.length > 0 ? 'Reinicia' : 'Añade'; return; }
+                let animationInterval = setInterval(() => { this.resultDiv.textContent = this.availableStudents[Math.floor(Math.random() * this.availableStudents.length)]; }, 100);
+                setTimeout(() => { clearInterval(animationInterval); const pickedIndex = Math.floor(Math.random() * this.availableStudents.length); this.resultDiv.textContent = this.availableStudents.splice(pickedIndex, 1)[0] || '?'; this.countSpan.textContent = this.availableStudents.length; this.desktop.saveWidgetsState(); }, 2000);
+            });
+            this.updateLists();
+        }
+        getState() { return { names: this.namesArea.value, available: this.availableStudents }; }
+        restoreState(data) { this.namesArea.value = data.names; this.allStudents = data.names.split('\n').filter(n => n.trim() !== ''); this.availableStudents = data.available; this.countSpan.textContent = this.availableStudents.length; }
+    }
+
+    class Scoreboard extends Widget {
+        getHTML() { return `<div class="flex flex-col h-full"><div class="scoreboard-setup"><h3 class="text-lg font-semibold">Jugadores/Equipos</h3><textarea class="scoreboard-names w-full p-2 mb-2" rows="4" placeholder="Un nombre por línea"></textarea><button class="scoreboard-start btn-primary w-full">Empezar</button></div><div class="scoreboard-main hidden"></div></div>`; }
+        init() {
+            this.setupDiv = this.body.querySelector('.scoreboard-setup'); this.mainDiv = this.body.querySelector('.scoreboard-main');
+            this.namesArea = this.body.querySelector('.scoreboard-names');
+            this.body.querySelector('.scoreboard-start').addEventListener('click', () => { this.start(); this.desktop.saveWidgetsState(); });
+        }
+        start() {
+            const names = this.namesArea.value.split('\n').filter(n => n.trim() !== ''); if (names.length === 0) return;
+            this.setupDiv.classList.add('hidden'); this.mainDiv.classList.remove('hidden'); this.mainDiv.innerHTML = '';
+            names.forEach(name => {
+                const playerDiv = document.createElement('div'); playerDiv.className = 'scoreboard-player';
+                playerDiv.innerHTML = `<span class="name font-semibold">${name}</span><div class="controls flex items-center gap-2"><button class="btn-minus btn-tertiary">-</button><span class="score">0</span><button class="btn-plus btn-secondary">+</button></div>`;
+                this.mainDiv.appendChild(playerDiv);
+                const scoreSpan = playerDiv.querySelector('.score');
+                playerDiv.querySelector('.btn-plus').addEventListener('click', () => { scoreSpan.textContent = parseInt(scoreSpan.textContent) + 1; this.desktop.saveWidgetsState(); });
+                playerDiv.querySelector('.btn-minus').addEventListener('click', () => { scoreSpan.textContent = Math.max(0, parseInt(scoreSpan.textContent) - 1); this.desktop.saveWidgetsState(); });
+            });
+        }
+        getState() {
+            const isSetup = !this.setupDiv.classList.contains('hidden');
+            if (isSetup) return { isSetup: true, names: this.namesArea.value };
+            const scores = Array.from(this.mainDiv.querySelectorAll('.scoreboard-player')).map(p => ({ name: p.querySelector('.name').textContent, score: p.querySelector('.score').textContent }));
+            return { isSetup: false, scores };
+        }
+        restoreState(data) {
+            if (data.isSetup) { this.namesArea.value = data.names; } 
+            else {
+                this.namesArea.value = data.scores.map(s => s.name).join('\n'); this.start();
+                const players = this.mainDiv.querySelectorAll('.scoreboard-player');
+                data.scores.forEach((s, i) => { if (players[i]) players[i].querySelector('.score').textContent = s.score; });
+            }
+        }
+    }
+    
+    // Y así con el resto... (Calendar, TrafficLight, etc.)
+    // ¡Aquí están el resto de las clases!
+    
+    class TrafficLight extends Widget {
+        getHTML() { return `<div class="traffic-light-body"><div class="light red"></div><div class="light yellow"></div><div class="light green"></div></div>`; }
+        init() {
+            this.lights = this.body.querySelectorAll('.light'); this.currentState = 0; // 0: red, 1: yellow, 2: green
+            this.body.querySelector('.traffic-light-body').addEventListener('click', () => { this.currentState = (this.currentState + 1) % 3; this.updateLights(); this.desktop.saveWidgetsState(); });
+            this.updateLights();
+        }
+        updateLights() {
+            this.lights.forEach(l => l.classList.remove('active'));
+            if (this.currentState === 0) this.lights[0].classList.add('active');
+            else if (this.currentState === 1) this.lights[1].classList.add('active');
+            else if (this.currentState === 2) this.lights[2].classList.add('active');
+        }
+        getState() { return { state: this.currentState }; }
+        restoreState(data) { this.currentState = data.state; this.updateLights(); }
+    }
+    
+    class Calendar extends Widget {
+        getHTML() { return `<div class="flex flex-col h-full"><div class="calendar-header flex justify-between items-center mb-4"><button class="prev-month-btn btn-secondary"><</button><h3 class="calendar-title text-xl font-bold"></h3><button class="next-month-btn btn-secondary">></button></div><div class="grid grid-cols-7 gap-1 text-center font-semibold"><div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div>S</div><div>D</div></div><div class="calendar-body grid grid-cols-7 gap-1 text-center mt-2"></div></div>`; }
+        init() {
+            this.headerTitle = this.body.querySelector('.calendar-title'); this.calendarBody = this.body.querySelector('.calendar-body');
+            this.date = new Date();
+            this.body.querySelector('.prev-month-btn').addEventListener('click', () => { this.date.setMonth(this.date.getMonth() - 1); this.renderCalendar(); });
+            this.body.querySelector('.next-month-btn').addEventListener('click', () => { this.date.setMonth(this.date.getMonth() + 1); this.renderCalendar(); });
+            this.renderCalendar();
+        }
+        renderCalendar() {
+            this.calendarBody.innerHTML = ''; const tempDate = new Date(this.date); tempDate.setDate(1);
+            const month = tempDate.getMonth(), year = tempDate.getFullYear();
+            this.headerTitle.textContent = `${new Intl.DateTimeFormat('es-ES', { month: 'long' }).format(tempDate)} ${year}`;
+            const firstDayIndex = tempDate.getDay() === 0 ? 6 : tempDate.getDay() - 1;
+            const prevLastDay = new Date(year, month, 0).getDate();
+            for (let x = firstDayIndex; x > 0; x--) this.calendarBody.innerHTML += `<div class="calendar-day other-month">${prevLastDay - x + 1}</div>`;
+            const monthDays = new Date(year, month + 1, 0).getDate();
+            const today = new Date();
+            for (let i = 1; i <= monthDays; i++) {
+                let classes = 'calendar-day';
+                if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) classes += ' current-day';
+                this.calendarBody.innerHTML += `<div class="${classes}">${i}</div>`;
+            }
+            const lastDayIndex = new Date(year, month + 1, 0).getDay();
+            const nextDays = 7 - (lastDayIndex === 0 ? 7 : lastDayIndex);
+            for (let j = 1; j <= nextDays; j++) this.calendarBody.innerHTML += `<div class="calendar-day other-month">${j}</div>`;
+        }
+    }
+    
+    // ... y el resto de widgets que tenías
+    class WorkList extends Widget {
+        getHTML() { return `<div class="flex flex-col h-full"><input type="text" class="work-list-input mb-2" placeholder="Añadir tarea y pulsar Enter..."><ul class="work-list-ul flex-grow overflow-y-auto"></ul></div>`; }
+        init() {
+            this.input = this.body.querySelector('.work-list-input'); this.ul = this.body.querySelector('.work-list-ul');
+            this.input.addEventListener('keypress', e => { if (e.key === 'Enter') { this.addTask(this.input.value); this.input.value = ''; this.desktop.saveWidgetsState(); } });
+        }
+        addTask(text, isCompleted = false) {
+            if (text.trim() === '') return;
+            const li = document.createElement('li'); li.innerHTML = `<input type="checkbox" class="task-checkbox"><label class="flex-grow">${text}</label>`;
+            const checkbox = li.querySelector('.task-checkbox'); checkbox.checked = isCompleted;
+            if (isCompleted) li.classList.add('completed');
+            this.ul.appendChild(li);
+            checkbox.addEventListener('change', e => { li.classList.toggle('completed', e.target.checked); this.desktop.saveWidgetsState(); });
+        }
+        getState() { return { tasks: Array.from(this.ul.querySelectorAll('li')).map(li => ({ text: li.querySelector('label').textContent, completed: li.classList.contains('completed') })) }; }
+        restoreState(data) { this.ul.innerHTML = ''; data.tasks.forEach(task => this.addTask(task.text, task.completed)); }
+    }
+    
+    class WorkGestures extends Widget {
+        getHTML() { return `<div class="grid grid-cols-2 gap-4"><div class="gesture-card" data-index="0"><div class="icon">🤫</div><div class="font-semibold">Silencio</div></div><div class="gesture-card" data-index="1"><div class="icon">🗣️</div><div class="font-semibold">Hablar Bajo</div></div><div class="gesture-card" data-index="2"><div class="icon">🧑‍🤝‍🧑</div><div class="font-semibold">Parejas</div></div><div class="gesture-card" data-index="3"><div class="icon">👨‍👩‍👧‍👦</div><div class="font-semibold">Equipo</div></div></div>`; }
+        init() {
+            this.cards = this.body.querySelectorAll('.gesture-card');
+            this.cards.forEach(card => card.addEventListener('click', () => { this.setActive(card); this.desktop.saveWidgetsState(); }));
+        }
+        setActive(selectedCard) { this.cards.forEach(c => c.classList.remove('active')); if (selectedCard) selectedCard.classList.add('active'); }
+        getState() { const active = this.body.querySelector('.gesture-card.active'); return { activeIndex: active ? active.dataset.index : null }; }
+        restoreState(data) { if (data.activeIndex) this.setActive(this.body.querySelector(`.gesture-card[data-index="${data.activeIndex}"]`)); }
+    }
+
+    class QrGenerator extends Widget {
+        getHTML() { return `<div class="flex flex-col h-full text-center"><input type="text" class="qr-input mb-2" placeholder="Pega una URL o escribe texto..."><button class="qr-generate-btn btn-primary mb-2">Generar QR</button><div class="qr-output flex-grow flex items-center justify-center bg-white rounded p-2"></div></div>`; }
+        init() {
+            this.input = this.body.querySelector('.qr-input'); this.output = this.body.querySelector('.qr-output');
+            this.body.querySelector('.qr-generate-btn').addEventListener('click', () => { this.generate(); this.desktop.saveWidgetsState(); });
+        }
+        generate() {
+            const text = this.input.value.trim();
+            if (text && window.qrcode) {
+                this.output.innerHTML = ''; try { const qr = qrcode(0, 'M'); qr.addData(text); qr.make(); this.output.innerHTML = qr.createImgTag(4, 4); } catch (e) { this.output.textContent = "Error."; }
+            }
+        }
+        getState() { return { text: this.input.value }; }
+        restoreState(data) { this.input.value = data.text; if (data.text) this.generate(); }
+    }
+    
+    class RandomGroups extends Widget {
+        getHTML() { return `<div class="flex flex-col h-full"><h3 class="text-lg font-semibold">Alumnos</h3><textarea class="rg-names w-full flex-grow p-2 mb-2" placeholder="Un nombre por línea..." style="min-height: 100px;"></textarea><div class="flex gap-2 items-end"><div class="flex-grow"><label class="text-sm">Nº Grupos</label><input type="number" min="1" class="rg-group-count w-full p-1"></div><div class="text-center font-bold pb-2">o</div><div class="flex-grow"><label class="text-sm">Alumnos/Grupo</label><input type="number" min="1" class="rg-students-per-group w-full p-1"></div></div><button class="rg-generate mt-2 w-full btn-primary">Generar</button><div class="rg-results mt-2 overflow-y-auto"></div></div>`; }
+        init() {
+            this.namesArea = this.body.querySelector('.rg-names'); this.groupCountInput = this.body.querySelector('.rg-group-count');
+            this.studentsPerGroupInput = this.body.querySelector('.rg-students-per-group'); this.resultsDiv = this.body.querySelector('.rg-results');
+            this.body.querySelector('.rg-generate').addEventListener('click', () => this.generate());
+            this.groupCountInput.addEventListener('input', () => { if (this.groupCountInput.value) this.studentsPerGroupInput.value = ''; });
+            this.studentsPerGroupInput.addEventListener('input', () => { if (this.studentsPerGroupInput.value) this.groupCountInput.value = ''; });
+        }
+        generate() {
+            let names = this.namesArea.value.split('\n').filter(n => n.trim() !== ''); if (names.length === 0) return;
+            for (let i = names.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [names[i], names[j]] = [names[j], names[i]]; }
+            const groupCount = parseInt(this.groupCountInput.value), studentsPerGroup = parseInt(this.studentsPerGroupInput.value);
+            let groups = [];
+            if (groupCount > 0) { for (let i = 0; i < groupCount; i++) groups.push([]); names.forEach((name, i) => groups[i % groupCount].push(name));
+            } else if (studentsPerGroup > 0) { for (let i = 0; i < names.length; i += studentsPerGroup) { groups.push(names.slice(i, i + studentsPerGroup)); } } 
+            else { this.resultsDiv.innerHTML = `<p>Elige una opción.</p>`; return; }
+            this.resultsDiv.innerHTML = groups.map((g, i) => `<div class="p-2 mt-1 bg-[#F4F8D3] text-black rounded"><h4 class="font-bold">Grupo ${i+1}</h4><ul>${g.map(m => `<li>${m}</li>`).join('')}</ul></div>`).join('');
+            this.desktop.saveWidgetsState();
+        }
+        getState() { return { names: this.namesArea.value, groupCount: this.groupCountInput.value, studentsPerGroup: this.studentsPerGroupInput.value, results: this.resultsDiv.innerHTML }; }
+        restoreState(data) { this.namesArea.value = data.names; this.groupCountInput.value = data.groupCount; this.studentsPerGroupInput.value = data.studentsPerGroup; this.resultsDiv.innerHTML = data.results; }
+    }
+    
+    class SoundMeter extends Widget {
+        getHTML() { return `<div class="text-center"><div class="noise-permission-request"><p class="mb-4">Necesita permiso para usar tu micrófono.</p><button class="noise-start btn-primary">Activar</button></div><div class="noise-meter-container hidden"><div class="w-full h-12 bg-gray-200 rounded-full overflow-hidden border-2 border-[#A6D6D6]"><div class="noise-bar h-full rounded-full" style="width:0%; transition: width 0.1s linear, background-color 0.5s linear;"></div></div><p class="noise-level-text text-lg font-medium mt-2">Silencio</p></div></div>`; }
+        init() {
+            this.startBtn = this.body.querySelector('.noise-start'); this.permissionDiv = this.body.querySelector('.noise-permission-request');
+            this.meterDiv = this.body.querySelector('.noise-meter-container'); this.noiseBar = this.body.querySelector('.noise-bar'); this.levelText = this.body.querySelector('.noise-level-text');
+            this.startBtn.addEventListener('click', () => this.start());
+        }
+        async start() {
+            if (this.isStarted) return;
+            try {
+                await this.desktop.startAudioContext();
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                this.permissionDiv.classList.add('hidden'); this.meterDiv.classList.remove('hidden');
+                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                this.analyser = this.audioContext.createAnalyser(); this.microphone = this.audioContext.createMediaStreamSource(stream);
+                this.analyser.smoothingTimeConstant = 0.8; this.analyser.fftSize = 1024;
+                this.microphone.connect(this.analyser);
+                this.isStarted = true;
+                this.update();
+            } catch (err) { this.meterDiv.innerHTML = `<p>No se pudo acceder al micrófono.</p>`; this.permissionDiv.classList.add('hidden'); this.meterDiv.classList.remove('hidden'); }
+        }
+        update() {
+            if (!this.isStarted) return;
+            const array = new Uint8Array(this.analyser.frequencyBinCount); this.analyser.getByteFrequencyData(array);
+            const average = array.reduce((a, b) => a + b, 0) / array.length;
+            const percentage = Math.min(100, Math.max(0, average * 1.5));
+            this.noiseBar.style.width = percentage + '%';
+            if (percentage < 30) { this.noiseBar.style.backgroundColor = '#A6D6D6'; this.levelText.textContent = 'Silencio'; }
+            else if (percentage < 60) { this.noiseBar.style.backgroundColor = '#a8c030'; this.levelText.textContent = 'Conversación'; }
+            else { this.noiseBar.style.backgroundColor = '#d9534f'; this.levelText.textContent = '¡Ruido!'; }
+            requestAnimationFrame(() => this.update());
+        }
+        onClose() { this.isStarted = false; if (this.microphone) this.microphone.mediaStream.getTracks().forEach(track => track.stop()); if (this.audioContext) this.audioContext.close(); }
+    }
+
+
+    /**
+     * ------------------------------------------------------------------------
+     * Clase principal de la Aplicación
+     * ------------------------------------------------------------------------
+     */
+    class ClassroomDesktop {
+        constructor() {
+            this.screen = document.getElementById('screen');
+            this.toolbar = document.getElementById('toolbar');
+            this.tooltip = document.getElementById('custom-tooltip');
+            this.widgets = {};
+            this.highestZ = 100;
+            this.isAudioContextStarted = false;
+            this.saveTimeout = null;
+            
+            // --- ¡CORREGIDO! Mapeo completo de herramientas a clases ---
+            this.widgetClasses = {
+                Notes, MediaEmbed, Timer, Dice, StudentPicker, Scoreboard,
+                TrafficLight, Calendar, WorkList, WorkGestures, QrGenerator,
+                RandomGroups, SoundMeter
+            };
+
+            this.initToolbar();
+            this.loadWidgetsState();
+        }
+        
+        initToolbar() {
+            this.toolbar.addEventListener('click', (e) => {
+                const button = e.target.closest('.tool-btn');
+                if (!button) return;
+                this.startAudioContext();
+                const toolId = button.dataset.tool;
+                const title = button.dataset.title;
+                this.createWidget(toolId, title);
+            });
+            
+            this.toolbar.addEventListener('mouseover', (e) => {
+                const button = e.target.closest('.tool-btn');
+                if (button?.dataset.title) {
+                    this.tooltip.textContent = button.dataset.title; this.tooltip.style.display = 'block'; const btnRect = button.getBoundingClientRect();
+                    this.tooltip.style.left = `${btnRect.left + btnRect.width / 2 - this.tooltip.offsetWidth / 2}px`; this.tooltip.style.top = `${btnRect.top - this.tooltip.offsetHeight - 8}px`;
+                }
+            });
+            this.toolbar.addEventListener('mouseout', () => this.tooltip.style.display = 'none');
+        }
+
+        async startAudioContext() {
+            if (!this.isAudioContextStarted && window.Tone) {
+                try { await Tone.start(); this.isAudioContextStarted = true; } catch(e) { console.error("Tone.js no pudo iniciar.", e); }
+            }
+        }
+
+        createWidget(toolId, title, state = null) {
+            const WidgetClass = this.widgetClasses[toolId];
+            if (!WidgetClass) { console.error(`La herramienta "${toolId}" no tiene clase.`); return; }
+            const newWidget = new WidgetClass(toolId, title, state, this);
+            this.widgets[newWidget.id] = newWidget;
+            if (!state) this.saveWidgetsState();
+        }
+        
+        removeWidget(widgetId) { delete this.widgets[widgetId]; this.saveWidgetsState(); }
+        getNextZIndex() { return ++this.highestZ; }
+
+        saveWidgetsState() {
+            const stateToSave = Object.values(this.widgets).map(widget => {
+                return {
+                    id: widget.id, toolId: widget.toolId, title: widget.title,
+                    left: widget.element.style.left, top: widget.element.style.top,
+                    width: widget.element.style.width, height: widget.element.style.height,
+                    zIndex: widget.element.style.zIndex, data: widget.getState()
+                };
+            });
+            localStorage.setItem('classroomDesktopState', JSON.stringify(stateToSave));
+        }
+        
+        saveWidgetsStateDebounced() {
+            clearTimeout(this.saveTimeout);
+            this.saveTimeout = setTimeout(() => this.saveWidgetsState(), 500);
+        }
+
+        loadWidgetsState() {
+            const savedState = localStorage.getItem('classroomDesktopState');
+            if (savedState) {
+                const widgetsData = JSON.parse(savedState); let maxZ = 100;
+                widgetsData.forEach(widgetData => {
+                    this.createWidget(widgetData.toolId, widgetData.title, widgetData);
+                    const z = parseInt(widgetData.zIndex); if (!isNaN(z) && z > maxZ) maxZ = z;
+                });
+                this.highestZ = maxZ;
+            }
+        }
+    }
+
+    // ¡Iniciar la aplicación!
+    new ClassroomDesktop();
+});
+</script>
+
+</body>
+</html>
