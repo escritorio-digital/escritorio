@@ -2,22 +2,55 @@
 
 /**
  * Widget de Gestos de Trabajo
- * Muestra tarjetas visuales para diferentes modos de trabajo en el aula.
+ * Muestra un gesto seleccionado en grande y una lista de miniaturas para elegir.
  */
 export const workGestures = {
     html: `
-        <div class="grid grid-cols-2 gap-4">
-            <div class="gesture-card"><div class="icon">🤫</div><div class="font-semibold">Silencio</div></div>
-            <div class="gesture-card"><div class="icon">🗣️</div><div class="font-semibold">Hablar Bajo</div></div>
-            <div class="gesture-card"><div class="icon">🧑‍🤝‍🧑</div><div class="font-semibold">Hablar con el compañero</div></div>
-            <div class="gesture-card"><div class="icon">👨‍👩‍👧‍👦</div><div class="font-semibold">Trabajo en Equipo</div></div>
-        </div>`,
+        <div class="gestures-container">
+            <div class="gesture-display">
+                <div class="icon">👇</div>
+                <div class="font-semibold">Elige un gesto</div>
+            </div>
+
+            <div class="gesture-thumbnails">
+                <div class="gesture-thumbnail active" data-icon="🤫" data-text="Silencio">
+                    <div class="icon">🤫</div>
+                    <div class="text">Silencio</div>
+                </div>
+                <div class="gesture-thumbnail" data-icon="🗣️" data-text="Hablar Bajo">
+                    <div class="icon">🗣️</div>
+                    <div class="text">Hablar Bajo</div>
+                </div>
+                <div class="gesture-thumbnail" data-icon="🧑‍🤝‍🧑" data-text="Hablar con el compañero">
+                    <div class="icon">🧑‍🤝‍🧑</div>
+                    <div class="text">Compañero</div>
+                </div>
+                <div class="gesture-thumbnail" data-icon="👨‍👩‍👧‍👦" data-text="Trabajo en Equipo">
+                    <div class="icon">👨‍👩‍👧‍👦</div>
+                    <div class="text">Equipo</div>
+                </div>
+            </div>
+        </div>
+    `,
     initializer: (widget) => {
-        const cards = widget.querySelectorAll('.gesture-card');
-        cards.forEach(card => {
-            card.addEventListener('click', () => {
-                cards.forEach(c => c.classList.remove('active'));
-                card.classList.add('active');
+        const display = widget.querySelector('.gesture-display');
+        const thumbnails = widget.querySelectorAll('.gesture-thumbnail');
+
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', () => {
+                // Obtiene los datos del gesto de la miniatura clicada
+                const icon = thumbnail.dataset.icon;
+                const text = thumbnail.dataset.text;
+
+                // Actualiza la vista principal con el nuevo gesto
+                display.innerHTML = `
+                    <div class="icon">${icon}</div>
+                    <div class="font-semibold">${text}</div>
+                `;
+
+                // Gestiona la clase 'active' para resaltar la miniatura seleccionada
+                thumbnails.forEach(t => t.classList.remove('active'));
+                thumbnail.classList.add('active');
             });
         });
     }

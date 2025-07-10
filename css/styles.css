@@ -180,3 +180,396 @@ body {
 .task-list li { display: flex; align-items: center; gap: 8px; padding: 8px; border-bottom: 1px solid var(--color-accent); }
 .task-list li.completed label { text-decoration: line-through; opacity: 0.6; }
 .task-list li input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--color-widget-header); }
+
+/* --- Estilos Definitivos para el Widget de Lista de Trabajo --- */
+
+.work-list-item {
+    display: flex; /* La clave para el diseño de 3 columnas */
+    align-items: center; /* Centra todo verticalmente */
+    gap: 12px; /* Espacio uniforme entre elementos */
+    padding: 10px 8px;
+    border-bottom: 1px solid rgba(142, 125, 190, 0.15);
+}
+
+/* 1. Casilla de Verificación (Izquierda) */
+.work-list-item .task-checkbox {
+    flex-shrink: 0; /* No se encoge */
+    width: 20px;
+    height: 20px;
+    accent-color: var(--color-widget-header);
+    cursor: pointer;
+}
+
+/* 2. Texto de la Tarea (Centro, ocupa el máximo espacio) */
+.work-list-item .task-label {
+    flex-grow: 1; /* ¡Mágico! Hace que el texto ocupe todo el espacio disponible */
+    margin: 0;
+    overflow: hidden; /* Oculta el texto que no cabe */
+    text-overflow: ellipsis; /* Añade "..." al texto largo */
+    white-space: nowrap; /* Mantiene el texto en una sola línea */
+}
+
+/* Estilo para la tarea completada (tachado) */
+.work-list-item.completed .task-label {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+/* 3. Botones de Acción (Derecha) */
+.work-list-item .task-actions {
+    display: flex;
+    flex-shrink: 0; /* No se encoge */
+    gap: 5px;
+}
+
+.work-list-item .task-actions button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 50%;
+    line-height: 1;
+    transition: background-color 0.2s;
+    visibility: hidden; /* Ocultos por defecto */
+    opacity: 0;
+}
+
+/* Muestra los botones elegantemente al pasar el ratón */
+.work-list-item:hover .task-actions button {
+    visibility: visible;
+    opacity: 1;
+}
+
+.work-list-item .task-actions button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Input que aparece al editar */
+.work-list-item .edit-input {
+    flex-grow: 1;
+    border: none;
+    background: #fff;
+    padding: 4px 6px;
+    border-radius: 4px;
+    outline: 2px solid var(--color-widget-header); /* Resaltado para indicar edición */
+}
+
+/* --- Estilos para el Widget de Notas con Texto Enriquecido (Quill.js) --- */
+
+.notes-container .ql-toolbar {
+    background-color: var(--color-bg);
+    border: 2px solid var(--color-accent) !important;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom: none !important; /* Quita el borde inferior de la barra de herramientas */
+    padding: 8px !important;
+}
+
+.notes-container .ql-container {
+    background-color: var(--color-bg);
+    border: 2px solid var(--color-accent) !important;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    color: var(--color-text-dark);
+    font-size: 16px;
+    height: auto; /* Permite que el contenedor crezca */
+}
+
+.notes-container .ql-editor {
+    min-height: 150px; /* Asegura una altura mínima para el área de texto */
+    padding: 12px;
+}
+
+/* Ajusta el color de los iconos de la barra de herramientas */
+.notes-container .ql-snow .ql-stroke {
+    stroke: var(--color-text-dark);
+}
+.notes-container .ql-snow .ql-fill {
+    fill: var(--color-text-dark);
+}
+.notes-container .ql-snow .ql-picker-label {
+    color: var(--color-text-dark);
+}
+
+/* --- Estilos para el Widget de Gestos de Trabajo Mejorado --- */
+
+.gestures-container {
+    display: flex;
+    flex-direction: column; /* Organiza la vista principal y las miniaturas verticalmente */
+    height: 100%;
+    width: 100%;
+}
+
+/* Vista principal donde se muestra el gesto grande */
+.gesture-display {
+    flex-grow: 1; /* Ocupa todo el espacio disponible */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-bg);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+}
+
+.gesture-display .icon {
+    font-size: 7rem; /* Icono mucho más grande */
+    line-height: 1;
+    margin-bottom: 16px;
+}
+
+.gesture-display .font-semibold {
+    font-size: 1.5rem; /* Texto más grande */
+    color: var(--color-text-dark);
+}
+
+/* Contenedor para las miniaturas en la parte inferior */
+.gesture-thumbnails {
+    display: flex;
+    justify-content: space-around; /* Distribuye las miniaturas uniformemente */
+    padding-top: 12px;
+    border-top: 2px solid var(--color-accent);
+    margin-top: 12px;
+}
+
+.gesture-thumbnail {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    text-align: center;
+    border: 3px solid transparent; /* Borde transparente para mantener el tamaño */
+    transition: all 0.2s ease-in-out;
+}
+
+.gesture-thumbnail .icon {
+    font-size: 2.5rem; /* Icono de miniatura */
+    line-height: 1;
+}
+
+.gesture-thumbnail .text {
+    font-size: 0.75rem; /* Texto pequeño para la miniatura */
+    margin-top: 4px;
+}
+
+.gesture-thumbnail:hover {
+    background-color: var(--color-bg);
+}
+
+/* Estilo para la miniatura activa (seleccionada) */
+.gesture-thumbnail.active {
+    border-color: var(--color-widget-header);
+    transform: scale(1.05);
+}
+
+/* --- Estilos para el Widget de Dados Animado --- */
+
+.dice-container {
+    gap: 20px;
+}
+
+.dice {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    align-items: center;
+    justify-items: center;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease-in-out; /* Transición suave para cambios directos */
+}
+
+.dice span {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-color: #333;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.dice span.visible {
+    opacity: 1;
+}
+
+/* Animación de giro */
+@keyframes spin {
+    from {
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+    to {
+        transform: rotateX(360deg) rotateY(720deg) rotateZ(360deg);
+    }
+}
+
+.dice.spinning {
+    animation: spin 0.8s cubic-bezier(0.36, 0.45, 0.63, 0.53) both;
+}
+
+.roll-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--color-accent);
+    color: var(--color-text-light);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.roll-button:hover {
+    background-color: var(--color-accent-dark);
+}
+
+.result {
+    color: var(--color-text-dark);
+}
+
+/* --- Estilos Finales para el Widget de Dados Animado --- */
+
+.dice-face {
+    width: 70px;
+    height: 70px;
+    background-color: var(--color-bg);
+    border-radius: 10px;
+    padding: 8px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    border: 2px solid var(--color-widget-header);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.dice-face .pip {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--color-text-dark);
+    margin: auto;
+}
+
+/* Animación de giro */
+@keyframes roll-dice {
+    0% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(180deg) scale(1.2); }
+    50% { transform: rotate(360deg) scale(1); }
+    75% { transform: rotate(540deg) scale(1.2); }
+    100% { transform: rotate(720deg) scale(1); }
+}
+
+.dice-face.is-rolling {
+    animation: roll-dice 1s ease-in-out;
+}
+
+/* --- Estilos Actualizados para el Widget de Temporizador Circular --- */
+
+/* Contenedor general del widget */
+.timer-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+/* Contenedor del círculo y el display de tiempo */
+.timer-container {
+    position: relative;
+    width: 180px; /* Un poco más pequeño para dar espacio */
+    height: 180px;
+}
+
+.timer-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.timer-circle-bg {
+    fill: none;
+    stroke: var(--color-bg);
+    stroke-width: 10;
+}
+
+.timer-circle-progress {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s linear, stroke 0.5s;
+}
+
+.timer-circle-progress.ending {
+    stroke: #d9534f;
+}
+
+/* Display de tiempo (00:00) superpuesto en el círculo */
+.timer-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    color: var(--color-text-dark);
+}
+
+/* Contenedor para los inputs (m : s) ahora externo */
+.timer-inputs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0; /* Margen para separarlo del círculo y los botones */
+    color: var(--color-text-dark);
+}
+
+.timer-inputs input {
+    width: 50px;
+    border: 2px solid var(--color-accent);
+    border-radius: 6px;
+    background-color: var(--color-bg);
+    text-align: center;
+    font-size: 1.25rem; /* <-- VALOR AJUSTADO (antes 1.5rem) */
+    font-weight: 600;
+    padding: 2px 0; /* Añade un poco de padding vertical */
+}
+
+.timer-inputs input:focus {
+    outline: none;
+    border-color: var(--color-widget-header);
+}
+
+/* Controles de botones (play, pause, reset) */
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.timer-controls button {
+    background-color: var(--color-bg);
+    border: 2px solid var(--color-accent);
+    color: var(--color-text-dark);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.timer-controls button:hover {
+    background-color: var(--color-accent);
+    transform: scale(1.1);
+}

@@ -59,3 +59,15 @@ export function makeWidgetDraggable(widget) {
     header.addEventListener('mousedown', onMouseDown);
     header.addEventListener('touchstart', onMouseDown);
 }
+
+/**
+ * Reproduce un archivo de sonido desde la carpeta /sounds.
+ * Esta versión devuelve la Promesa para un manejo de errores correcto.
+ * @param {string} soundFile - El nombre del archivo de sonido.
+ * @returns {Promise}
+ */
+export function playSound(soundFile) {
+    const audio = new Audio(`sounds/${soundFile}`);
+    // Devolvemos la promesa que genera el método .play()
+    return audio.play();
+}

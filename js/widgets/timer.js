@@ -2,53 +2,97 @@
 
 /**
  * Widget de Temporizador
- * Un temporizador de cuenta regresiva simple con controles de inicio, pausa y reinicio.
+ * Un temporizador de cuenta regresiva con una barra de progreso circular y controles externos mejorados.
  */
 export const timer = {
     html: `
-        <div class="text-center">
-            <div class="timer-display text-6xl font-mono font-bold mb-4">00:05:00</div>
-            <div class="flex flex-wrap justify-center items-center gap-2 mb-4">
-                <input type="number" min="0" max="59" value="5" class="timer-minutes w-16 p-1 text-center">
-                <span class="font-semibold">m</span>
-                <input type="number" min="0" max="59" value="0" class="timer-seconds w-16 p-1 text-center">
-                <span class="font-semibold">s</span>
+        <div class="timer-wrapper">
+            <div class="timer-container">
+                <svg class="timer-svg" viewBox="0 0 100 100">
+                    <circle class="timer-circle-bg" r="45" cx="50" cy="50"></circle>
+                    <circle class="timer-circle-progress" r="45" cx="50" cy="50"></circle>
+                </svg>
+                <div class="timer-display">00:00</div>
             </div>
-            <div class="flex justify-center gap-2">
-                <button class="timer-start btn-primary">Iniciar</button>
-                <button class="timer-pause btn-secondary">Pausar</button>
-                <button class="timer-reset btn-tertiary">Reiniciar</button>
+
+            <div class="timer-inputs">
+                <input type="number" min="0" max="59" value="5" class="timer-minutes" aria-label="Minutos">
+                <span class="font-bold text-2xl">:</span>
+                <input type="number" min="0" max="59" value="0" class="timer-seconds" aria-label="Segundos">
             </div>
-        </div>`,
+
+            <div class="timer-controls">
+                <button class="timer-start" title="Iniciar">▶️</button>
+                <button class="timer-pause" title="Pausar">⏸️</button>
+                <button class="timer-reset" title="Reiniciar">🔄</button>
+            </div>
+        </div>
+    `,
     initializer: (widget) => {
         const display = widget.querySelector('.timer-display');
         const minutesInput = widget.querySelector('.timer-minutes');
         const secondsInput = widget.querySelector('.timer-seconds');
-        let timerInterval = null;
-        let totalSeconds = 0;
+        const progressCircle = widget.querySelector('.timer-circle-progress');
+        
+        const radius = progressCircle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+        progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+        progressCircle.style.strokeDashoffset = circumference;
 
-        const setInitialTime = () => {
-            totalSeconds = (parseInt(minutesInput.value, 10) || 0) * 60 + (parseInt(secondsInput.value, 10) || 0);
-            updateDisplay();
+        let timerInterval = null;
+        let totalDuration = 0;
+        let remainingSeconds = 0;
+
+        // --- NUEVA FUNCIÓN PARA FORMATEAR LOS INPUTS ---
+        const formatInputValue = (inputElement) => {
+            let value = parseInt(inputElement.value, 10) || 0;
+            if (value < 0) value = 0;
+            if (value > 59) value = 59;
+            inputElement.value = String(value).padStart(2, '0');
         };
 
         const updateDisplay = () => {
-            const min = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
-            const sec = String(totalSeconds % 60).padStart(2, '0');
+            const min = String(Math.floor(remainingSeconds / 60)).padStart(2, '0');
+            const sec = String(remainingSeconds % 60).padStart(2, '0');
             display.textContent = `${min}:${sec}`;
-            display.style.color = totalSeconds <= 10 && totalSeconds > 0 ? '#d9534f' : 'var(--color-text-dark)';
         };
 
-        widget.querySelector('.timer-start').addEventListener('click', () => {
-            if (timerInterval) return;
-            clearInterval(timerInterval);
-            setInitialTime();
-            if (totalSeconds <= 0) return;
+        const setProgress = (percent) => {
+            const offset = circumference - (percent / 100) * circumference;
+            progressCircle.style.strokeDashoffset = offset;
+            progressCircle.classList.toggle('ending', percent <= 20 && percent > 0);
+        };
 
+        const setInitialTime = () => {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            // Aseguramos que los valores estén formateados antes de calcular
+            formatInputValue(minutesInput);
+            formatInputValue(secondsInput);
+            totalDuration = (parseInt(minutesInput.value, 10)) * 60 + (parseInt(secondsInput.value, 10));
+            remainingSeconds = totalDuration;
+            updateDisplay();
+            setProgress(100);
+        };
+        
+        // --- EVENTOS ACTUALIZADOS ---
+        minutesInput.addEventListener('change', setInitialTime);
+        secondsInput.addEventListener('change', setInitialTime);
+        // Formatea el valor al dejar el campo para una mejor experiencia
+        minutesInput.addEventListener('blur', () => formatInputValue(minutesInput));
+        secondsInput.addEventListener('blur', () => formatInputValue(secondsInput));
+
+        widget.querySelector('.timer-start').addEventListener('click', () => {
+            if (timerInterval || remainingSeconds <= 0) return;
+            if (remainingSeconds === 0 && totalDuration > 0) {
+                 setInitialTime();
+            }
             timerInterval = setInterval(() => {
-                totalSeconds--;
+                remainingSeconds--;
                 updateDisplay();
-                if (totalSeconds <= 0) {
+                const percent = (remainingSeconds / totalDuration) * 100;
+                setProgress(percent);
+                if (remainingSeconds <= 0) {
                     clearInterval(timerInterval);
                     timerInterval = null;
                     display.textContent = "¡FIN!";
@@ -62,18 +106,11 @@ export const timer = {
             timerInterval = null;
         });
 
-        widget.querySelector('.timer-reset').addEventListener('click', () => {
-            clearInterval(timerInterval);
-            timerInterval = null;
-            setInitialTime();
-        });
+        widget.querySelector('.timer-reset').addEventListener('click', setInitialTime);
 
-        minutesInput.addEventListener('change', setInitialTime);
-        secondsInput.addEventListener('change', setInitialTime);
-
-        // Función de limpieza para detener el intervalo si el widget se cierra
         widget.cleanup = () => clearInterval(timerInterval);
-
+        
+        // Formatea los valores iniciales al cargar el widget
         setInitialTime();
     }
 };
