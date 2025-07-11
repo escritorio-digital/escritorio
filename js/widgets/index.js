@@ -17,6 +17,7 @@ import { dice } from './dice.js';
 import { ideaStarter } from './idea-starter.js';
 import { tournamentGenerator } from './tournament-generator.js';
 import { scoreboard } from './scoreboard.js';
+import { pdfViewer } from './pdf-viewer.js'; 
 
 // Agrupa todos los widgets en un solo objeto 'tools' y lo exporta.
 // La clave del objeto debe coincidir con el 'data-tool' del botón en el HTML.
@@ -37,4 +38,5 @@ export const tools = {
     'idea-starter': ideaStarter,
     'tournament-generator': tournamentGenerator,
     scoreboard,
+    'pdf-viewer': pdfViewer, 
 };
