@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/quill": "^2.0.14",
     "lucide-react": "^0.525.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-quilljs": "^2.0.5",
     "react-rnd": "^10.5.2"
   },
   "devDependencies": {
