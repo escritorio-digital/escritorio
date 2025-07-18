@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -b migracion-react -d dist"
   },
   "dependencies": {
     "@types/papaparse": "^5.3.16",
