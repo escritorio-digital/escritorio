@@ -1,4 +1,5 @@
-import React, { useState, useEffect, FC } from 'react';
+import { useState, useEffect } from 'react';
+import type { FC } from 'react'; // <-- CORRECCIÓN 2: Importación de tipo
 import { Play, Pause, RotateCw } from 'lucide-react';
 import type { WidgetConfig } from '../../../types';
 
@@ -10,7 +11,9 @@ export const TimerWidget: FC = () => {
     const [isActive, setIsActive] = useState(false);
 
     useEffect(() => {
-        let interval: number | undefined = undefined;
+        // CORRECCIÓN 3: Dejamos que TypeScript infiera el tipo correcto para 'interval'
+        let interval: ReturnType<typeof setInterval> | undefined = undefined;
+        
         if (isActive && remainingSeconds > 0) {
             interval = setInterval(() => {
                 setRemainingSeconds(secs => secs - 1);
@@ -86,7 +89,6 @@ export const TimerWidget: FC = () => {
     );
 };
 
-// El widget exporta su propia configuración para ser detectado automáticamente.
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
     id: 'timer',
     title: 'Temporizador',
