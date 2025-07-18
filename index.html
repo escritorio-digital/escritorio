@@ -1,60 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escritorio para el Aula (Modular)</title>
-
-    <!-- Dependencias Externas (CDN) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- CORRECCIÓN: Se cambió el CDN de Tone.js a jsdelivr para evitar bloqueos -->
-    <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
-
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
-    <script src="https://mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Estilos locales -->
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-
-    <div id="screen"></div>
-
-    <div id="toolbar">
-        <div class="toolbar-group">
-            <button class="tool-btn" data-title="Temporizador" data-tool="timer">⏱️</button>
-            <button class="tool-btn" data-title="Medidor de Sonido" data-tool="sound-meter">🔊</button>
-            <button class="tool-btn" data-title="Semáforo" data-tool="traffic-light">🚦</button>
-            <button class="tool-btn" data-title="Calendario" data-tool="calendar">📅</button>
-            <button class="tool-btn" data-title="Lista de Trabajo" data-tool="work-list">✅</button>
-        </div>
-        <div class="toolbar-group">
-            <button class="tool-btn" data-title="Bloc de Notas" data-tool="notes">📝</button>
-            <button class="tool-btn" data-title="Agregador de Medios" data-tool="media-embed">🖼️</button>
-            <button class="tool-btn" data-title="Lector PDF" data-tool="pdf-viewer">📖</button>
-            <button class="tool-btn" data-title="Gestos de Trabajo" data-tool="work-gestures">🤫</button>
-            <button class="tool-btn" data-title="Generador QR" data-tool="qr-generator">📱</button>
-        </div>
-        <div class="toolbar-group">
-            <button class="tool-btn" data-title="Grupos Aleatorios" data-tool="random-groups">🧑‍🤝‍🧑</button>
-            <button class="tool-btn" data-title="Grupos Cooperativos" data-tool="coop-groups">🤝</button>
-            <button class="tool-btn" data-title="Selector Aleatorio" data-tool="student-picker">🎯</button>
-            <button class="tool-btn" data-title="Lanzar Dados" data-tool="dice">🎲</button>
-            <button class="tool-btn" data-title="Disparador de Ideas" data-tool="idea-starter">💡</button>
-            <button class="tool-btn" data-title="Generador de Torneos" data-tool="tournament-generator">🏆</button>
-            <button class="tool-btn" data-title="Marcador" data-tool="scoreboard">💯</button>
-        </div>
-    </div>
-    
-    <div id="custom-tooltip" class="custom-tooltip"></div>
-
-    <!-- Módulo principal de JavaScript -->
-    <script src="js/main.js" type="module"></script>
-
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/escritorio-interactivo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escritorio interactivo - ReactJS</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
