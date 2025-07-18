@@ -5,8 +5,16 @@ import { WidgetWindow } from './components/core/WidgetWindow';
 import { Toolbar } from './components/core/Toolbar';
 import { SettingsModal } from './components/core/SettingsModal';
 import type { ActiveWidget } from './types';
+import { useTheme } from './context/ThemeContext'; // Correcto
+import { useEffect } from 'react';
 
 function App() {
+  const { theme } = useTheme();
+
+  useEffect(() => {
+    document.body.style.backgroundImage = theme['--wallpaper'];
+  }, [theme]);
+
   const [activeWidgets, setActiveWidgets] = useState<ActiveWidget[]>([]);
   const [highestZ, setHighestZ] = useState(100);
   const [isSettingsOpen, setSettingsOpen] = useState(false);

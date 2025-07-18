@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { X, Edit, Download } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { X, Edit, Download, Upload } from 'lucide-react';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
+import Papa from 'papaparse';
 import type { WidgetConfig } from '../../../types';
 
-// Definimos una interfaz para nuestras tareas para mayor claridad
 interface Task {
   id: number;
   text: string;
@@ -11,16 +11,12 @@ interface Task {
 }
 
 export const WorkListWidget: React.FC = () => {
-  // 1. PERSISTENCIA EN LOCAL STORAGE
-  // Usamos el hook useLocalStorage en lugar de useState para que las tareas persistan.
   const [tasks, setTasks] = useLocalStorage<Task[]>('work-list-tasks', []);
   const [newTask, setNewTask] = useState('');
-
-  // Estados para la funcionalidad de editar (UPDATE)
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
   const [editingTaskText, setEditingTaskText] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // CREATE: Añadir una nueva tarea
   const addTask = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && newTask.trim() !== '') {
       setTasks([...tasks, { id: Date.now(), text: newTask.trim(), completed: false }]);
@@ -28,27 +24,22 @@ export const WorkListWidget: React.FC = () => {
     }
   };
 
-  // UPDATE: Cambiar el estado de completado de una tarea
   const toggleTask = (id: number) => {
     setTasks(tasks.map(task => (task.id === id ? { ...task, completed: !task.completed } : task)));
   };
 
-  // DELETE: Eliminar una tarea
   const removeTask = (id: number) => {
     setTasks(tasks.filter(task => task.id !== id));
   };
 
-  // UPDATE: Iniciar la edición de una tarea
   const startEditing = (task: Task) => {
     setEditingTaskId(task.id);
     setEditingTaskText(task.text);
   };
 
-  // UPDATE: Guardar la tarea editada
   const handleUpdate = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && editingTaskId !== null) {
       if (editingTaskText.trim() === '') {
-        // Si el texto está vacío, eliminamos la tarea
         removeTask(editingTaskId);
       } else {
         setTasks(
@@ -62,14 +53,9 @@ export const WorkListWidget: React.FC = () => {
     }
   };
 
-  // 2. DESCARGA COMO CSV
   const downloadAsCSV = () => {
-    const headers = 'ID,Tarea,Completada\n';
-    const csvContent = tasks
-      .map(t => `${t.id},"${t.text.replace(/"/g, '""')}",${t.completed}`)
-      .join('\n');
-    
-    const blob = new Blob([headers + csvContent], { type: 'text/csv;charset=utf-8;' });
+    const csv = Papa.unparse(tasks.map(t => ({ id: t.id, text: t.text, completed: t.completed })));
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
     
@@ -79,6 +65,34 @@ export const WorkListWidget: React.FC = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      Papa.parse<Task>(file, {
+        header: true,
+        skipEmptyLines: true,
+        complete: (results) => {
+          const newTasks = results.data.map(row => ({
+            id: Number(row.id) || Date.now() + Math.random(),
+            text: String(row.text || ''),
+            completed: String(row.completed).toLowerCase() === 'true'
+          })).filter(task => task.text);
+
+          if (window.confirm('¿Quieres reemplazar la lista actual con las tareas del archivo? \n(Haz clic en "Cancelar" para añadirlas al final)')) {
+            setTasks(newTasks);
+          } else {
+            setTasks(prevTasks => [...prevTasks, ...newTasks]);
+          }
+        },
+        error: (error) => {
+          console.error("Error al parsear el CSV:", error);
+          alert("Hubo un error al leer el archivo CSV. Por favor, revisa su formato.");
+        }
+      });
+    }
+    if(e.target) e.target.value = '';
   };
 
   return (
@@ -93,6 +107,13 @@ export const WorkListWidget: React.FC = () => {
           onKeyPress={addTask}
         />
         <button 
+          onClick={() => fileInputRef.current?.click()}
+          className="p-2 bg-accent rounded hover:bg-[#8ec9c9] transition-colors"
+          title="Cargar CSV"
+        >
+          <Upload size={20} />
+        </button>
+        <button 
           onClick={downloadAsCSV}
           className="p-2 bg-accent rounded hover:bg-[#8ec9c9] transition-colors"
           title="Descargar como CSV"
@@ -101,7 +122,7 @@ export const WorkListWidget: React.FC = () => {
         </button>
       </div>
       
-      {/* READ: Mostramos la lista de tareas */}
+      {/* ¡ESTA ES LA PARTE QUE FALTABA! */}
       <ul className="flex-grow overflow-y-auto pr-2">
         {tasks.map(task => (
           <li key={task.id} className={`flex items-center gap-3 p-2 border-b border-accent/50 ${task.completed ? 'opacity-50' : ''}`}>
@@ -139,6 +160,14 @@ export const WorkListWidget: React.FC = () => {
         ))}
       </ul>
       <p className="text-xs text-gray-500 mt-2 text-center">Doble click en una tarea para editarla.</p>
+
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleFileUpload}
+        accept=".csv"
+        className="hidden"
+      />
     </div>
   );
 };

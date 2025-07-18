@@ -1,48 +1,98 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useQuill } from 'react-quilljs';
-import 'quill/dist/quill.snow.css'; // Estilos base de Quill
-import './Notepad.css'; // Nuestros estilos personalizados
+import showdown from 'showdown';
+import 'quill/dist/quill.snow.css';
+import './Notepad.css';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import type { WidgetConfig } from '../../../types';
+import { Upload, Download } from 'lucide-react';
 
 export const NotepadWidget: React.FC = () => {
-  const [content, setContent] = useLocalStorage('notepad-content', '');
+  const [content, setContent] = useLocalStorage('notepad-content-html', '');
+  const fileInputRef = useRef<HTMLInputElement>(null);
   
+  const [converter] = useState(new showdown.Converter());
+
   const modules = {
     toolbar: [
       [{ 'header': [1, 2, 3, false] }],
       ['bold', 'italic', 'underline', 'strike'],
-      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-      ['link'],
-      ['clean']
+      [{'list': 'ordered'}, {'list': 'bullet'}],
+      ['link', 'clean'],
     ],
   };
 
   const { quill, quillRef } = useQuill({ modules });
 
-  // Sincronizamos el LocalStorage con el editor
   useEffect(() => {
     if (quill) {
-      // Cargamos el contenido inicial
       if (content && quill.root.innerHTML !== content) {
         quill.clipboard.dangerouslyPasteHTML(content);
       }
-
-      // Guardamos los cambios en el LocalStorage
-      quill.on('text-change', () => {
+      const handleChange = () => {
         setContent(quill.root.innerHTML);
-      });
+      };
+      quill.on('text-change', handleChange);
+      return () => {
+        quill.off('text-change', handleChange);
+      };
     }
-  }, [quill, setContent]);
+  }, [quill, content, setContent]);
+  
+
+  const handleDownload = () => {
+    if (!quill) return;
+    const htmlContent = quill.root.innerHTML;
+    // ¡CORRECCIÓN! Usamos el nombre de método correcto.
+    const markdownContent = converter.makeMarkdown(htmlContent);
+    
+    const blob = new Blob([markdownContent], { type: 'text/markdown;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'mi-nota.md';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file && quill) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const markdownContent = event.target?.result as string;
+        const htmlContent = converter.makeHtml(markdownContent);
+        quill.clipboard.dangerouslyPasteHTML(htmlContent);
+      };
+      reader.readAsText(file);
+    }
+    if(e.target) e.target.value = '';
+  };
 
   return (
     <div className="flex flex-col h-full w-full notepad-widget">
+      <div className="flex items-center p-2 border-b border-accent bg-white rounded-t-lg">
+        <button onClick={() => fileInputRef.current?.click()} className="p-2 hover:bg-gray-200 rounded-full" title="Cargar nota (.md)">
+          <Upload size={18} />
+        </button>
+        <button onClick={handleDownload} className="p-2 hover:bg-gray-200 rounded-full" title="Descargar nota (.md)">
+          <Download size={18} />
+        </button>
+      </div>
+
       <div ref={quillRef} style={{ flexGrow: 1 }} />
+
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleFileUpload}
+        accept=".md,.txt"
+        className="hidden"
+      />
     </div>
   );
 };
 
-// Configuración para el auto-descubrimiento del widget
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'notepad',
   title: 'Bloc de Notas',

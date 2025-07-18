@@ -2,17 +2,18 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}", // Esto le dice a Tailwind que busque clases en todos tus archivos de React.
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       colors: {
-        'custom-bg': '#F4F8D3',
-        'widget-bg': '#F7CFD8',
-        'widget-header': '#8E7DBE',
-        'accent': '#A6D6D6',
-        'text-light': '#F4F8D3',
-        'text-dark': '#493e6a',
+        // Hacemos que los colores de Tailwind apunten a nuestras variables CSS
+        'custom-bg': 'var(--color-bg)',
+        'widget-bg': 'var(--color-widget-bg)',
+        'widget-header': 'var(--color-widget-header)',
+        'accent': 'var(--color-accent)',
+        'text-light': 'var(--color-text-light)',
+        'text-dark': 'var(--color-text-dark)',
       }
     },
   },

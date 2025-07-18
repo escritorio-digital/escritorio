@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { WIDGET_REGISTRY } from '../widgets';
+import { ThemeSettings } from './ThemeSettings.tsx';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -10,8 +11,11 @@ interface SettingsModalProps {
 }
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, pinnedWidgets, setPinnedWidgets }) => {
+  const [activeTab, setActiveTab] = useState('widgets');
+
   if (!isOpen) return null;
 
+  // ¡CORRECCIÓN! Volvemos a añadir la constante y la función.
   const MAX_WIDGETS = 20;
 
   const togglePin = (widgetId: string) => {
@@ -25,7 +29,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, p
       return prev;
     });
   };
-
+  
   return (
     <div className="fixed inset-0 bg-black/50 z-[10001] flex items-center justify-center" onClick={onClose}>
       <div 
@@ -33,27 +37,49 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, p
         onClick={e => e.stopPropagation()}
       >
         <header className="p-4 border-b flex justify-between items-center">
-          <h2 className="text-xl font-bold">Librería de Widgets</h2>
+          <h2 className="text-xl font-bold">Configuración</h2>
           <button onClick={onClose} className="p-1 rounded-full hover:bg-black/10"><X size={20}/></button>
         </header>
-        <div className="p-4 overflow-y-auto">
-          <p className="mb-4 text-sm text-gray-600">Selecciona los widgets que quieres en tu barra de herramientas. ({pinnedWidgets.length}/{MAX_WIDGETS})</p>
-          <ul className="space-y-2">
-            {Object.values(WIDGET_REGISTRY).map(widget => (
-              <li key={widget.id} className="flex items-center justify-between p-3 bg-white/50 rounded-lg">
-                <div className="flex items-center gap-4">
-                  <span className="text-2xl">{widget.icon}</span>
-                  <span className="font-semibold">{widget.title}</span>
-                </div>
-                <button
-                  onClick={() => togglePin(widget.id)}
-                  className={`font-semibold py-2 px-4 rounded-lg transition-colors ${pinnedWidgets.includes(widget.id) ? 'bg-widget-header text-text-light hover:bg-[#7b69b1]' : 'bg-accent text-text-dark hover:bg-[#8ec9c9]'}`}
-                >
-                  {pinnedWidgets.includes(widget.id) ? 'Quitar' : 'Añadir'}
-                </button>
-              </li>
-            ))}
-          </ul>
+
+        <div className="flex border-b">
+          <button 
+            onClick={() => setActiveTab('widgets')}
+            className={`flex-1 p-3 font-semibold ${activeTab === 'widgets' ? 'bg-accent text-text-dark' : 'hover:bg-gray-200'}`}
+          >
+            Librería de Widgets
+          </button>
+          <button 
+            onClick={() => setActiveTab('theme')}
+            className={`flex-1 p-3 font-semibold ${activeTab === 'theme' ? 'bg-accent text-text-dark' : 'hover:bg-gray-200'}`}
+          >
+            Personalizar Tema
+          </button>
+        </div>
+
+        <div className="overflow-y-auto">
+          {activeTab === 'widgets' && (
+            <div className="p-4">
+              <p className="mb-4 text-sm text-gray-600">Selecciona los widgets que quieres en tu barra de herramientas. ({pinnedWidgets.length}/{MAX_WIDGETS})</p>
+              <ul className="space-y-2">
+                {Object.values(WIDGET_REGISTRY).map(widget => (
+                  <li key={widget.id} className="flex items-center justify-between p-3 bg-white/50 rounded-lg">
+                    <div className="flex items-center gap-4">
+                      <span className="text-2xl">{widget.icon}</span>
+                      <span className="font-semibold">{widget.title}</span>
+                    </div>
+                    <button
+                      // Usamos la función togglePin que hemos re-añadido
+                      onClick={() => togglePin(widget.id)}
+                      className={`font-semibold py-2 px-4 rounded-lg transition-colors ${pinnedWidgets.includes(widget.id) ? 'bg-widget-header text-text-light hover:bg-[#7b69b1]' : 'bg-accent text-text-dark hover:bg-[#8ec9c9]'}`}
+                    >
+                      {pinnedWidgets.includes(widget.id) ? 'Quitar' : 'Añadir'}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {activeTab === 'theme' && <ThemeSettings />}
         </div>
       </div>
     </div>
