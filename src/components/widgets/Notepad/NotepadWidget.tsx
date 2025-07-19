@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useQuill } from 'react-quilljs';
-import * as showdown from 'showdown'; // <-- ¡AQUÍ ESTÁ LA CORRECCIÓN!
+import showdown from 'showdown';
 import 'quill/dist/quill.snow.css';
 import './Notepad.css';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
