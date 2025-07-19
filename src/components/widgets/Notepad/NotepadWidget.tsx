@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useQuill } from 'react-quilljs';
-import showdown from 'showdown';
+import * as showdown from 'showdown'; // <-- ¡AQUÍ ESTÁ LA CORRECCIÓN!
 import 'quill/dist/quill.snow.css';
 import './Notepad.css';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
@@ -43,7 +43,6 @@ export const NotepadWidget: React.FC = () => {
   const handleDownload = () => {
     if (!quill) return;
     const htmlContent = quill.root.innerHTML;
-    // ¡CORRECCIÓN! Usamos el nombre de método correcto.
     const markdownContent = converter.makeMarkdown(htmlContent);
     
     const blob = new Blob([markdownContent], { type: 'text/markdown;charset=utf-8;' });
@@ -95,7 +94,7 @@ export const NotepadWidget: React.FC = () => {
 
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'notepad',
-  title: 'Bloc de Notas',
+  title: 'Bloc de Notas (MD)',
   icon: '📝',
   defaultSize: { width: 500, height: 450 },
 };
