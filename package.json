@@ -13,6 +13,8 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@tiptap/react": "^3.0.7",
+    "@tiptap/starter-kit": "^3.0.7",
     "@types/marked": "^5.0.2",
     "@types/papaparse": "^5.3.16",
     "@types/quill": "^2.0.14",
@@ -22,7 +24,6 @@
     "papaparse": "^5.5.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-quilljs": "^2.0.5",
     "react-rnd": "^10.5.2",
     "turndown": "^7.2.0"
   },

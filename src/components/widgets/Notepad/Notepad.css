@@ -1,39 +1,17 @@
-.notepad-widget {
-  /* Hacemos que el contenedor del editor ocupe todo el espacio */
-  display: flex;
-  flex-direction: column;
+.notepad-widget .tiptap {
+  /* Esto aplica estilos al editor de TipTap */
+  @apply flex-grow p-3 outline-none overflow-y-auto;
 }
 
-.notepad-widget .ql-container {
-  flex-grow: 1;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-  background-color: var(--color-bg); /* Color de fondo del área de escritura */
-  color: var(--color-text-dark); /* Color del texto */
-  border-color: var(--color-accent) !important;
+/* Estilos base para el contenido del editor */
+.notepad-widget .ProseMirror {
+    min-height: 100%;
 }
 
-.notepad-widget .ql-toolbar {
-  background-color: #ffffff;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  border-color: var(--color-accent) !important;
+.notepad-widget .ProseMirror:focus {
+  outline: none;
 }
 
-/* Colores de los iconos de la barra de herramientas */
-.notepad-widget .ql-stroke {
-  stroke: var(--color-text-dark);
-}
-
-.notepad-widget .ql-fill {
-  fill: var(--color-text-dark);
-}
-
-.notepad-widget .ql-picker-label {
-    color: var(--color-text-dark);
-}
-
-/* Cambia el color del borde cuando el editor está activo */
-.notepad-widget .ql-container.ql-snow:focus-within {
-    border-color: var(--color-widget-header) !important;
+.notepad-widget .menubar button.is-active {
+    @apply bg-accent text-text-dark;
 }
