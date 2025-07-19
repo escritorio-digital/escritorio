@@ -1,27 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { WIDGET_REGISTRY } from './components/widgets';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { WidgetWindow } from './components/core/WidgetWindow';
 import { Toolbar } from './components/core/Toolbar';
 import { SettingsModal } from './components/core/SettingsModal';
+import { CreditsModal } from './components/core/CreditsModal';
+import { useTheme } from './context/ThemeContext';
 import type { ActiveWidget } from './types';
-import { useTheme } from './context/ThemeContext'; // Correcto
-import { useEffect } from 'react';
+import { Copyright } from 'lucide-react';
 
 function App() {
+  const [activeWidgets, setActiveWidgets] = useState<ActiveWidget[]>([]);
+  const [highestZ, setHighestZ] = useState(100);
+  const [isSettingsOpen, setSettingsOpen] = useState(false);
+  const [isCreditsOpen, setIsCreditsOpen] = useState(false);
+  const [pinnedWidgets, setPinnedWidgets] = useLocalStorage<string[]>(
+    'pinnedWidgets',
+    ['work-list', 'timer']
+  );
   const { theme } = useTheme();
 
   useEffect(() => {
     document.body.style.backgroundImage = theme['--wallpaper'];
   }, [theme]);
-
-  const [activeWidgets, setActiveWidgets] = useState<ActiveWidget[]>([]);
-  const [highestZ, setHighestZ] = useState(100);
-  const [isSettingsOpen, setSettingsOpen] = useState(false);
-  const [pinnedWidgets, setPinnedWidgets] = useLocalStorage<string[]>(
-    'pinnedWidgets',
-    ['work-list', 'timer']
-  );
 
   const addWidget = (widgetId: string) => {
     const widgetConfig = WIDGET_REGISTRY[widgetId];
@@ -75,7 +76,6 @@ function App() {
               setActiveWidgets(prev => prev.map(w => w.instanceId === widget.instanceId ? { ...w, size: { width: ref.style.width, height: ref.style.height }, position } : w));
             }}
           >
-            {/* Ya no se necesita Suspense aquí */}
             <Component />
           </WidgetWindow>
         );
@@ -87,11 +87,24 @@ function App() {
         onSettingsClick={() => setSettingsOpen(true)}
       />
 
+      <button
+        onClick={() => setIsCreditsOpen(true)}
+        className="fixed bottom-4 left-4 z-[9999] p-3 bg-black/20 backdrop-blur-md rounded-full text-white hover:bg-black/40 transition-colors"
+        title="Créditos y Licencia"
+      >
+        <Copyright size={24} />
+      </button>
+
       <SettingsModal
         isOpen={isSettingsOpen}
         onClose={() => setSettingsOpen(false)}
         pinnedWidgets={pinnedWidgets}
         setPinnedWidgets={setPinnedWidgets}
+      />
+
+      <CreditsModal
+        isOpen={isCreditsOpen}
+        onClose={() => setIsCreditsOpen(false)}
       />
     </div>
   );

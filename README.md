@@ -86,3 +86,25 @@ export const widgetConfig: Omit<WidgetConfig, 'component'> = {
 ¡Eso es todo! No necesitas registrar el widget en ningún otro lugar. El archivo `src/components/widgets/index.ts` se encarga de importar dinámicamente cualquier archivo que termine en `*Widget.tsx` dentro del directorio de widgets, extrae el componente y su configuración, y lo añade al `WIDGET_REGISTRY`.
 
 Una vez que hayas creado tus archivos y reiniciado el servidor de desarrollo, tu nuevo widget estará disponible automáticamente en la **Librería de Widgets** (el modal de configuración).
+
+---
+
+## Créditos, Licencia y Agradecimientos
+
+El proyecto original **Escritorio Interactivo para el Aula** y su idea pertenecen a **María Teresa González**.
+
+* Puedes visitar la aplicación original en: <https://mtgonzalezm.github.io/escritorio-interactivo-aula/>
+
+Esta versión es una migración a **React.js** realizada por **Pablo G. Guízar** con ayuda de **Gemini**.
+
+* El repositorio de esta migración se encuentra en: [GitHub - PabloGGuizar/escritorio-interactivo-aula](https://github.com/PabloGGuizar/escritorio-interactivo-aula/tree/migracion-react)
+
+Tanto el proyecto original como esta migración están indexados en el **Repositorio de aplicaciones educativas**, una colección de recursos creados por la comunidad **Vibe Coding Educativo**.
+
+* Consulta más aplicaciones de esta comunidad en: [Repositorio Vibe Coding Educativo](https://vibe-coding-educativo.github.io/app_edu/)
+
+* Únete a la comunidad en Telegram: [t.me/vceduca](https://t.me/vceduca)
+
+Este proyecto se adhiere al [**Decálogo del Conocimiento Abierto**](https://conocimiento-abierto.github.io/).
+
+[![Licencia Creative Commons](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.es)
