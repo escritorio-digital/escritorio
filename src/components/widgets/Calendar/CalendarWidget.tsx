@@ -39,7 +39,7 @@ export const CalendarWidget: FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full text-text-dark">
+    <div className="flex flex-col h-full text-text-dark p-4">
       <div className="flex justify-between items-center mb-4">
         <button onClick={goToPreviousMonth} className="p-2 rounded-full hover:bg-accent/50">
           <ChevronLeft size={20} />

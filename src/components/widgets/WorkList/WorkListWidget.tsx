@@ -96,7 +96,7 @@ export const WorkListWidget: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full text-text-dark">
+    <div className="flex flex-col h-full text-text-dark p-4">
       <div className="flex gap-2 mb-2">
         <input
           type="text"
@@ -123,7 +123,7 @@ export const WorkListWidget: React.FC = () => {
       </div>
       
       {/* ¡ESTA ES LA PARTE QUE FALTABA! */}
-      <ul className="flex-grow overflow-y-auto pr-2">
+      <ul className="flex-grow overflow-y-auto pr-2  min-h-0">
         {tasks.map(task => (
           <li key={task.id} className={`flex items-center gap-3 p-2 border-b border-accent/50 ${task.completed ? 'opacity-50' : ''}`}>
             <input

@@ -40,7 +40,7 @@ export const TrafficLightWidget: FC = () => {
 
   return (
     <div 
-      className="flex flex-col items-center justify-center h-full w-full cursor-pointer"
+      className="flex flex-col items-center justify-center cursor-pointer  p-4"
       onClick={handleClick}
       title="Haz clic para cambiar de color"
     >

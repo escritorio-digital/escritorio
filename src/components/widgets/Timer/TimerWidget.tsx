@@ -54,7 +54,7 @@ export const TimerWidget: FC = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center h-full text-text-dark">
+        <div className="flex flex-col items-center justify-center h-full text-text-dark p-4">
             <div className="text-6xl font-bold font-mono mb-4">
                 {remainingSeconds === 0 && !isActive ? "¡FIN!" : formatTime(remainingSeconds)}
             </div>
