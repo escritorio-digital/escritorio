@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useQuill } from 'react-quilljs';
-import showdown from 'showdown';
+import { marked } from 'marked'; // <-- NUEVA BIBLIOTECA (MD -> HTML)
+import TurndownService from 'turndown'; // <-- NUEVA BIBLIOTECA (HTML -> MD)
 import 'quill/dist/quill.snow.css';
 import './Notepad.css';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
@@ -11,7 +12,8 @@ export const NotepadWidget: React.FC = () => {
   const [content, setContent] = useLocalStorage('notepad-content-html', '');
   const fileInputRef = useRef<HTMLInputElement>(null);
   
-  const [converter] = useState(new showdown.Converter());
+  // Creamos una instancia del servicio Turndown
+  const [turndownService] = useState(new TurndownService());
 
   const modules = {
     toolbar: [
@@ -43,7 +45,8 @@ export const NotepadWidget: React.FC = () => {
   const handleDownload = () => {
     if (!quill) return;
     const htmlContent = quill.root.innerHTML;
-    const markdownContent = converter.makeMarkdown(htmlContent);
+    // Usamos Turndown para convertir HTML a Markdown
+    const markdownContent = turndownService.turndown(htmlContent);
     
     const blob = new Blob([markdownContent], { type: 'text/markdown;charset=utf-8;' });
     const link = document.createElement('a');
@@ -58,9 +61,10 @@ export const NotepadWidget: React.FC = () => {
     const file = e.target.files?.[0];
     if (file && quill) {
       const reader = new FileReader();
-      reader.onload = (event) => {
+      reader.onload = async (event) => {
         const markdownContent = event.target?.result as string;
-        const htmlContent = converter.makeHtml(markdownContent);
+        // Usamos marked para convertir Markdown a HTML
+        const htmlContent = await marked.parse(markdownContent);
         quill.clipboard.dangerouslyPasteHTML(htmlContent);
       };
       reader.readAsText(file);
@@ -94,7 +98,7 @@ export const NotepadWidget: React.FC = () => {
 
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'notepad',
-  title: 'Bloc de Notas (MD)',
+  title: 'Bloc de Notas',
   icon: '📝',
   defaultSize: { width: 500, height: 450 },
 };
