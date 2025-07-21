@@ -1,0 +1,57 @@
+.image-carousel-widget {
+  @apply w-full h-full bg-gray-800 flex items-center justify-center relative;
+}
+
+/* --- Vista sin Imágenes --- */
+.placeholder-view {
+  @apply flex flex-col items-center justify-center text-gray-300 p-4;
+}
+
+.upload-button {
+  @apply mt-4 flex items-center gap-2 bg-accent text-text-dark font-semibold py-2 px-4 rounded-lg hover:bg-[#8ec9c9] transition-colors;
+}
+
+/* --- Vista del Carrusel --- */
+.carousel-view {
+  @apply w-full h-full relative;
+}
+
+.carousel-image-container {
+  @apply w-full h-full overflow-hidden;
+}
+
+.carousel-image-container img {
+  @apply w-full h-full object-contain transition-opacity duration-500 ease-in-out;
+}
+
+.carousel-arrow {
+  @apply absolute top-1/2 -translate-y-1/2 text-white bg-black/30 rounded-full p-1 hover:bg-black/60 transition-colors;
+}
+
+.left-arrow {
+  @apply left-2;
+}
+
+.right-arrow {
+  @apply right-2;
+}
+
+.slide-indicators {
+  @apply absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2;
+}
+
+.indicator-dot {
+  @apply w-2 h-2 bg-white/40 rounded-full cursor-pointer transition-all;
+}
+
+.indicator-dot:hover {
+  @apply bg-white/70;
+}
+
+.indicator-dot.active {
+  @apply bg-white scale-125;
+}
+
+.change-images-button {
+  @apply absolute top-2 right-2 bg-black/30 text-white p-2 rounded-full hover:bg-black/60 transition-colors;
+}

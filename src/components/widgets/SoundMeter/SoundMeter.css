@@ -1,0 +1,56 @@
+.sound-meter-widget {
+  @apply w-full h-full flex items-center justify-center p-4 bg-gray-200 text-white overflow-hidden;
+}
+
+/* --- Pantalla de Permisos (sin cambios) --- */
+.permission-screen {
+  @apply flex flex-col items-center justify-center text-center gap-4 text-text-dark;
+}
+
+.permission-button {
+  @apply bg-accent text-text-dark font-semibold py-2 px-4 rounded-lg hover:bg-[#8ec9c9] transition-colors;
+}
+
+.permission-screen small {
+    @apply text-xs text-gray-500 max-w-xs;
+}
+
+/* --- Tarjetas de Nivel de Ruido --- */
+.level-card {
+  @apply w-full h-full rounded-lg flex flex-col items-center justify-center gap-4 transition-all duration-300;
+  transform: scale(1);
+  animation: pop-in 0.3s ease-out;
+}
+
+.level-card .emoji {
+  @apply text-8xl;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+}
+
+.level-card .label {
+  @apply text-4xl font-extrabold;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Colores de fondo para cada estado */
+.level-silence {
+  background-color: #22c55e; /* green-500 */
+}
+.level-conversation {
+  background-color: #f9d923; /* Similar a amarillo */
+  color: #493e6a;
+}
+.level-noise {
+  background-color: #ef4444; /* red-500 */
+}
+
+@keyframes pop-in {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

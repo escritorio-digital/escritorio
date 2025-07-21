@@ -1,0 +1,68 @@
+.work-gestures-widget {
+  @apply w-full h-full p-4 bg-gray-100;
+}
+
+/* --- Rejilla de Tarjetas --- */
+.card-grid {
+  @apply grid grid-cols-2 gap-4 w-full h-full;
+}
+
+.gesture-card {
+  @apply flex flex-col items-center justify-center rounded-lg text-white font-bold cursor-pointer transition-all duration-200;
+  transform: scale(1);
+}
+
+.gesture-card:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.card-icon {
+  @apply mb-2;
+}
+
+.card-label {
+  @apply text-xl;
+}
+
+/* --- Vista de Tarjeta Seleccionada --- */
+.selected-view {
+  @apply cursor-pointer relative;
+}
+
+.selected-card {
+  @apply w-full h-full flex flex-col items-center justify-center text-white text-center p-8;
+}
+
+.selected-icon svg {
+  width: 96px;
+  height: 96px;
+}
+
+.selected-label {
+  @apply text-5xl font-extrabold my-4;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+}
+
+.selected-description {
+  @apply text-lg;
+}
+
+.back-button {
+  @apply absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/20 text-white text-xs font-semibold py-1 px-3 rounded-full;
+}
+
+
+/* --- Colores de las Tarjetas --- */
+.card-silence {
+  background-color: #3b82f6; /* blue-500 */
+}
+.card-pairs {
+  background-color: #22c55e; /* green-500 */
+}
+.card-teams {
+  background-color: #f97316; /* orange-500 */
+}
+.card-plenary {
+  background-color: #8b5cf6; /* violet-500 */
+}
