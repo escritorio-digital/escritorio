@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { FC } from 'react';
 import type { WidgetConfig } from '../../../types';
 import { Hand, Users, User, MessageSquare } from 'lucide-react';
