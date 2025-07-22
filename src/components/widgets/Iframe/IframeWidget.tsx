@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { FC } from 'react';
 import type { WidgetConfig } from '../../../types';
 import { Link } from 'lucide-react';
@@ -9,7 +9,6 @@ export const IframeWidget: FC = () => {
   const [inputValue, setInputValue] = useState('');
 
   const handleApplyUrl = () => {
-    // Una validación simple para asegurar que la URL no esté vacía
     if (inputValue.trim()) {
       setUrl(inputValue.trim());
     }
@@ -37,7 +36,7 @@ export const IframeWidget: FC = () => {
             src={url}
             title="Contenido Embebido"
             className="embedded-iframe"
-            sandbox="allow-scripts allow-same-origin" // Atributo de seguridad
+            sandbox="allow-scripts allow-same-origin"
           />
         ) : (
           <div className="placeholder">
