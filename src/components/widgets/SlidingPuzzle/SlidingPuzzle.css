@@ -1,0 +1,58 @@
+.sliding-puzzle-widget {
+  @apply w-full h-full flex flex-col p-4 bg-gray-200 gap-4;
+}
+
+.puzzle-placeholder {
+  @apply w-full h-full flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg text-gray-600;
+}
+.puzzle-placeholder p {
+  @apply font-semibold my-2;
+}
+
+.puzzle-board {
+  @apply flex-grow grid gap-1 relative bg-gray-900 p-1 rounded-lg shadow-inner;
+  aspect-ratio: 1 / 1;
+}
+
+.puzzle-piece {
+  @apply rounded-md cursor-pointer bg-gray-700;
+  overflow: hidden; /* Clave para que la imagen no se salga */
+}
+
+.piece-image {
+  @apply w-full h-full transition-transform duration-200 ease-in-out;
+}
+
+.puzzle-piece:not(.empty):hover .piece-image {
+  transform: scale(1.1);
+}
+
+.puzzle-piece.empty {
+  @apply bg-transparent cursor-default;
+}
+
+.solved-overlay {
+  @apply absolute inset-0 bg-black/70 flex items-center justify-center text-white text-4xl font-bold rounded-lg;
+  animation: fade-in 0.5s;
+}
+
+.puzzle-controls {
+  @apply flex-shrink-0 flex items-center justify-between;
+}
+
+.puzzle-controls label {
+  @apply flex items-center gap-2 text-sm font-semibold;
+}
+
+.puzzle-controls select {
+  @apply bg-white border border-gray-300 rounded p-1;
+}
+
+.puzzle-controls button {
+  @apply flex items-center gap-2 bg-accent text-text-dark font-semibold py-2 px-3 rounded-lg hover:bg-[#8ec9c9] transition-colors;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

@@ -1,0 +1,74 @@
+.memory-game-widget {
+  @apply w-full h-full flex flex-col p-4 bg-gray-800;
+  perspective: 1000px; /* Necesario para la animación 3D de volteo */
+}
+
+/* --- Vista de Carga --- */
+.memory-placeholder {
+  @apply w-full h-full flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg text-gray-300;
+}
+.memory-placeholder p {
+  @apply font-semibold my-2;
+}
+.memory-placeholder small {
+    @apply text-xs text-gray-500 mb-4;
+}
+
+/* --- Tablero del Juego --- */
+.game-board {
+  @apply flex-grow grid gap-2;
+}
+
+.card {
+  @apply bg-transparent cursor-pointer rounded-lg;
+  aspect-ratio: 1 / 1;
+}
+.card-inner {
+  @apply relative w-full h-full text-center transition-transform duration-500;
+  transform-style: preserve-3d;
+}
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  @apply absolute w-full h-full flex items-center justify-center rounded-lg;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  @apply bg-accent text-text-dark text-4xl font-bold;
+}
+
+.card-back {
+  @apply bg-gray-200 p-1;
+  transform: rotateY(180deg);
+}
+.card-back img {
+  @apply w-full h-full object-cover rounded-md;
+}
+
+/* --- Footer y Overlay --- */
+.game-footer {
+  @apply flex-shrink-0 flex items-center justify-between text-white font-semibold mt-3 pt-3 border-t border-gray-700;
+}
+.game-footer button {
+  @apply flex items-center gap-2 bg-accent text-text-dark font-semibold py-1 px-3 rounded-lg hover:bg-[#8ec9c9] transition-colors text-sm;
+}
+
+.game-won-overlay {
+  @apply absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-white text-center p-4;
+  animation: fade-in 0.5s;
+}
+.game-won-overlay h2 {
+  @apply text-5xl font-bold mb-2;
+}
+.game-won-overlay p {
+  @apply text-lg mb-4;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

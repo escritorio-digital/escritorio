@@ -1,0 +1,51 @@
+.stopwatch-widget {
+  @apply w-full h-full flex flex-col bg-gray-900 text-white p-4;
+}
+
+.time-display-container {
+  @apply flex-grow flex items-center justify-center;
+}
+
+.time-display-main {
+  @apply font-mono text-5xl tracking-wider;
+}
+
+.controls-container {
+  @apply flex-shrink-0 flex justify-between items-center my-4;
+}
+
+.control-button {
+  @apply w-20 h-20 rounded-full flex flex-col items-center justify-center border-2 transition-colors;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+}
+.control-button span {
+  @apply text-xs mt-1;
+}
+
+.control-button.reset {
+  @apply bg-gray-700 border-gray-600 hover:bg-gray-600;
+}
+.control-button.lap {
+  @apply bg-gray-700 border-gray-600 hover:bg-gray-600;
+}
+
+.control-button.start-stop {
+  @apply bg-green-800 border-green-700 text-green-300 hover:bg-green-700;
+}
+.control-button.start-stop.active {
+  @apply bg-red-800 border-red-700 text-red-300 hover:bg-red-700;
+}
+
+
+.laps-container {
+  @apply flex-shrink-0 h-32 bg-black/30 rounded-lg overflow-y-auto;
+}
+.laps-list {
+  @apply p-2 font-mono text-sm;
+}
+.lap-item {
+  @apply flex justify-between p-1 border-b border-gray-700;
+}
+.lap-item:last-child {
+  @apply border-none;
+}

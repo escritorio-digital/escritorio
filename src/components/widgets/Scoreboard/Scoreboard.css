@@ -1,0 +1,59 @@
+.scoreboard-widget {
+  @apply w-full h-full flex flex-col bg-gray-100;
+}
+
+.player-list {
+  @apply flex-grow p-4 overflow-y-auto space-y-3;
+}
+
+.empty-message {
+  @apply text-center text-gray-500 h-full flex items-center justify-center;
+}
+
+.player-row {
+  @apply flex items-center justify-between bg-white p-3 rounded-lg shadow-sm;
+}
+
+.player-name {
+  @apply font-bold text-lg text-text-dark;
+}
+
+.player-controls {
+  @apply flex items-center gap-2;
+}
+
+.player-score {
+  @apply font-mono text-2xl font-bold w-12 text-center;
+}
+
+.score-button {
+  @apply w-8 h-8 rounded-full font-bold text-xl flex items-center justify-center transition-colors text-white;
+}
+.score-button.plus {
+  @apply bg-green-500 hover:bg-green-600;
+}
+.score-button.minus {
+  @apply bg-red-500 hover:bg-red-600;
+}
+
+.remove-button {
+  @apply text-gray-400 hover:text-red-600 ml-2;
+}
+
+.scoreboard-footer {
+  @apply flex-shrink-0 p-3 bg-gray-200 border-t border-gray-300 flex items-center gap-2;
+}
+
+.add-player-form {
+  @apply flex-grow flex gap-2;
+}
+.add-player-form input {
+  @apply flex-grow bg-white border-2 border-gray-300 rounded p-2 focus:border-accent outline-none text-sm;
+}
+.add-player-form button {
+  @apply flex items-center gap-2 bg-accent text-text-dark font-semibold py-2 px-3 rounded-lg hover:bg-[#8ec9c9] transition-colors;
+}
+
+.reset-button {
+  @apply p-2 text-gray-600 hover:bg-gray-300 rounded-lg;
+}

@@ -1,0 +1,102 @@
+.attendance-widget {
+  @apply w-full h-full flex flex-col bg-gray-100;
+}
+
+.main-content {
+  @apply flex-grow flex flex-col;
+  min-height: 0;
+}
+
+.date-controls {
+  @apply flex-shrink-0 p-2 flex items-center gap-2 border-b border-gray-200;
+}
+.date-controls label {
+  @apply font-semibold text-sm text-gray-700;
+}
+.date-controls input {
+  @apply bg-white border border-gray-300 rounded px-2 py-1 text-sm;
+}
+
+.tabs {
+  @apply flex-shrink-0 flex;
+}
+.tabs button {
+  @apply w-1/3 p-3 font-semibold text-gray-500 bg-gray-200 flex items-center justify-center gap-2;
+}
+.tabs button.active {
+  @apply bg-gray-100 text-accent;
+}
+
+.content-area {
+  @apply flex-grow p-2 overflow-y-auto;
+}
+
+.empty-state {
+  @apply h-full flex flex-col items-center justify-center text-center text-gray-500;
+}
+
+.student-list {
+  @apply space-y-2;
+}
+.student-item {
+  @apply flex items-center justify-between p-3 bg-white rounded-lg shadow-sm;
+}
+.student-name {
+  @apply font-bold text-text-dark;
+}
+
+/* --- ESTA ES LA SECCIÓN CORREGIDA CON CSS PURO --- */
+.controls {
+  display: flex;
+  flex-direction: row; /* Fuerza la dirección horizontal */
+  align-items: center;
+  gap: 0.25rem; /* Equivale a gap-1 de Tailwind */
+}
+
+.status-btn {
+  @apply px-2 py-1 text-xs font-bold rounded-full transition-colors border-2;
+}
+.status-btn.present { @apply border-green-500 text-green-600; }
+.status-btn.absent { @apply border-red-500 text-red-600; }
+.status-btn.late { @apply border-yellow-500 text-yellow-600; }
+
+.status-btn.present.active { @apply bg-green-500 text-white; }
+.status-btn.absent.active { @apply bg-red-500 text-white; }
+.status-btn.late.active { @apply bg-yellow-500 text-white; }
+
+.badge-btn, .alert-btn {
+  @apply text-2xl rounded-full w-9 h-9 flex items-center justify-center transition-all duration-200;
+  opacity: 0.3;
+}
+.badge-btn.active, .alert-btn.active {
+  opacity: 1;
+  transform: scale(1.2);
+}
+.alert-btn.active {
+  background-color: #fef08a;
+}
+/* --- FIN DE LA CORRECCIÓN --- */
+
+.footer {
+  @apply flex-shrink-0 p-2 bg-gray-200 border-t border-gray-300 flex items-center gap-2;
+}
+
+.add-student-form {
+  @apply flex-grow flex;
+}
+.add-student-form input {
+  @apply flex-grow bg-white border-2 border-r-0 border-gray-300 rounded-l-lg p-2 focus:border-accent outline-none text-sm;
+}
+.add-student-form button {
+  @apply p-2 bg-accent text-text-dark rounded-r-lg hover:bg-[#8ec9c9];
+}
+
+.actions-group {
+  @apply flex items-center gap-1;
+}
+.action-btn {
+  @apply p-2 rounded-lg text-gray-600 hover:bg-gray-300;
+}
+.action-btn.danger:hover {
+  @apply bg-red-500 text-white;
+}

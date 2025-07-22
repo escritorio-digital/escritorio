@@ -1,0 +1,55 @@
+.metronome-widget {
+  @apply w-full h-full flex flex-col items-center justify-around p-6 bg-gray-800 text-white;
+}
+
+.bpm-display {
+  @apply text-center;
+}
+
+.bpm-value {
+  @apply text-7xl font-mono font-bold;
+}
+
+.bpm-label {
+  @apply block text-sm text-gray-400 -mt-2;
+}
+
+.bpm-slider {
+  @apply w-full px-2;
+}
+
+.bpm-slider input[type="range"] {
+  @apply w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer;
+}
+
+.beat-indicators {
+  @apply flex gap-3 my-4;
+}
+
+.beat-dot {
+  @apply w-4 h-4 bg-gray-600 rounded-full transition-all duration-100;
+}
+
+.beat-dot.active {
+  @apply bg-yellow-400;
+  transform: scale(1.5);
+}
+.beat-dot.first-beat {
+  @apply bg-accent;
+}
+
+
+.controls {
+  @apply w-full flex flex-col items-center gap-4;
+}
+
+.measure-control {
+  @apply flex items-center gap-4 text-lg font-semibold;
+}
+.measure-control button {
+  @apply w-8 h-8 rounded-full bg-gray-700 hover:bg-gray-600 disabled:opacity-50;
+}
+
+.play-button {
+  @apply w-20 h-20 rounded-full flex items-center justify-center text-accent bg-gray-700 hover:bg-gray-600 transition-colors;
+}
