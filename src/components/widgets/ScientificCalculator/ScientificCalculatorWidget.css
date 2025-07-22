@@ -1,0 +1,42 @@
+.scientific-calculator {
+  @apply w-full h-full flex flex-col bg-gray-800 text-white;
+}
+
+.display-area {
+  @apply flex-grow flex flex-col justify-end items-end p-4 bg-gray-900;
+}
+
+.expression {
+  @apply text-gray-400 text-lg h-6;
+}
+
+.main-display {
+  @apply text-5xl font-light;
+  min-height: 50px;
+}
+
+.buttons-grid {
+  @apply grid grid-cols-7 gap-px bg-gray-700;
+  height: 350px; /* Altura fija para el área de botones */
+}
+
+.calc-button {
+  @apply bg-gray-800 text-xl flex items-center justify-center transition-colors hover:bg-gray-700;
+  outline: none;
+}
+
+.calc-button:active {
+  @apply bg-gray-600;
+}
+
+.calc-button.operator {
+  @apply bg-orange-500 hover:bg-orange-600;
+}
+
+.calc-button.ac {
+  @apply bg-red-500 hover:bg-red-600;
+}
+
+.calc-button.mode-active {
+    @apply bg-accent text-text-dark;
+}

@@ -1,0 +1,35 @@
+.iframe-widget {
+  @apply w-full h-full flex flex-col p-3 bg-gray-100;
+}
+
+.controls-container {
+  @apply flex items-center gap-2 mb-3 pb-3 border-b border-gray-300 flex-shrink-0;
+}
+
+.url-icon {
+  @apply text-gray-400;
+}
+
+.url-input {
+  @apply flex-grow bg-white border-2 border-gray-300 rounded p-2 focus:border-accent outline-none text-sm;
+}
+
+.apply-button {
+  @apply bg-accent text-text-dark font-semibold py-2 px-4 rounded-lg hover:bg-[#8ec9c9] transition-colors;
+}
+
+.iframe-container {
+  @apply flex-grow bg-white rounded-md shadow-inner overflow-hidden flex items-center justify-center;
+}
+
+.embedded-iframe {
+  @apply w-full h-full border-0;
+}
+
+.placeholder {
+  @apply text-center text-gray-500;
+}
+
+.placeholder small {
+  @apply text-xs mt-1;
+}

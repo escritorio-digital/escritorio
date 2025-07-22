@@ -1,0 +1,38 @@
+.latex-markdown-widget {
+  @apply w-full h-full flex;
+}
+
+.editor-pane {
+  @apply w-1/2 h-full flex flex-col bg-gray-800;
+}
+
+.mode-selector {
+  @apply flex-shrink-0 flex;
+}
+
+.mode-selector button {
+  @apply w-1/2 p-2 text-center font-semibold text-gray-400 bg-gray-700;
+}
+
+.mode-selector button.active {
+  @apply bg-accent text-text-dark;
+}
+
+.editor-textarea {
+  @apply flex-grow w-full p-4 font-mono text-sm resize-none outline-none border-0;
+  @apply bg-gray-900 text-gray-300;
+}
+
+.preview-pane {
+  @apply w-1/2 h-full p-6 bg-white overflow-auto;
+  /* Estilos para que el contenido de Markdown se vea bien */
+  @apply prose max-w-none;
+}
+
+.preview-pane .katex-display {
+  @apply overflow-auto; /* Permite scroll horizontal para fórmulas anchas */
+}
+
+.error-message {
+    @apply text-red-500 font-mono bg-red-100 p-4 rounded-md;
+}
