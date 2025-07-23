@@ -2,6 +2,34 @@
 
 Este proyecto es un entorno de escritorio virtual construido con React, que permite a los usuarios añadir, mover y redimensionar "widgets" interactivos. El sistema está diseñado para que la creación de nuevos widgets sea un proceso sencillo y modular.
 
+## Widgets del Escritorio Interactivo
+
+1.  **Control de Asistencia:** Herramienta para llevar un registro diario de la asistencia de los estudiantes, además de asignar insignias y alertas.
+2.  **Calculadora Científica:** Realiza operaciones matemáticas, incluyendo funciones trigonométricas, logaritmos, raíces cuadradas y factoriales.
+3.  **Calendario:** Un calendario mensual simple para consultar fechas.
+4.  **Carrusel de Imágenes:** Carga y muestra una serie de imágenes en formato de diapositivas.
+5.  **Conversor de Unidades:** Convierte entre diferentes unidades de medida como longitud, peso y temperatura.
+6.  **Cronómetro:** Un cronómetro para medir el tiempo transcurrido, con función para registrar vueltas (laps).
+7.  **Dados 3D:** Lanza uno o varios dados virtuales con una animación en tres dimensiones.
+8.  **Generador de Grupos:** Permite crear grupos aleatorios a partir de una lista de nombres, ya sea especificando el número de grupos o el número de integrantes por grupo.
+9.  **Generador QR:** Crea un código QR a partir de un texto o una URL que introduzcas.
+10. **Gestos de Trabajo:** Muestra tarjetas visuales grandes para indicar el modo de trabajo en el aula (Silencio, Parejas, Equipos, Plenaria).
+11. **HTML Sandbox:** Un lienzo con un único campo para pegar código HTML y un botón para alternar entre el editor y la vista previa.
+12. **Intérprete (MD/LaTeX):** Renderiza documentos que mezclan texto en formato Markdown con fórmulas matemáticas escritas en LaTeX.
+13. **Lista de Trabajo:** Un gestor de tareas pendientes (to-do list) que permite añadir, marcar como completadas y eliminar tareas.
+14. **Marcador de Puntos:** Un marcador para llevar la puntuación de varios equipos o jugadores.
+15. **Medidor de Ruido:** Utiliza el micrófono para medir el nivel de ruido ambiental y lo clasifica como silencio, conversación o ruido.
+16. **Memorama:** Un juego de memoria clásico que se crea cargando tus propias imágenes para encontrar los pares.
+17. **Metrónomo:** Un metrónomo digital para marcar un tempo (BPM) constante.
+18. **Bloc de Notas:** Un editor de texto enriquecido para tomar apuntes rápidos con formato.
+19. **Puzzle Deslizante:** El clásico juego de puzzle de 15, que se crea a partir de una imagen que tú subas.
+20. **Relojes Mundiales:** Muestra la hora actual en diferentes ciudades del mundo y la compara con tu hora local.
+21. **Ruleta Aleatoria:** Una ruleta personalizable para seleccionar opciones al azar.
+22. **Semáforo:** Un semáforo visual (rojo, amarillo, verde) ideal para gestionar los tiempos o niveles de ruido en el aula.
+23. **Temporizador:** Un contador regresivo que puedes configurar con minutos y segundos.
+24. **Tic-Tac-Toe:** El juego clásico de tres en raya para dos jugadores.
+25. **Visor Web:** Permite embeber y mostrar el contenido de una URL directamente en el escritorio, usando un iframe.
+
 ## 🚀 Cómo Crear un Nuevo Widget
 
 El sistema de widgets está diseñado para descubrir y registrar nuevos widgets automáticamente siempre que se siga la estructura de archivos y convenciones de código correctas.
@@ -86,6 +114,31 @@ export const widgetConfig: Omit<WidgetConfig, 'component'> = {
 ¡Eso es todo! No necesitas registrar el widget en ningún otro lugar. El archivo `src/components/widgets/index.ts` se encarga de importar dinámicamente cualquier archivo que termine en `*Widget.tsx` dentro del directorio de widgets, extrae el componente y su configuración, y lo añade al `WIDGET_REGISTRY`.
 
 Una vez que hayas creado tus archivos y reiniciado el servidor de desarrollo, tu nuevo widget estará disponible automáticamente en la **Librería de Widgets** (el modal de configuración).
+
+## Librerías y Frameworks
+
+### Librerías y Frameworks Principales
+
+* **React:** La biblioteca fundamental para construir toda la interfaz de usuario.
+* **Vite:** La herramienta de desarrollo que compila y sirve el proyecto.
+
+---
+### Widgets y Funcionalidades Específicas
+
+* **`react-rnd`:** Librería clave que permite que las ventanas de los widgets se puedan mover, redimensionar y arrastrar.
+* **`@tiptap/react` y `@tiptap/starter-kit`:** Conjunto de herramientas que potencian el editor de texto enriquecido del "Bloc de Notas".
+* **`qrcode.react`:** Utilizada en el "Generador QR" para crear los códigos QR.
+* **`katex`:** La librería que renderiza las fórmulas matemáticas de LaTeX en el "Intérprete (MD/LaTeX)".
+* **`marked`:** Convierte el texto de Markdown a HTML.
+* **`papaparse`:** Usada para importar y exportar datos en formato CSV.
+* **`turndown`:** Utilizada para convertir el contenido de HTML de vuelta a Markdown.
+
+---
+### Diseño y Estilos
+
+* **Tailwind CSS:** El framework principal utilizado para dar estilo a toda la aplicación.
+* **`lucide-react`:** La librería que proporciona todos los íconos del proyecto.
+* **PostCSS y Autoprefixer:** Herramientas que trabajan junto con Tailwind para asegurar la compatibilidad del CSS.
 
 ---
 
