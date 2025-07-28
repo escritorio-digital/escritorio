@@ -1,7 +1,6 @@
-import React, { createContext, useContext, useEffect } from 'react';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import React, { createContext, useContext } from 'react';
 
-// 1. Definimos la estructura de nuestro tema
+// 1. Definimos la estructura de nuestro tema (esto no cambia)
 interface Theme {
   '--color-bg': string;
   '--color-widget-bg': string;
@@ -12,9 +11,9 @@ interface Theme {
   '--wallpaper': string;
 }
 
-// 2. Colores por defecto
-const defaultTheme: Theme = {
-  '--color-bg': '#F4F8D3',
+// 2. Colores por defecto (esto no cambia)
+export const defaultTheme: Theme = {
+  '--color-bg': '#FFFFFF',
   '--color-widget-bg': '#F7CFD8',
   '--color-widget-header': '#8E7DBE',
   '--color-accent': '#A6D6D6',
@@ -23,46 +22,28 @@ const defaultTheme: Theme = {
   '--wallpaper': 'none',
 };
 
-// 3. Definimos lo que nuestro contexto va a proveer
+// 3. Definimos lo que nuestro contexto va a proveer (esto no cambia)
 interface ThemeContextType {
   theme: Theme;
-  setTheme: (theme: Theme) => void;
+  setTheme: (theme: Theme | ((val: Theme) => Theme)) => void;
   setWallpaper: (wallpaperUrl: string) => void;
   resetTheme: () => void;
+  defaultTheme: Theme;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-// 4. Creamos el Proveedor del Tema (El componente que envuelve la app)
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useLocalStorage<Theme>('app-theme', defaultTheme);
-
-  // Este efecto aplica los colores como variables CSS en el documento
-  useEffect(() => {
-    const root = document.documentElement;
-    for (const [key, value] of Object.entries(theme)) {
-      if (key !== '--wallpaper') {
-        root.style.setProperty(key, value);
-      }
-    }
-  }, [theme]);
-  
-  const setWallpaper = (wallpaperUrl: string) => {
-    setTheme(prevTheme => ({ ...prevTheme, '--wallpaper': wallpaperUrl }));
-  };
-
-  const resetTheme = () => {
-    setTheme(defaultTheme);
-  }
-
+// 4. MODIFICAMOS EL PROVEEDOR DEL TEMA
+// Ahora es un componente simple que recibe el valor del contexto como prop.
+export const ThemeProvider: React.FC<{ children: React.ReactNode; value: ThemeContextType }> = ({ children, value }) => {
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, setWallpaper, resetTheme }}>
+    <ThemeContext.Provider value={value}>
       {children}
     </ThemeContext.Provider>
   );
 };
 
-// 5. Hook personalizado para usar el tema fácilmente en otros componentes
+// 5. Hook personalizado para usar el tema (esto no cambia)
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (context === undefined) {

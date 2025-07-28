@@ -2,20 +2,36 @@ import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { WIDGET_REGISTRY } from '../widgets';
 import { ThemeSettings } from './ThemeSettings.tsx';
+import { ProfileManager } from './ProfileManager'; // Importa el nuevo componente
+import type { ProfileCollection } from '../../types'; // Importa el tipo
 
 interface SettingsModalProps {
   isOpen: boolean;
   onClose: () => void;
   pinnedWidgets: string[];
   setPinnedWidgets: React.Dispatch<React.SetStateAction<string[]>>;
+  // Nuevas props para perfiles
+  profiles: ProfileCollection;
+  setProfiles: React.Dispatch<React.SetStateAction<ProfileCollection>>;
+  activeProfileName: string;
+  setActiveProfileName: (name: string) => void;
 }
 
-export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, pinnedWidgets, setPinnedWidgets }) => {
-  const [activeTab, setActiveTab] = useState('widgets');
+export const SettingsModal: React.FC<SettingsModalProps> = ({
+  isOpen,
+  onClose,
+  pinnedWidgets,
+  setPinnedWidgets,
+  // Recibe las nuevas props
+  profiles,
+  setProfiles,
+  activeProfileName,
+  setActiveProfileName,
+}) => {
+  const [activeTab, setActiveTab] = useState('profiles'); // Inicia en la nueva pestaña
 
   if (!isOpen) return null;
 
-  // ¡CORRECCIÓN! Volvemos a añadir la constante y la función.
   const MAX_WIDGETS = 20;
 
   const togglePin = (widgetId: string) => {
@@ -43,6 +59,12 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, p
 
         <div className="flex border-b">
           <button 
+            onClick={() => setActiveTab('profiles')}
+            className={`flex-1 p-3 font-semibold ${activeTab === 'profiles' ? 'bg-accent text-text-dark' : 'hover:bg-gray-200'}`}
+          >
+            Perfiles de Escritorio
+          </button>
+          <button 
             onClick={() => setActiveTab('widgets')}
             className={`flex-1 p-3 font-semibold ${activeTab === 'widgets' ? 'bg-accent text-text-dark' : 'hover:bg-gray-200'}`}
           >
@@ -57,6 +79,14 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, p
         </div>
 
         <div className="overflow-y-auto">
+          {activeTab === 'profiles' && (
+            <ProfileManager
+              profiles={profiles}
+              setProfiles={setProfiles}
+              activeProfileName={activeProfileName}
+              setActiveProfileName={setActiveProfileName}
+            />
+          )}
           {activeTab === 'widgets' && (
             <div className="p-4">
               <p className="mb-4 text-sm text-gray-600">Selecciona los widgets que quieres en tu barra de herramientas. ({pinnedWidgets.length}/{MAX_WIDGETS})</p>
@@ -68,7 +98,6 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, p
                       <span className="font-semibold">{widget.title}</span>
                     </div>
                     <button
-                      // Usamos la función togglePin que hemos re-añadido
                       onClick={() => togglePin(widget.id)}
                       className={`font-semibold py-2 px-4 rounded-lg transition-colors ${pinnedWidgets.includes(widget.id) ? 'bg-widget-header text-text-light hover:bg-[#7b69b1]' : 'bg-accent text-text-dark hover:bg-[#8ec9c9]'}`}
                     >
