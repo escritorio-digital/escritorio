@@ -1,7 +1,7 @@
 {
-  "name": "escritorio-interactivo",
+  "name": "escritorio",
   "private": true,
-  "homepage": "https://pablogguizar.github.io/escritorio-interactivo-aula/",
+  "homepage": "https://Escritorio-Interactivo-para-el-Aula.github.io/escritorio/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
