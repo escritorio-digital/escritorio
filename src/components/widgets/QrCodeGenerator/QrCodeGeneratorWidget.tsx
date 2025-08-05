@@ -6,9 +6,9 @@ import { QrCode } from 'lucide-react';
 import './QrCodeGenerator.css';
 
 export const QrCodeGeneratorWidget: FC = () => {
-  const [text, setText] = useState('https://pablogguizar.github.io/escritorio-interactivo-aula/');
+  const [text, setText] = useState('https://escritorio-digital.github.io/escritorio/');
   // Estado separado para evitar regenerar el QR en cada pulsación de tecla
-  const [qrValue, setQrValue] = useState('https://pablogguizar.github.io/escritorio-interactivo-aula/');
+  const [qrValue, setQrValue] = useState('https://escritorio-digital.github.io/escritorio/');
 
   const handleGenerate = () => {
     setQrValue(text);
