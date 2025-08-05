@@ -175,6 +175,6 @@ export const WorkListWidget: React.FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
     id: 'work-list',
     title: 'Lista de Trabajo',
-    icon: '✅',
+    icon: <img src="/escritorio/icons/WorkList.png" alt="Lista de Trabajo" width="52" height="52" />,
     defaultSize: { width: 380, height: 400 },
 };

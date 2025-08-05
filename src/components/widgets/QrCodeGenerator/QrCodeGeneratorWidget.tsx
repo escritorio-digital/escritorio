@@ -52,6 +52,6 @@ export const QrCodeGeneratorWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'qr-code-generator',
   title: 'Generador QR',
-  icon: '🔲',
+  icon: <img src="/escritorio/icons/QrCodeGenerator.png" alt="Generador QR" width="52" height="52" />,
   defaultSize: { width: 350, height: 500 },
 };

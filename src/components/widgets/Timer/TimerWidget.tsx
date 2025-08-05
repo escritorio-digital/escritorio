@@ -92,6 +92,6 @@ export const TimerWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
     id: 'timer',
     title: 'Temporizador',
-    icon: '⏳',
+    icon: <img src="/escritorio/icons/Timer.png" alt="Temporizador" width="52" height="52" />,
     defaultSize: { width: 300, height: 300 },
 };

@@ -58,6 +58,6 @@ export const TrafficLightWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'traffic-light',
   title: 'Semáforo',
-  icon: '🚦',
+  icon: <img src="/escritorio/icons/TrafficLight.png" alt="Semáforo" width="52" height="52" />,
   defaultSize: { width: 150, height: 350 },
 };

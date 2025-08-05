@@ -82,6 +82,6 @@ export const WorkGesturesWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'work-gestures',
   title: 'Gestos de Trabajo',
-  icon: '✋',
+  icon: <img src="/escritorio/icons/WorkGestures.png" alt="Gestos de trabajo" width="52" height="52" />,
   defaultSize: { width: 450, height: 450 },
 };

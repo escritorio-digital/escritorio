@@ -112,6 +112,6 @@ export const ImageCarouselWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'image-carousel',
   title: 'Carrusel de Imágenes',
-  icon: '🖼️',
+  icon: <img src="/escritorio/icons/ImageCarousel.png" alt="Carrusel de Imágenes" width="52" height="52" />,
   defaultSize: { width: 500, height: 400 },
 };

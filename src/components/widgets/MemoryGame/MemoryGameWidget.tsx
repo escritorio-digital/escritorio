@@ -139,6 +139,6 @@ export const MemoryGameWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'memory-game',
   title: 'Memorama',
-  icon: '🧠',
+  icon: <img src="/escritorio/icons/MemoryGame.png" alt="Memorama" width="52" height="52" />,
   defaultSize: { width: 500, height: 550 },
 };

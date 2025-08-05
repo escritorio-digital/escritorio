@@ -114,6 +114,6 @@ export const GroupGeneratorWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'group-generator',
   title: 'Generador de Grupos',
-  icon: '👥',
+  icon: <img src="/escritorio/icons/GroupGenerator.png" alt="Generador de Grupos" width="52" height="52" />,
   defaultSize: { width: 700, height: 550 },
 };

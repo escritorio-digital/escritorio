@@ -264,6 +264,6 @@ export const AttendanceWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'attendance-tracker',
   title: 'Control de Asistencia',
-  icon: '📋',
+  icon: <img src="/escritorio/icons/Attendance.png" alt="Control de Asistencia" width="52" height="52" />,
   defaultSize: { width: 450, height: 600 },
 };

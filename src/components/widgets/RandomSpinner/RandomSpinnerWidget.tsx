@@ -213,6 +213,6 @@ export const RandomSpinnerWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'random-spinner',
   title: 'Ruleta Aleatoria',
-  icon: '🎡',
+  icon: <img src="/escritorio/icons/RandomSpinner.png" alt="Ruleta Aleatoria" width="52" height="52" />,
   defaultSize: { width: 550, height: 420 },
 };

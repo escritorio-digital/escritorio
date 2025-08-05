@@ -104,6 +104,6 @@ export const GlobalClocksWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'global-clocks',
   title: 'Relojes Mundiales',
-  icon: '🌍',
+  icon: <img src="/escritorio/icons/GlobalClocks.png" alt="Relojes mundiales" width="52" height="52" />,
   defaultSize: { width: 350, height: 400 },
 };

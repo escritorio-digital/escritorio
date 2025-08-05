@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 
 /**
  * Define la estructura de la configuración estática de un widget.
@@ -7,7 +7,7 @@ import type { FC } from 'react';
 export interface WidgetConfig {
   id: string;
   title: string;
-  icon: string;
+  icon: string | ReactNode;
   defaultSize: { width: number; height: number };
   component: FC; // El componente de React como una función
 }

@@ -91,6 +91,6 @@ export const StopwatchWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'stopwatch',
   title: 'Cronómetro',
-  icon: '⏱️',
+  icon: <img src="/escritorio/icons/Stopwatch.png" alt="Cronometro" width="52" height="52" />,
   defaultSize: { width: 320, height: 450 },
 };

@@ -139,6 +139,6 @@ export const DiceWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'dice-roller',
   title: 'Dados 3D',
-  icon: '🎲',
+  icon: <img src="/escritorio/icons/Dice.png" alt="Dados 3D" width="52" height="52" />,
   defaultSize: { width: 400, height: 300 },
 };
