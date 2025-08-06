@@ -1,3 +1,5 @@
+// src/components/widgets/Iframe/IframeWidget.tsx
+
 import { useState } from 'react';
 import type { FC } from 'react';
 import type { WidgetConfig } from '../../../types';
@@ -5,8 +7,8 @@ import { Link } from 'lucide-react';
 import './IframeWidget.css';
 
 export const IframeWidget: FC = () => {
-  const [url, setUrl] = useState('');
-  const [inputValue, setInputValue] = useState('');
+  const [url, setUrl] = useState('https://vibe-coding-educativo.github.io/app_edu/');
+  const [inputValue, setInputValue] = useState('https://vibe-coding-educativo.github.io/app_edu/');
 
   const handleApplyUrl = () => {
     if (inputValue.trim()) {
@@ -36,7 +38,7 @@ export const IframeWidget: FC = () => {
             src={url}
             title="Contenido Embebido"
             className="embedded-iframe"
-            sandbox="allow-scripts allow-same-origin"
+            // --- LÍNEA MODIFICADA: Se ha eliminado el atributo 'sandbox' ---
           />
         ) : (
           <div className="placeholder">
