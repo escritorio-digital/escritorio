@@ -1,3 +1,5 @@
+// src/types/index.ts
+
 import type { FC, ReactNode } from 'react';
 
 /**
@@ -21,6 +23,13 @@ export interface ActiveWidget {
   position: { x: number; y: number };
   size: { width: number | string; height: number | string };
   zIndex: number;
+  
+  // --- LÍNEAS AÑADIDAS ---
+  isMinimized?: boolean;
+  isMaximized?: boolean;
+  previousPosition?: { x: number; y: number };
+  previousSize?: { width: number | string; height: number | string };
+  // --- FIN DE LÍNEAS AÑADIDAS ---
 }
 
 /**

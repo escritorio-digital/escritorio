@@ -1,3 +1,5 @@
+// src/App.tsx
+
 import { useState, useEffect } from 'react';
 import { WIDGET_REGISTRY } from './components/widgets';
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -10,7 +12,6 @@ import type { ActiveWidget, DesktopProfile, ProfileCollection } from './types';
 import { Copyright } from 'lucide-react';
 
 // --- Componente Hijo que Renderiza la UI ---
-// Este componente está DENTRO del ThemeProvider, por lo que puede usar el contexto sin problemas.
 const DesktopUI: React.FC<{
     profiles: ProfileCollection;
     setProfiles: React.Dispatch<React.SetStateAction<ProfileCollection>>;
@@ -59,6 +60,46 @@ const DesktopUI: React.FC<{
         setHighestZ(newZ);
         setActiveWidgets(prev => prev.map(w => (w.instanceId === instanceId ? { ...w, zIndex: newZ } : w)));
     };
+    
+    // --- LÓGICA AÑADIDA PARA MINIMIZAR Y MAXIMIZAR ---
+    const toggleMinimize = (instanceId: string) => {
+        setActiveWidgets(prev => prev.map(w => (
+            w.instanceId === instanceId ? { ...w, isMinimized: !w.isMinimized } : w
+        )));
+    };
+
+    const toggleMaximize = (instanceId: string) => {
+        const newZ = highestZ + 1;
+        setHighestZ(newZ);
+        setActiveWidgets(prev => prev.map(w => {
+            if (w.instanceId === instanceId) {
+                if (w.isMaximized) {
+                    // Restaurar
+                    return {
+                        ...w,
+                        isMaximized: false,
+                        position: w.previousPosition || { x: 100, y: 100 },
+                        size: w.previousSize || { width: 500, height: 400 },
+                        zIndex: newZ,
+                    };
+                } else {
+                    // Maximizar
+                    return {
+                        ...w,
+                        isMaximized: true,
+                        isMinimized: false, // No puede estar minimizado y maximizado a la vez
+                        previousPosition: w.position,
+                        previousSize: w.size,
+                        position: { x: 0, y: 0 },
+                        size: { width: '100vw', height: '100vh' },
+                        zIndex: newZ,
+                    };
+                }
+            }
+            return w;
+        }));
+    };
+    // --- FIN DE LA LÓGICA AÑADIDA ---
 
     return (
         <div className="w-screen h-screen overflow-hidden">
@@ -73,6 +114,12 @@ const DesktopUI: React.FC<{
                         position={widget.position}
                         size={widget.size}
                         zIndex={widget.zIndex}
+                        // --- PROPS AÑADIDAS ---
+                        isMinimized={widget.isMinimized}
+                        isMaximized={widget.isMaximized}
+                        onToggleMinimize={() => toggleMinimize(widget.instanceId)}
+                        onToggleMaximize={() => toggleMaximize(widget.instanceId)}
+                        // --- FIN DE PROPS AÑADIDAS ---
                         onClose={() => closeWidget(widget.instanceId)}
                         onFocus={() => focusWidget(widget.instanceId)}
                         onDragStop={(_e, d) => setActiveWidgets(prev => prev.map(w => (w.instanceId === widget.instanceId ? { ...w, position: { x: d.x, y: d.y } } : w)))}
@@ -100,6 +147,7 @@ const DesktopUI: React.FC<{
         </div>
     );
 };
+
 
 // --- Componente Principal que Maneja el Estado y el Proveedor de Contexto ---
 function App() {
