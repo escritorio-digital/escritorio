@@ -41,15 +41,25 @@ const DesktopUI: React.FC<{
         if (!widgetConfig) return;
         const newZ = highestZ + 1;
         setHighestZ(newZ);
+
+        // --- LÓGICA CORREGIDA PARA LA POSICIÓN INICIAL ---
+        const maxX = window.innerWidth - (widgetConfig.defaultSize.width as number);
+        const maxY = window.innerHeight - (widgetConfig.defaultSize.height as number) - 80; // 80px for toolbar buffer
+
         const newWidget: ActiveWidget = {
             instanceId: `${widgetId}-${Date.now()}`,
             widgetId: widgetId,
-            position: { x: Math.random() * (window.innerWidth - (widgetConfig.defaultSize.width as number)), y: Math.random() * (window.innerHeight - (widgetConfig.defaultSize.height as number) - 80) },
+            position: { 
+                x: Math.max(0, Math.random() * maxX), 
+                y: Math.max(0, Math.random() * maxY) 
+            },
+            // --- FIN DE LA CORRECCIÓN ---
             size: widgetConfig.defaultSize,
             zIndex: newZ,
         };
         setActiveWidgets(prev => [...prev, newWidget]);
     };
+
 
     const closeWidget = (instanceId: string) => {
         setActiveWidgets(prev => prev.filter(w => w.instanceId !== instanceId));
@@ -61,7 +71,6 @@ const DesktopUI: React.FC<{
         setActiveWidgets(prev => prev.map(w => (w.instanceId === instanceId ? { ...w, zIndex: newZ } : w)));
     };
     
-    // --- LÓGICA AÑADIDA PARA MINIMIZAR Y MAXIMIZAR ---
     const toggleMinimize = (instanceId: string) => {
         setActiveWidgets(prev => prev.map(w => (
             w.instanceId === instanceId ? { ...w, isMinimized: !w.isMinimized } : w
@@ -87,7 +96,7 @@ const DesktopUI: React.FC<{
                     return {
                         ...w,
                         isMaximized: true,
-                        isMinimized: false, // No puede estar minimizado y maximizado a la vez
+                        isMinimized: false, 
                         previousPosition: w.position,
                         previousSize: w.size,
                         position: { x: 0, y: 0 },
@@ -99,7 +108,6 @@ const DesktopUI: React.FC<{
             return w;
         }));
     };
-    // --- FIN DE LA LÓGICA AÑADIDA ---
 
     return (
         <div className="w-screen h-screen overflow-hidden">
@@ -114,12 +122,10 @@ const DesktopUI: React.FC<{
                         position={widget.position}
                         size={widget.size}
                         zIndex={widget.zIndex}
-                        // --- PROPS AÑADIDAS ---
                         isMinimized={widget.isMinimized}
                         isMaximized={widget.isMaximized}
                         onToggleMinimize={() => toggleMinimize(widget.instanceId)}
                         onToggleMaximize={() => toggleMaximize(widget.instanceId)}
-                        // --- FIN DE PROPS AÑADIDAS ---
                         onClose={() => closeWidget(widget.instanceId)}
                         onFocus={() => focusWidget(widget.instanceId)}
                         onDragStop={(_e, d) => setActiveWidgets(prev => prev.map(w => (w.instanceId === widget.instanceId ? { ...w, position: { x: d.x, y: d.y } } : w)))}
