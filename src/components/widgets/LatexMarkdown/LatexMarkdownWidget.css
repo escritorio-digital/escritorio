@@ -3,7 +3,7 @@
 }
 
 .editor-pane {
-  @apply w-1/2 h-full flex flex-col bg-gray-800;
+  @apply w-1/2 h-full flex flex-col bg-gray-800 border-r border-gray-700;
 }
 
 .mode-selector {
@@ -11,11 +11,16 @@
 }
 
 .mode-selector button {
-  @apply w-1/2 p-2 text-center font-semibold text-gray-400 bg-gray-700;
+  @apply w-1/2 p-2 text-center font-semibold text-gray-400 bg-gray-700 transition-colors;
+}
+
+.mode-selector button:hover {
+  @apply bg-gray-600 text-gray-200;
 }
 
 .mode-selector button.active {
-  @apply bg-accent text-text-dark;
+  /* He usado variables de color genéricas, ajústalas a tu tema si es necesario */
+  @apply bg-blue-600 text-white;
 }
 
 .editor-textarea {
@@ -23,8 +28,31 @@
   @apply bg-gray-900 text-gray-300;
 }
 
+/* Nuevo contenedor para la previsualización y su barra de herramientas */
+.preview-container {
+  @apply w-1/2 h-full flex flex-col;
+}
+
+/* Nueva barra de herramientas */
+.preview-toolbar {
+  @apply flex-shrink-0 flex items-center justify-end gap-2 p-2 bg-gray-100 border-b border-gray-200;
+}
+
+.preview-toolbar button {
+  @apply p-1.5 rounded-md text-gray-600 transition-colors;
+}
+
+.preview-toolbar button:hover {
+  @apply bg-gray-300 text-gray-900;
+}
+
+/* Mensaje de feedback */
+.feedback-message {
+  @apply text-sm text-gray-700 mr-auto px-2;
+}
+
 .preview-pane {
-  @apply w-1/2 h-full p-6 bg-white overflow-auto;
+  @apply h-full p-6 bg-white overflow-auto;
   /* Estilos para que el contenido de Markdown se vea bien */
   @apply prose max-w-none;
 }
@@ -34,5 +62,5 @@
 }
 
 .error-message {
-    @apply text-red-500 font-mono bg-red-100 p-4 rounded-md;
+    @apply text-red-600 font-mono text-sm bg-red-50 p-4 rounded-md;
 }
