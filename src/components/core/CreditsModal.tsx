@@ -26,7 +26,7 @@ export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) =
             Puedes visitar la aplicación original en: <a href="https://mtgonzalezm.github.io/escritorio-interactivo-aula/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">https://mtgonzalezm.github.io/escritorio-interactivo-aula/</a>
           </p>
           <p>
-            Esta versión es una migración a <strong>React.js</strong> realizada por <strong>Pablo G. Guízar</strong> con ayuda de <strong>Gemini</strong>. El repositorio de esta migración se encuentra en: <a href="https://github.com/PabloGGuizar/escritorio-interactivo-aula/tree/migracion-react" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">GitHub - PabloGGuizar/escritorio-interactivo-aula</a>
+            Esta nueva versión fue desarrollada en colaboración por María Teresa González y Pablo G. Guízar, con la asistencia de Gemini. El repositorio de este proyecto se encuentra en: <a href="https://github.com/escritorio-digital/escritorio" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Escritorio Digital</a>
           </p>
           <hr />
           <p>

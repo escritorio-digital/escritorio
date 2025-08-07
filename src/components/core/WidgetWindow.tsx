@@ -42,11 +42,11 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
         onMouseDown={onFocus}
         className="bg-widget-bg rounded-lg shadow-2xl border-2 border-widget-header relative"
         dragHandleClassName="widget-header-drag-handle"
-        // --- LÍNEA AÑADIDA: Esto soluciona el problema ---
         bounds="parent" 
       >
         <div className="flex items-center justify-between h-10 bg-widget-header text-text-light font-bold px-3 absolute top-0 left-0 right-0">
-          <span className="widget-header-drag-handle flex-grow h-full cursor-move">{title}</span>
+          {/* --- LÍNEA MODIFICADA: Se han añadido clases de flexbox para centrar --- */}
+          <span className="widget-header-drag-handle flex-grow h-full cursor-move flex items-center">{title}</span>
           
           <div className="flex items-center gap-1">
             <button onClick={onToggleMinimize} className="hover:bg-black/20 rounded-full p-1">
