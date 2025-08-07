@@ -22,7 +22,7 @@ export const DiceWidget: FC = () => {
 
   // 2. Crea el objeto de Audio solo en el lado del cliente (en el navegador)
   useEffect(() => {
-    audioRef.current = new Audio('/escritorio-interactivo-aula/sounds/dice-142528.mp3');
+    audioRef.current = new Audio('/escritorio/sounds/dice-142528.mp3');
   }, []);
 
 
