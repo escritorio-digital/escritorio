@@ -69,6 +69,6 @@ export const CalendarWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'calendar',
   title: 'Calendario',
-  icon: <img src="/escritorio/icons/Calendar.png" alt="Calendario" width="52" height="52" />,
+  icon: <img src="/icons/Calendar.png" alt="Calendario" width="52" height="52" />,
   defaultSize: { width: 320, height: 350 },
 };

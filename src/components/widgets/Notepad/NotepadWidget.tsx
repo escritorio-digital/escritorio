@@ -144,6 +144,6 @@ export const NotepadWidget: React.FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'notepad',
   title: 'Bloc de Notas',
-  icon: <img src="/escritorio/icons/Notepad.png" alt="Bloc de notas" width="52" height="52" />,
+  icon: <img src="/icons/Notepad.png" alt="Bloc de notas" width="52" height="52" />,
   defaultSize: { width: 500, height: 450 },
 };

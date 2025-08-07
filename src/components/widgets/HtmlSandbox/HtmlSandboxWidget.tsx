@@ -46,6 +46,6 @@ export const HtmlSandboxWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'html-sandbox',
   title: 'HTML Sandbox',
-  icon: <img src="/escritorio/icons/HtmlSandbox.png" alt="HTML Sandbox" width="52" height="52" />,
+  icon: <img src="/icons/HtmlSandbox.png" alt="HTML Sandbox" width="52" height="52" />,
   defaultSize: { width: 600, height: 450 },
 };

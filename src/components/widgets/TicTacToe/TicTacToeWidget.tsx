@@ -109,6 +109,6 @@ export const TicTacToeWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'tic-tac-toe',
   title: 'Tic-Tac-Toe',
-  icon: <img src="/escritorio/icons/TicTacToe.png" alt="Juego Gato" width="52" height="52" />,
+  icon: <img src="/icons/TicTacToe.png" alt="Juego Gato" width="52" height="52" />,
   defaultSize: { width: 380, height: 520 },
 };

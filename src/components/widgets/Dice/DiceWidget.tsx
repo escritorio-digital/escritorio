@@ -22,7 +22,7 @@ export const DiceWidget: FC = () => {
 
   // 2. Crea el objeto de Audio solo en el lado del cliente (en el navegador)
   useEffect(() => {
-    audioRef.current = new Audio('/escritorio/sounds/dice-142528.mp3');
+    audioRef.current = new Audio('/sounds/dice-142528.mp3');
   }, []);
 
 
@@ -139,6 +139,6 @@ export const DiceWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'dice-roller',
   title: 'Dados 3D',
-  icon: <img src="/escritorio/icons/Dice.png" alt="Dados 3D" width="52" height="52" />,
+  icon: <img src="/icons/Dice.png" alt="Dados 3D" width="52" height="52" />,
   defaultSize: { width: 400, height: 300 },
 };

@@ -139,6 +139,6 @@ export const ScientificCalculatorWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'scientific-calculator',
   title: 'Calculadora Científica',
-  icon: <img src="/escritorio/icons/ScientificCalculator.png" alt="Calculadora Científica" width="52" height="52" />,
+  icon: <img src="/icons/ScientificCalculator.png" alt="Calculadora Científica" width="52" height="52" />,
   defaultSize: { width: 400, height: 550 },
 };

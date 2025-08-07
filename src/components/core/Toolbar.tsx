@@ -30,7 +30,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({ pinnedWidgets, onWidgetClick, 
         className="w-14 h-14 bg-gray-500/50 text-white text-2xl rounded-lg flex items-center justify-center hover:bg-gray-500/80 transition-all duration-200 hover:scale-110"
         title="Configurar Widgets"
       >
-        <img src="/escritorio/icons/Settings.png" alt="Ajsutes" width="52" height="52" />
+        <img src="/icons/Settings.png" alt="Ajsutes" width="52" height="52" />
       </button>
     </div>
   );

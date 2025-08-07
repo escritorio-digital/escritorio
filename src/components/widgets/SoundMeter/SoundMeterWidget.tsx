@@ -138,6 +138,6 @@ export const SoundMeterWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'sound-meter',
   title: 'Medidor de Ruido',
-  icon: <img src="/escritorio/icons/SoundMeter.png" alt="Medidor de ruido" width="52" height="52" />,
+  icon: <img src="/icons/SoundMeter.png" alt="Medidor de ruido" width="52" height="52" />,
   defaultSize: { width: 300, height: 300 },
 };

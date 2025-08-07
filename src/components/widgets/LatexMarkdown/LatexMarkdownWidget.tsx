@@ -208,6 +208,6 @@ export const LatexMarkdownWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'latex-markdown-interpreter',
   title: 'Intérprete (MD/LaTeX)',
-  icon: <img src="/escritorio/icons/LatexMarkdown.png" alt="Intérprete (MD/LaTeX)" width="52" height="52" />,
+  icon: <img src="/icons/LatexMarkdown.png" alt="Intérprete (MD/LaTeX)" width="52" height="52" />,
   defaultSize: { width: 900, height: 550 },
 };

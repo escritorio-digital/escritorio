@@ -95,6 +95,6 @@ export const ScoreboardWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'scoreboard',
   title: 'Marcador de Puntos',
-  icon: <img src="/escritorio/icons/Scoreboard.png" alt="Marcador de puntos" width="52" height="52" />,
+  icon: <img src="/icons/Scoreboard.png" alt="Marcador de puntos" width="52" height="52" />,
   defaultSize: { width: 400, height: 450 },
 };

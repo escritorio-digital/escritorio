@@ -54,6 +54,6 @@ export const IframeWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'iframe-embed',
   title: 'Visor Web',
-  icon: <img src="/escritorio/icons/Iframe.png" alt="Visor Web" width="52" height="52" />,
+  icon: <img src="/icons/Iframe.png" alt="Visor Web" width="52" height="52" />,
   defaultSize: { width: 600, height: 500 },
 };
