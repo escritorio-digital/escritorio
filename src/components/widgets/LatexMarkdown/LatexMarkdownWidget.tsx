@@ -129,7 +129,6 @@ export const LatexMarkdownWidget: FC = () => {
     renderContentInto(dst, mode, input);
 
     try {
-      // @ts-expect-error: document.fonts no siempre tipado
       await document.fonts?.ready;
     } catch {}
     await new Promise<void>((r) => requestAnimationFrame(() => r()));
