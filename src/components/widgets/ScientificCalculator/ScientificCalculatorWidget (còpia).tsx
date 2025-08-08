@@ -3,46 +3,25 @@ import type { FC } from 'react';
 import type { WidgetConfig } from '../../../types';
 import './ScientificCalculatorWidget.css';
 
-// --- INICIO: NUEVOS COMPONENTES PARA ICONOS ---
+// --- LAYOUTS DE BOTONES CON BOTÓN DE RETROCESO (←) ---
 
-const IconoBasico: FC<{ className?: string }> = ({ className }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M20 6H4V4h16v2zm-2 3H6v2h12V9zm-2 3h-8v2h8v-2zm-2 3H10v2h4v-2zM4 20h16v-2H4v2zM12 1c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10S17.52 1 12 1zM2 11h20M12 1v22"/>
-  </svg>
-);
-
-const IconoEstandar: FC<{ className?: string }> = ({ className }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9.47 17.07L5 12.6l1.41-1.41L9.47 14.24l7.07-7.07L18 8.59 9.47 17.07z"/>
-  </svg>
-);
-
-const IconoCientifico: FC<{ className?: string }> = ({ className }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5.5-2.5l1.41 1.41L12 14.83l4.09 4.09 1.41-1.41L13.41 13.4l4.09-4.09-1.41-1.41L12 11.97 7.91 7.91 6.5 9.32l4.09 4.09-4.09 4.09z"/>
-  </svg>
-);
-
-// --- FIN: NUEVOS COMPONENTES PARA ICONOS ---
-
-
-// --- LAYOUTS DE BOTONES ---
 const scientificLayout = [
   'rad', 'deg', 'x!', '(', ')',
   'sin', 'cos', 'tan', 'ln', 'log',
-  '7',   '8',   '9',   '÷', 'split-ac-backspace',
-  '4',   '5',   '6',   '×', 'π',
-  '1',   '2',   '3',   '-', '√',
-  '0',   '.',   'Ans', 'EE', '+',
+  '7',   '8',   '9',   '÷', 'AC',
+  '4',   '5',   '6',   '×', '←', // Botón de retroceso añadido
+  '1',   '2',   '3',   '-', '%',
+  '0',   '.',   'e',   'π', '+',
   '='
 ];
 
 const standardLayout = [
-  '(', ')', 'Ans', 'split-ac-backspace',
+  '(', ')', '%', 'AC',
   '7', '8', '9', '÷',
   '4', '5', '6', '×',
   '1', '2', '3', '-',
   '0', '.', '√', '+',
+  '←', // Botón de retroceso añadido
   '='
 ];
 
@@ -50,7 +29,8 @@ const basicLayout = [
   '7', '8', '9', '÷',
   '4', '5', '6', '×',
   '1', '2', '3', '-',
-  '0', '.', '+', 'split-ac-backspace',
+  'AC', '0', '.', '+',
+  '←', // Botón de retroceso añadido
   '='
 ];
 
@@ -65,11 +45,10 @@ export const ScientificCalculatorWidget: FC = () => {
   const [expression, setExpression] = useState('');
   const [isRadians, setIsRadians] = useState(true);
   const [mode, setMode] = useState('Scientific');
+  // --- NUEVOS ESTADOS PARA EL HISTORIAL ---
   const [history, setHistory] = useState<string[]>([]);
   const [showHistory, setShowHistory] = useState(false);
-  const [lastAnswer, setLastAnswer] = useState('0');
 
-  // El resto de la lógica de la calculadora no necesita cambios...
   const evaluateExpression = (expr: string): string => {
     try {
       let evalExpr = expr
@@ -77,7 +56,7 @@ export const ScientificCalculatorWidget: FC = () => {
         .replace(/÷/g, '/')
         .replace(/%/g, '/100')
         .replace(/π/g, 'Math.PI')
-        .replace(/Ans/g, lastAnswer);
+        .replace(/e/g, 'Math.E');
         
       evalExpr = evalExpr.replace(/√\(([^)]+)\)/g, (_, value) => `Math.sqrt(${evaluateExpression(value)})`);
       evalExpr = evalExpr.replace(/log\(([^)]+)\)/g, (_, value) => `Math.log10(${evaluateExpression(value)})`);
@@ -101,12 +80,10 @@ export const ScientificCalculatorWidget: FC = () => {
         return result.toString();
       });
 
+      // eslint-disable-next-line no-new-func
       const result = new Function('return ' + evalExpr)();
       
-      if (result === 0) return '0';
-      if (Math.abs(result) > 1e12 || (Math.abs(result) < 1e-9 && result !== 0)) {
-        return result.toExponential(9);
-      }
+      if (Math.abs(result) > 1e15) return result.toExponential(9);
       return String(parseFloat(result.toFixed(10)));
       
     } catch (error) {
@@ -114,6 +91,7 @@ export const ScientificCalculatorWidget: FC = () => {
     }
   };
 
+  // --- NUEVA FUNCIÓN PARA EL BOTÓN DE RETROCESO ---
   const handleBackspace = () => {
     if (display.length > 1) {
       setDisplay(display.slice(0, -1));
@@ -129,28 +107,16 @@ export const ScientificCalculatorWidget: FC = () => {
       setDisplay('0');
       setExpression('');
     } else if (btn === '←') {
-      handleBackspace();
+      handleBackspace(); // Llamada a la función de retroceso
     } else if (btn === '=') {
       const finalExpression = expression || display;
       const result = evaluateExpression(finalExpression);
-      
       setDisplay(result);
       setExpression(finalExpression + '=');
-      setLastAnswer(result);
-      
+      // --- AÑADIR OPERACIÓN AL HISTORIAL ---
       const historyEntry = `${finalExpression} = ${result}`;
-      setHistory(prev => [historyEntry, ...prev].slice(0, 20));
-    } else if (btn === 'Ans') {
-      handleInput(btn);
-    } 
-    else if (btn === 'EE') {
-      const lastCharIsOperator = operators.includes(expression.slice(-1));
-      if (lastCharIsOperator || display.includes('e')) return;
-
-      setExpression(prev => prev + 'e');
-      setDisplay(prev => prev + 'e');
-    }
-    else if (['sin', 'cos', 'tan', 'log', 'ln', '√'].includes(btn)) {
+      setHistory(prev => [historyEntry, ...prev].slice(0, 20)); // Guarda las últimas 20 operaciones
+    } else if (['sin', 'cos', 'tan', 'log', 'ln', '√'].includes(btn)) {
         handleFunction(btn);
     } else if (btn === 'rad' || btn === 'deg') {
         setIsRadians(btn === 'rad');
@@ -164,23 +130,23 @@ export const ScientificCalculatorWidget: FC = () => {
   
   const handleInput = (btn: string) => {
     if (display === 'Error' || (expression.includes('=') && !operators.includes(btn))) {
-      setDisplay(btn === 'Ans' ? lastAnswer : btn);
+      setDisplay(btn);
       setExpression(btn);
       return;
     }
 
+    // Previene añadir un operador si la expresión ya termina con uno
     const lastCharIsOperator = operators.includes(expression.slice(-1));
     if (operators.includes(btn) && lastCharIsOperator) return;
 
-    const valueToDisplay = btn === 'Ans' ? lastAnswer : btn;
-
     if (display === '0' && btn !== '.') {
-      setDisplay(valueToDisplay);
+      setDisplay(btn);
     } else {
+       // Si la última acción fue un operador, el display se reinicia
        if (lastCharIsOperator) {
-         setDisplay(valueToDisplay);
+         setDisplay(btn);
        } else {
-         setDisplay(prev => prev + valueToDisplay);
+         setDisplay(prev => prev + btn);
        }
     }
     
@@ -212,25 +178,17 @@ export const ScientificCalculatorWidget: FC = () => {
     <div className="scientific-calculator">
       <div className="top-bar">
         <div className="mode-selector">
-          {/* --- BOTONES DE MODO ACTUALIZADOS CON ICONOS --- */}
-          <button className={`mode-button ${mode === 'Basic' ? 'mode-active' : ''}`} onClick={() => setMode('Basic')}>
-            <IconoBasico className="button-icon" />
-            <span>Básica</span>
-          </button>
-          <button className={`mode-button ${mode === 'Standard' ? 'mode-active' : ''}`} onClick={() => setMode('Standard')}>
-            <IconoEstandar className="button-icon" />
-            <span>Estándar</span>
-          </button>
-          <button className={`mode-button ${mode === 'Scientific' ? 'mode-active' : ''}`} onClick={() => setMode('Scientific')}>
-            <IconoCientifico className="button-icon" />
-            <span>Científica</span>
-          </button>
+          <button className={`mode-button ${mode === 'Basic' ? 'mode-active' : ''}`} onClick={() => setMode('Basic')}>Básica</button>
+          <button className={`mode-button ${mode === 'Standard' ? 'mode-active' : ''}`} onClick={() => setMode('Standard')}>Estándar</button>
+          <button className={`mode-button ${mode === 'Scientific' ? 'mode-active' : ''}`} onClick={() => setMode('Scientific')}>Científica</button>
         </div>
+        {/* --- BOTÓN PARA MOSTRAR/OCULTAR EL HISTORIAL --- */}
         <button className={`mode-button history-toggle ${showHistory ? 'mode-active' : ''}`} onClick={() => setShowHistory(!showHistory)}>
           Historial
         </button>
       </div>
       
+      {/* --- PANEL DE HISTORIAL CONDICIONAL --- */}
       {showHistory && (
         <div className="history-panel">
           {history.length === 0 ? <p className="history-empty">No hay historial.</p> :
@@ -247,21 +205,15 @@ export const ScientificCalculatorWidget: FC = () => {
       </div>
       <div className={`buttons-grid ${gridClass}`}>
         {currentLayout.map((btn, index) => {
-          if (btn === 'split-ac-backspace') {
-            return (
-              <div key={`${mode}-split-${index}`} className="split-button-container">
-                <button onClick={() => handleButtonClick('←')} className="split-button split-left control">←</button>
-                <button onClick={() => handleButtonClick('AC')} className="split-button split-right ac">AC</button>
-              </div>
-            );
-          }
-          
           const isOperator = operators.includes(btn);
           const isNumber = numbers.includes(btn);
+          const isAC = btn === 'AC';
+          const isBackspace = btn === '←';
           
           let buttonClass = 'function';
           if (isOperator) buttonClass = 'operator';
           if (isNumber) buttonClass = 'number';
+          if (isAC || isBackspace) buttonClass = 'control';
           
           let spanClass = '';
           if (btn === '0' && mode === 'Scientific') spanClass = 'col-span-2';
@@ -272,6 +224,7 @@ export const ScientificCalculatorWidget: FC = () => {
               key={`${mode}-${btn}-${index}`}
               onClick={() => handleButtonClick(btn)}
               className={`calc-button ${buttonClass} 
+                ${isAC ? 'ac' : ''}
                 ${(btn === 'rad' && isRadians) || (btn === 'deg' && !isRadians) ? 'mode-active' : ''}
                 ${spanClass}
               `}

@@ -2,6 +2,7 @@
   @apply w-full h-full flex flex-col bg-gray-800 text-white rounded-lg overflow-hidden;
 }
 
+/* --- BARRA SUPERIOR PARA AGRUPAR SELECTORES --- */
 .top-bar {
   @apply flex items-center justify-between p-2 bg-gray-900 flex-shrink-0;
 }
@@ -10,17 +11,8 @@
   @apply flex items-center justify-center;
 }
 
-/* --- ESTILOS MODIFICADOS Y NUEVOS --- */
 .mode-button {
   @apply px-3 py-1 text-sm rounded-md text-gray-300 transition-colors duration-150 whitespace-nowrap;
-  /* Añadido para alinear icono y texto */
-  @apply flex items-center justify-center gap-2;
-}
-
-/* Nueva clase para los iconos dentro de los botones */
-.button-icon {
-  width: 1em; /* El tamaño se ajusta al del texto */
-  height: 1em;
 }
 
 .mode-button:hover {
@@ -31,6 +23,7 @@
   @apply bg-accent text-text-dark font-semibold;
 }
 
+/* --- ESTILOS PARA EL HISTORIAL --- */
 .history-panel {
   @apply bg-gray-900 p-3 flex flex-col-reverse gap-2 border-b border-gray-700;
   max-height: 150px;
@@ -44,6 +37,9 @@
 .history-empty {
   @apply text-center text-gray-500 italic;
 }
+
+/* --- FIN DE ESTILOS DE HISTORIAL --- */
+
 
 .display-area {
   @apply flex-shrink-0 flex flex-col justify-end items-end p-4 bg-gray-900;
@@ -69,45 +65,29 @@
   margin: 1px;
 }
 
-.split-button-container {
-  @apply flex p-0;
-  margin: 1px;
-}
-
-.split-button {
-  @apply w-1/2 h-full text-xl flex items-center justify-center transition-colors duration-150 ease-in-out;
-}
-
-.split-button:active, .calc-button:active {
+.calc-button:active {
   @apply transform scale-95;
 }
 
-.split-left {
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-}
-.split-right {
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-
-.calc-button.function, .split-button.function {
+/* --- CLASES DE BOTONES REVISADAS --- */
+.calc-button.function {
   @apply bg-gray-800 hover:bg-gray-700;
 }
 
-.calc-button.number, .split-button.number {
+.calc-button.number {
   @apply bg-gray-600 hover:bg-gray-500;
 }
 
-.calc-button.operator, .split-button.operator {
+.calc-button.operator {
   @apply bg-blue-600 hover:bg-blue-700 text-white;
 }
 
-.calc-button.control, .split-button.control {
+/* Nueva clase para AC y Retroceso */
+.calc-button.control {
   @apply bg-red-800 hover:bg-red-700;
 }
 
-.calc-button.ac, .split-button.ac {
+.calc-button.ac {
   @apply bg-red-600 hover:bg-red-500;
 }
 
@@ -115,6 +95,7 @@
   @apply bg-accent text-text-dark;
 }
 
+/* Clases para que los botones ocupen más de una columna */
 .col-span-2 {
     grid-column: span 2 / span 2;
 }
