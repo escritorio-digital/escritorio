@@ -26,7 +26,7 @@ export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) =
             Puedes visitar la aplicación original en: <a href="https://mtgonzalezm.github.io/escritorio-interactivo-aula/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">https://mtgonzalezm.github.io/escritorio-interactivo-aula/</a>
           </p>
           <p>
-            Esta nueva versión fue desarrollada en colaboración por María Teresa González, Juan José de Haro y Pablo G. Guízar. El repositorio de este proyecto se encuentra en: <a href="https://github.com/escritorio-digital/escritorio" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Escritorio Digital</a>
+            Esta nueva versión fue desarrollada en colaboración por <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> y <strong>Pablo G. Guízar</strong>. El repositorio de este proyecto se encuentra en: <a href="https://github.com/escritorio-digital/escritorio" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Escritorio Digital</a>
           </p>
           <hr />
           <p>

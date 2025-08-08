@@ -39,8 +39,8 @@ const infoButtonStyles: React.CSSProperties = {
 };
 
 // --- Componente principal del Widget ---
-export const QPlayViewerWidget: FC = () => {
-    const qplayUrl = "https://jjdeharo.github.io/directo/";
+export const AppViewerWidget: FC = () => {
+    const appUrl = "https://jjdeharo.github.io/directo/";
     const repoUrl = "https://github.com/jjdeharo/directo/";
 
     return (
@@ -50,7 +50,7 @@ export const QPlayViewerWidget: FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={infoButtonStyles}
-                title="Ir al repositorio original de Directo"
+                title="Ir al repositorio de Conexión en Directo"
                 onMouseOver={(e) => (e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.6)')}
                 onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.3)')}
             >
@@ -58,8 +58,8 @@ export const QPlayViewerWidget: FC = () => {
             </a>
 
             <iframe
-                src={qplayUrl}
-                title="Directo"
+                src={appUrl}
+                title="Conexión en Directo"
                 style={iframeStyles}
                 sandbox="allow-scripts allow-same-origin allow-forms"
             />
@@ -70,7 +70,7 @@ export const QPlayViewerWidget: FC = () => {
 // --- Configuración del Widget ---
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'directo-viewer',
-  title: 'Directo',
-  icon: '📶',
+  title: 'Conexión en Directo',
+  icon: <img src="/icons/Directo.png" alt="Conexión en directo" width="52" height="52" />,
   defaultSize: { width: 800, height: 600 },
 };
