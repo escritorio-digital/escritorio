@@ -3,32 +3,56 @@ import type { FC } from 'react';
 import type { WidgetConfig } from '../../../types';
 import './ScientificCalculatorWidget.css';
 
-// Mapeo de botones para facilitar la creación del layout
-const buttons = [
-  'rad', 'deg', 'x!', '(', ')', '%', 'AC',
-  'sin', 'ln', '7', '8', '9', '÷',
-  'cos', 'log', '4', '5', '6', '×',
-  'tan', '√', '1', '2', '3', '-',
-  'e', 'π', '0', '.', '=', '+',
+// --- LAYOUTS DE BOTONES PARA CADA MODO ---
+
+const scientificLayout = [
+  'rad', 'deg', 'x!', '(', ')',
+  'sin', 'cos', 'tan', 'ln', 'log',
+  '7',   '8',   '9',   '÷', 'AC',
+  '4',   '5',   '6',   '×', '%',
+  '1',   '2',   '3',   '-', '√',
+  '0',   '.',   'e',   'π', '+',
+  '='
 ];
+
+const standardLayout = [
+  '(', ')', '%', 'AC',
+  '7', '8', '9', '÷',
+  '4', '5', '6', '×',
+  '1', '2', '3', '-',
+  '0', '.', '√', '+',
+  '='
+];
+
+const basicLayout = [
+  '7', '8', '9', '÷',
+  '4', '5', '6', '×',
+  '1', '2', '3', '-',
+  '0', '.', 'AC', '+',
+  '='
+];
+
+// --- GRUPOS DE BOTONES PARA ESTILO ---
+const operators = ['=', '+', '-', '×', '÷'];
+const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
+// El resto serán considerados 'function' por defecto en la lógica de clases
+
 
 export const ScientificCalculatorWidget: FC = () => {
   const [display, setDisplay] = useState('0');
   const [expression, setExpression] = useState('');
   const [isRadians, setIsRadians] = useState(true);
+  const [mode, setMode] = useState('Scientific'); // 'Scientific', 'Standard' o 'Basic'
 
-  // Función para evaluar de forma segura la expresión matemática
   const evaluateExpression = (expr: string): string => {
     try {
       let evalExpr = expr
         .replace(/×/g, '*')
         .replace(/÷/g, '/')
-        .replace(/%/g, '/100') // Manejo de porcentaje
+        .replace(/%/g, '/100')
         .replace(/π/g, 'Math.PI')
         .replace(/e/g, 'Math.E');
-
-      // Reemplazo de funciones (incluyendo la raíz cuadrada)
-      // 👇 LÍNEA AÑADIDA Y MEJORADA
+        
       evalExpr = evalExpr.replace(/√\(([^)]+)\)/g, (_, value) => `Math.sqrt(${evaluateExpression(value)})`);
       evalExpr = evalExpr.replace(/log\(([^)]+)\)/g, (_, value) => `Math.log10(${evaluateExpression(value)})`);
       evalExpr = evalExpr.replace(/ln\(([^)]+)\)/g, (_, value) => `Math.log(${evaluateExpression(value)})`);
@@ -68,10 +92,13 @@ export const ScientificCalculatorWidget: FC = () => {
       setDisplay('0');
       setExpression('');
     } else if (btn === '=') {
+      // --- INICIO DE LA CORRECCIÓN ---
       const finalExpression = expression || display;
       const result = evaluateExpression(finalExpression);
-      setDisplay(result);
-      setExpression(result);
+      
+      setDisplay(result); // La pantalla principal muestra el resultado
+      setExpression(finalExpression + '='); // La expresión de arriba muestra la operación completa
+      // --- FIN DE LA CORRECCIÓN ---
     } else if (['sin', 'cos', 'tan', 'log', 'ln', '√'].includes(btn)) {
         handleFunction(btn);
     } else if (btn === 'rad' || btn === 'deg') {
@@ -85,7 +112,7 @@ export const ScientificCalculatorWidget: FC = () => {
   };
   
   const handleInput = (btn: string) => {
-    if (display === 'Error' || (expression.includes('=') && !['+', '-', '×', '÷', '%'].includes(btn))) {
+    if (display === 'Error' || (expression.includes('=') && !operators.includes(btn))) {
       setDisplay(btn);
       setExpression(btn);
       return;
@@ -96,7 +123,13 @@ export const ScientificCalculatorWidget: FC = () => {
     } else {
       setDisplay(prev => prev + btn);
     }
-    setExpression(prev => prev + btn);
+    
+    // Si la última operación fue un igual, la nueva expresión empieza de cero con el nuevo botón
+    if (expression.includes('=')) {
+        setExpression(btn);
+    } else {
+        setExpression(prev => prev + btn);
+    }
   }
 
   const handleFunction = (func: string) => {
@@ -109,28 +142,53 @@ export const ScientificCalculatorWidget: FC = () => {
       setExpression(prev => prev + newExpression);
     }
   }
-
+  
+  // --- LÓGICA PARA DETERMINAR EL LAYOUT Y LA CUADRÍCULA ---
+  const currentLayout = mode === 'Basic' ? basicLayout : 
+                        mode === 'Standard' ? standardLayout : 
+                        scientificLayout;
+                        
+  const gridClass = mode === 'Scientific' ? 'grid-cols-5' : 'grid-cols-4';
 
   return (
     <div className="scientific-calculator">
+      <div className="mode-selector">
+        <button className={`mode-button ${mode === 'Basic' ? 'mode-active' : ''}`} onClick={() => setMode('Basic')}>Básica</button>
+        <button className={`mode-button ${mode === 'Standard' ? 'mode-active' : ''}`} onClick={() => setMode('Standard')}>Estándar</button>
+        <button className={`mode-button ${mode === 'Scientific' ? 'mode-active' : ''}`} onClick={() => setMode('Scientific')}>Científica</button>
+      </div>
       <div className="display-area">
         <div className="expression">{expression.replace(/\*/g, '×').replace(/\//g, '÷')}</div>
         <div className="main-display">{display}</div>
       </div>
-      <div className="buttons-grid">
-        {buttons.map((btn) => (
-          <button
-            key={btn}
-            onClick={() => handleButtonClick(btn)}
-            className={`calc-button ${
-              ['=', '+', '-', '×', '÷'].includes(btn) ? 'operator' : ''
-            } ${btn === 'AC' ? 'ac' : ''} ${
-                (btn === 'rad' && isRadians) || (btn === 'deg' && !isRadians) ? 'mode-active' : ''
-            }`}
-          >
-            {btn}
-          </button>
-        ))}
+      <div className={`buttons-grid ${gridClass}`}>
+        {currentLayout.map((btn) => {
+          const isOperator = operators.includes(btn);
+          const isNumber = numbers.includes(btn);
+          const isAC = btn === 'AC';
+          
+          let buttonClass = 'function'; // Clase por defecto
+          if (isOperator) buttonClass = 'operator';
+          if (isNumber) buttonClass = 'number';
+          
+          let spanClass = '';
+          if (btn === '0' && mode === 'Scientific') spanClass = 'col-span-2';
+          if (btn === '=') spanClass = mode === 'Scientific' ? 'col-span-5' : 'col-span-4';
+
+          return (
+            <button
+              key={`${mode}-${btn}`} // La key debe ser única para cada botón en cada modo
+              onClick={() => handleButtonClick(btn)}
+              className={`calc-button ${buttonClass} 
+                ${isAC ? 'ac' : ''}
+                ${(btn === 'rad' && isRadians) || (btn === 'deg' && !isRadians) ? 'mode-active' : ''}
+                ${spanClass}
+              `}
+            >
+              {btn}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
@@ -138,7 +196,7 @@ export const ScientificCalculatorWidget: FC = () => {
 
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'scientific-calculator',
-  title: 'Calculadora Científica',
-  icon: <img src="/icons/ScientificCalculator.png" alt="Calculadora Científica" width="52" height="52" />,
+  title: 'Calculadora', // Título genérico
+  icon: <img src="/icons/ScientificCalculator.png" alt="Calculadora" width="52" height="52" />,
   defaultSize: { width: 400, height: 550 },
 };

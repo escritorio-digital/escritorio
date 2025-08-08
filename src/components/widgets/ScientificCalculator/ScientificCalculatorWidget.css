@@ -1,9 +1,28 @@
 .scientific-calculator {
-  @apply w-full h-full flex flex-col bg-gray-800 text-white;
+  @apply w-full h-full flex flex-col bg-gray-800 text-white rounded-lg overflow-hidden;
 }
 
+/* --- ESTILOS PARA EL NUEVO SELECTOR DE MODO --- */
+.mode-selector {
+  @apply flex items-center justify-center p-2 bg-gray-900 flex-shrink-0;
+}
+
+.mode-button {
+  @apply px-4 py-1 text-sm rounded-md text-gray-300 transition-colors duration-150;
+}
+
+.mode-button:hover {
+  @apply bg-gray-700;
+}
+
+.mode-button.mode-active {
+  @apply bg-accent text-text-dark font-semibold;
+}
+/* --- FIN DE ESTILOS PARA EL SELECTOR --- */
+
+
 .display-area {
-  @apply flex-grow flex flex-col justify-end items-end p-4 bg-gray-900;
+  @apply flex-shrink-0 flex flex-col justify-end items-end p-4 bg-gray-900;
 }
 
 .expression {
@@ -16,27 +35,53 @@
 }
 
 .buttons-grid {
-  @apply grid grid-cols-7 gap-px bg-gray-700;
-  height: 350px; /* Altura fija para el área de botones */
+  /* La clase para las columnas (grid-cols-X) se añade ahora dinámicamente en el TSX */
+  @apply grid gap-px bg-gray-700 flex-grow;
 }
 
 .calc-button {
-  @apply bg-gray-800 text-xl flex items-center justify-center transition-colors hover:bg-gray-700;
+  @apply text-xl flex items-center justify-center transition-colors duration-150 ease-in-out;
   outline: none;
+  border-radius: 4px;
+  margin: 1px;
 }
 
 .calc-button:active {
-  @apply bg-gray-600;
+  @apply transform scale-95;
 }
 
+/* Color para funciones y controles */
+.calc-button.function {
+  @apply bg-gray-800 hover:bg-gray-700;
+}
+
+/* Color para números */
+.calc-button.number {
+  @apply bg-gray-600 hover:bg-gray-500;
+}
+
+/* Color para operadores */
 .calc-button.operator {
-  @apply bg-orange-500 hover:bg-orange-600;
+  @apply bg-blue-600 hover:bg-blue-700 text-white;
 }
 
+/* Botón AC */
 .calc-button.ac {
-  @apply bg-red-500 hover:bg-red-600;
+  @apply bg-red-600 hover:bg-red-700;
 }
 
+/* Botón de modo activo (rad/deg) */
 .calc-button.mode-active {
-    @apply bg-accent text-text-dark;
+  @apply bg-accent text-text-dark;
+}
+
+/* Clases para que los botones ocupen más de una columna */
+.col-span-2 {
+    grid-column: span 2 / span 2;
+}
+.col-span-4 {
+    grid-column: span 4 / span 4;
+}
+.col-span-5 {
+    grid-column: span 5 / span 5;
 }
