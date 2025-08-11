@@ -10,6 +10,8 @@ import { CreditsModal } from './components/core/CreditsModal';
 import { ThemeProvider, defaultTheme } from './context/ThemeContext';
 import type { ActiveWidget, DesktopProfile, ProfileCollection } from './types';
 import { Copyright } from 'lucide-react';
+// --- ¡AQUÍ ESTÁ EL CAMBIO! Importamos el nuevo componente ---
+import { ProfileSwitcher } from './components/core/ProfileSwitcher';
 
 // --- Componente Hijo que Renderiza la UI ---
 const DesktopUI: React.FC<{
@@ -41,10 +43,8 @@ const DesktopUI: React.FC<{
         if (!widgetConfig) return;
         const newZ = highestZ + 1;
         setHighestZ(newZ);
-
-        // --- LÓGICA CORREGIDA PARA LA POSICIÓN INICIAL ---
         const maxX = window.innerWidth - (widgetConfig.defaultSize.width as number);
-        const maxY = window.innerHeight - (widgetConfig.defaultSize.height as number) - 80; // 80px for toolbar buffer
+        const maxY = window.innerHeight - (widgetConfig.defaultSize.height as number) - 80;
 
         const newWidget: ActiveWidget = {
             instanceId: `${widgetId}-${Date.now()}`,
@@ -53,56 +53,28 @@ const DesktopUI: React.FC<{
                 x: Math.max(0, Math.random() * maxX), 
                 y: Math.max(0, Math.random() * maxY) 
             },
-            // --- FIN DE LA CORRECCIÓN ---
             size: widgetConfig.defaultSize,
             zIndex: newZ,
         };
         setActiveWidgets(prev => [...prev, newWidget]);
     };
 
-
-    const closeWidget = (instanceId: string) => {
-        setActiveWidgets(prev => prev.filter(w => w.instanceId !== instanceId));
-    };
-
+    const closeWidget = (instanceId: string) => setActiveWidgets(prev => prev.filter(w => w.instanceId !== instanceId));
     const focusWidget = (instanceId: string) => {
         const newZ = highestZ + 1;
         setHighestZ(newZ);
         setActiveWidgets(prev => prev.map(w => (w.instanceId === instanceId ? { ...w, zIndex: newZ } : w)));
     };
-    
-    const toggleMinimize = (instanceId: string) => {
-        setActiveWidgets(prev => prev.map(w => (
-            w.instanceId === instanceId ? { ...w, isMinimized: !w.isMinimized } : w
-        )));
-    };
-
+    const toggleMinimize = (instanceId: string) => setActiveWidgets(prev => prev.map(w => (w.instanceId === instanceId ? { ...w, isMinimized: !w.isMinimized } : w)));
     const toggleMaximize = (instanceId: string) => {
         const newZ = highestZ + 1;
         setHighestZ(newZ);
         setActiveWidgets(prev => prev.map(w => {
             if (w.instanceId === instanceId) {
                 if (w.isMaximized) {
-                    // Restaurar
-                    return {
-                        ...w,
-                        isMaximized: false,
-                        position: w.previousPosition || { x: 100, y: 100 },
-                        size: w.previousSize || { width: 500, height: 400 },
-                        zIndex: newZ,
-                    };
+                    return { ...w, isMaximized: false, position: w.previousPosition || { x: 100, y: 100 }, size: w.previousSize || { width: 500, height: 400 }, zIndex: newZ };
                 } else {
-                    // Maximizar
-                    return {
-                        ...w,
-                        isMaximized: true,
-                        isMinimized: false, 
-                        previousPosition: w.position,
-                        previousSize: w.size,
-                        position: { x: 0, y: 0 },
-                        size: { width: '100vw', height: '100vh' },
-                        zIndex: newZ,
-                    };
+                    return { ...w, isMaximized: true, isMinimized: false, previousPosition: w.position, previousSize: w.size, position: { x: 0, y: 0 }, size: { width: '100vw', height: '100vh' }, zIndex: newZ };
                 }
             }
             return w;
@@ -139,17 +111,15 @@ const DesktopUI: React.FC<{
             <button onClick={() => setIsCreditsOpen(true)} className="fixed bottom-4 left-4 z-[9999] p-3 bg-black/20 backdrop-blur-md rounded-full text-white hover:bg-black/40 transition-colors" title="Créditos y Licencia">
                 <Copyright size={24} />
             </button>
-            <SettingsModal
-                isOpen={isSettingsOpen}
-                onClose={() => setSettingsOpen(false)}
-                pinnedWidgets={activeProfile.pinnedWidgets}
-                setPinnedWidgets={setPinnedWidgets}
-                profiles={profiles}
-                setProfiles={setProfiles}
-                activeProfileName={activeProfileName}
-                setActiveProfileName={setActiveProfileName}
-            />
+            <SettingsModal isOpen={isSettingsOpen} onClose={() => setSettingsOpen(false)} pinnedWidgets={activeProfile.pinnedWidgets} setPinnedWidgets={setPinnedWidgets} profiles={profiles} setProfiles={setProfiles} activeProfileName={activeProfileName} setActiveProfileName={setActiveProfileName} />
             <CreditsModal isOpen={isCreditsOpen} onClose={() => setIsCreditsOpen(false)} />
+            
+            {/* --- ¡AQUÍ ESTÁ EL CAMBIO! Añadimos el nuevo componente a la interfaz --- */}
+            <ProfileSwitcher
+              profiles={profiles}
+              activeProfileName={activeProfileName}
+              setActiveProfileName={setActiveProfileName}
+            />
         </div>
     );
 };

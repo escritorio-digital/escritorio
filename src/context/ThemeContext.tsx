@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react';
 
-// 1. Definimos la estructura de nuestro tema (esto no cambia)
+// 1. Definimos la estructura del tema.
 interface Theme {
   '--color-bg': string;
   '--color-widget-bg': string;
@@ -8,21 +8,23 @@ interface Theme {
   '--color-accent': string;
   '--color-text-light': string;
   '--color-text-dark': string;
+  '--color-border': string;
   '--wallpaper': string;
 }
 
-// 2. Colores por defecto (esto no cambia)
+// 2. ACTUALIZAMOS los colores por defecto.
 export const defaultTheme: Theme = {
-  '--color-bg': '#FFFFFF',
-  '--color-widget-bg': '#F7CFD8',
-  '--color-widget-header': '#8E7DBE',
-  '--color-accent': '#A6D6D6',
-  '--color-text-light': '#F4F8D3',
-  '--color-text-dark': '#493e6a',
+  '--color-bg': '#FFFFFF', // <-- ¡Aquí está el cambio a blanco!
+  '--color-widget-bg': '#00809D',
+  '--color-widget-header': '#D3AF37',
+  '--color-accent': '#FFD700',
+  '--color-text-light': '#FCF8DD',
+  '--color-text-dark': '#1a202c',
+  '--color-border': '#FFFFFF',
   '--wallpaper': 'none',
 };
 
-// 3. Definimos lo que nuestro contexto va a proveer (esto no cambia)
+// 3. Definimos lo que nuestro contexto va a proveer.
 interface ThemeContextType {
   theme: Theme;
   setTheme: (theme: Theme | ((val: Theme) => Theme)) => void;
@@ -31,10 +33,9 @@ interface ThemeContextType {
   defaultTheme: Theme;
 }
 
+// El resto del archivo no necesita cambios.
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-// 4. MODIFICAMOS EL PROVEEDOR DEL TEMA
-// Ahora es un componente simple que recibe el valor del contexto como prop.
 export const ThemeProvider: React.FC<{ children: React.ReactNode; value: ThemeContextType }> = ({ children, value }) => {
   return (
     <ThemeContext.Provider value={value}>
@@ -43,7 +44,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode; value: ThemeCo
   );
 };
 
-// 5. Hook personalizado para usar el tema (esto no cambia)
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (context === undefined) {

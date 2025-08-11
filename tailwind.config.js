@@ -14,6 +14,8 @@ export default {
         'accent': 'var(--color-accent)',
         'text-light': 'var(--color-text-light)',
         'text-dark': 'var(--color-text-dark)',
+        // La línea que faltaba para el borde blanco
+        'custom-border': 'var(--color-border)', 
       }
     },
   },
