@@ -5,6 +5,7 @@
 
 /* Estilos base para el contenido del editor */
 .notepad-widget .ProseMirror {
+    @apply text-text-dark; 
     min-height: 100%;
     /* Estilos para listas: aseguran visibilidad y alineación */
     ul, ol {

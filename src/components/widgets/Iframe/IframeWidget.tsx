@@ -38,7 +38,7 @@ export const IframeWidget: FC = () => {
             src={url}
             title="Contenido Embebido"
             className="embedded-iframe"
-            // --- LÍNEA MODIFICADA: Se ha eliminado el atributo 'sandbox' ---
+            sandbox="allow-scripts allow-same-origin allow-forms"
           />
         ) : (
           <div className="placeholder">

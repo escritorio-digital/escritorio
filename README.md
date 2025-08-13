@@ -29,6 +29,8 @@ Este proyecto es un entorno de escritorio virtual construido con React, que perm
 23. **Temporizador:** Un contador regresivo que puedes configurar con minutos y segundos.
 24. **Tic-Tac-Toe:** El juego clásico de tres en raya para dos jugadores.
 25. **Visor Web:** Permite embeber y mostrar el contenido de una URL directamente en el escritorio, usando un iframe.
+26. **Conexión en Directo:** Es un visor de aplicaciones web que carga una página externa, específicamente la aplicación "Conexión en Directo" de Juan José de Haro, dentro de una ventana en el escritorio.
+27. **Paleta de Dibujo:** Una completa herramienta de dibujo que permite trazos con diferentes pinceles (lápiz, rotulador, spray), insertar formas geométricas (líneas, rectángulos, círculos), añadir flechas y texto. 
 
 ## 🚀 Cómo Crear un Nuevo Widget
 
@@ -121,6 +123,7 @@ Una vez que hayas creado tus archivos y reiniciado el servidor de desarrollo, tu
 
 * **React:** La biblioteca fundamental para construir toda la interfaz de usuario.
 * **Vite:** La herramienta de desarrollo que compila y sirve el proyecto.
+* **TypeScript:** Añade un sistema de tipos estáticos a JavaScript para mejorar la robustez y mantenibilidad del código.
 
 ---
 ### Widgets y Funcionalidades Específicas
@@ -132,6 +135,9 @@ Una vez que hayas creado tus archivos y reiniciado el servidor de desarrollo, tu
 * **`marked`:** Convierte el texto de Markdown a HTML.
 * **`papaparse`:** Usada para importar y exportar datos en formato CSV.
 * **`turndown`:** Utilizada para convertir el contenido de HTML de vuelta a Markdown.
+* **`html-to-image`:** Permite convertir el contenido de un widget (como el del "Intérprete MD/LaTeX") en una imagen PNG que se puede copiar al portapapeles.
+* **`framer-motion`:** Una potente biblioteca para crear animaciones fluidas y complejas, utilizada para las transiciones de los modales y otros efectos visuales.
+
 
 ---
 ### Diseño y Estilos
@@ -144,20 +150,31 @@ Una vez que hayas creado tus archivos y reiniciado el servidor de desarrollo, tu
 
 ## Créditos, Licencia y Agradecimientos
 
-El proyecto original **Escritorio Interactivo para el Aula** y su idea pertenecen a **María Teresa González**.
-
-* Puedes visitar la aplicación original en: <https://mtgonzalezm.github.io/escritorio-interactivo-aula/>
-
-Esta versión es una migración a **React.js** realizada por **Pablo G. Guízar** con ayuda de **Gemini**.
-
-* El repositorio de esta migración se encuentra en: [GitHub - PabloGGuizar/escritorio-interactivo-aula](https://github.com/PabloGGuizar/escritorio-interactivo-aula/tree/migracion-react)
-
-Tanto el proyecto original como esta migración están indexados en el **Repositorio de aplicaciones educativas**, una colección de recursos creados por la comunidad **Vibe Coding Educativo**.
-
-* Consulta más aplicaciones de esta comunidad en: [Repositorio Vibe Coding Educativo](https://vibe-coding-educativo.github.io/app_edu/)
-
-* Únete a la comunidad en Telegram: [t.me/vceduca](https://t.me/vceduca)
-
-Este proyecto se adhiere al [**Decálogo del Conocimiento Abierto**](https://conocimiento-abierto.github.io/).
-
-[![Licencia Creative Commons](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.es)
+<p>
+El proyecto original <strong>Escritorio Interactivo para el Aula</strong> y su idea pertenecen a <strong>María Teresa González</strong>. Puedes visitar la aplicación original en: <a href="https://mtgonzalezm.github.io/escritorio-interactivo-aula/" target="_blank" rel="noopener noreferrer">https://mtgonzalezm.github.io/escritorio-interactivo-aula/</a>
+</p>
+<p>
+Esta nueva versión fue desarrollada en colaboración por <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> y <strong>Pablo G. Guízar</strong>. El repositorio de este proyecto se encuentra en: <a href="https://github.com/escritorio-digital/escritorio" target="_blank" rel="noopener noreferrer">Escritorio Digital</a>
+</p>
+<hr />
+<p>
+Tanto el proyecto original como esta migración están indexados en el <strong>Repositorio de aplicaciones educativas</strong>, una colección de recursos creados por la comunidad <strong>Vibe Coding Educativo</strong>.
+</p>
+<ul>
+<li>
+Consulta más aplicaciones de esta comunidad en: <a href="https://vibe-coding-educativo.github.io/app_edu/" target="_blank" rel="noopener noreferrer">Repositorio Vibe Coding Educativo</a>
+</li>
+<li>
+Únete a la comunidad en Telegram: <a href="https://t.me/vceduca" target="_blank" rel="noopener noreferrer">t.me/vceduca</a>
+</li>
+</ul>
+<hr />
+<div>
+<p>Este proyecto se adhiere al
+<a href="https://conocimiento-abierto.github.io/" target="_blank" rel="noopener noreferrer">Decálogo del Conocimiento Abierto</a></p>
+<p>
+<a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" rel="noopener noreferrer">
+<img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="Licencia Creative Commons BY-SA 4.0" />
+</a>
+</p>
+</div>
