@@ -10,7 +10,23 @@
       "theme": "Appearance"
     },
     "general": {
-      "language": "Application Language"
+      "language": "Application Language",
+      "languages": {
+        "en": "English",
+        "es": "Spanish"
+      }
+    },
+    "profiles": {
+      "invalid_name_alert": "Invalid or already existing profile name.",
+      "delete_last_alert": "You cannot delete the last profile.",
+      "delete_confirm": "Are you sure you want to delete the profile \"{{name}}\"?",
+      "save_current_title": "Save Current Settings as a New Profile",
+      "new_profile_placeholder": "New profile name...",
+      "save_button": "Save",
+      "saved_profiles_title": "Saved Profiles",
+      "active_button": "Active",
+      "load_button": "Load",
+      "delete_button": "Delete"
     },
     "widgets": {
       "search": "Search widget...",
@@ -18,6 +34,21 @@
       "add": "Add",
       "remove": "Remove",
       "max_widgets_alert": "You cannot pin more than {{max}} widgets."
+    },
+    "theme": {
+      "theme_colors_title": "Theme Colors",
+      "colors": {
+        "desktop_bg": "Desktop Background",
+        "widget_bg": "Widget Background",
+        "widget_header": "Widget Header",
+        "accent": "Accent",
+        "text_light": "Light Text",
+        "text_dark": "Dark Text"
+      },
+      "wallpaper_title": "Wallpaper",
+      "upload_image_button": "Upload Image",
+      "remove_wallpaper_button": "Remove Wallpaper",
+      "reset_theme_button": "Reset to Default Theme"
     }
   },
   "toolbar": {
@@ -38,11 +69,11 @@
     "open_knowledge_decalogue": "Open Knowledge Decalogue"
   },
   "widgets": {
-    "attendance": { 
+    "attendance": {
       "title": "Attendance Tracker",
       "badges": {
         "excellent_work": "Excellent Work",
-        "good_participation": "Good Participation", 
+        "good_participation": "Good Participation",
         "goal_achieved": "Goal Achieved",
         "helps_classmates": "Helps Classmates"
       },
@@ -59,7 +90,7 @@
       "delete_all_tooltip": "Delete all",
       "reset_confirm": "Are you sure you want to delete ALL the student list and ALL records?",
       "present": "Present",
-      "absent": "Absent", 
+      "absent": "Absent",
       "late": "Late",
       "date": "Date:",
       "attendance_tab": "Attendance",
@@ -70,7 +101,7 @@
     },
     "scientific_calculator": { "title": "Scientific Calculator" },
     "calendar": { "title": "Calendar" },
-    "image_carousel": { 
+    "image_carousel": {
       "title": "Image Carousel",
       "no_images": "No images loaded.",
       "select_images": "Select Images",
@@ -101,14 +132,14 @@
         "kelvin": "Kelvin"
       }
     },
-    "stopwatch": { 
+    "stopwatch": {
       "title": "Stopwatch",
       "pause": "Pause",
       "start": "Start",
       "lap": "Lap"
     },
     "dice": { "title": "3D Dice" },
-    "group_generator": { 
+    "group_generator": {
       "title": "Group Generator",
       "student_list_label": "Student List",
       "placeholder": "One name per line...",
@@ -151,7 +182,7 @@
       }
     },
     "html_sandbox": { "title": "HTML Sandbox" },
-    "latex_markdown": { 
+    "latex_markdown": {
       "title": "Interpreter (MD/LaTeX)",
       "copy_source": "Copy source code",
       "copy_image": "Copy as image",
@@ -161,7 +192,7 @@
       "copy_failed": "Could not copy",
       "image_copied": "Image copied",
       "copy_image_failed": "Error copying image",
-      "sample_content": "# Pythagorean Theorem\n\nIn a right triangle, the square of the hypotenuse is equal to the sum of the squares of the legs.\n\n$$c = \\sqrt{a^2 + b^2}$$",
+      "sample_content": "# Pythagorean Theorem\n\nIn a right triangle, the square of the hypotenuse is equal to the sum of the squares of the legs.\n\n$$c = \sqrt{a^2 + b^2}$$",
       "latex_mode_title": "LaTeX Exclusive Mode",
       "latex_mode_description": "This mode displays a single formula. The current content appears to be text or Markdown.",
       "how_to_proceed": "How to proceed",
@@ -171,7 +202,7 @@
       "latex_syntax_error": "LaTeX syntax error:",
       "generic_error": "An error occurred."
     },
-    "work_list": { 
+    "work_list": {
       "title": "Work List",
       "add_task_placeholder": "Add new task and press Enter...",
       "load_csv": "Load CSV",
@@ -189,7 +220,7 @@
       "add_button": "Add",
       "reset_button_title": "Reset all to zero"
     },
-    "sound_meter": { 
+    "sound_meter": {
       "title": "Sound Meter",
       "silence": "Silence",
       "conversation": "Conversation",
@@ -246,13 +277,13 @@
       },
       "shuffle_button": "Shuffle"
     },
-    "global_clocks": { 
+    "global_clocks": {
       "title": "World Clocks",
       "your_local_time": "Your Local Time",
       "add_clock": "Add Clock",
       "cities": {
         "los_angeles": "Los Angeles",
-        "new_york": "New York", 
+        "new_york": "New York",
         "london": "London",
         "paris": "Paris",
         "madrid": "Madrid",
@@ -284,11 +315,11 @@
       "icon_alt": "Traffic Light",
       "tooltip": "Click to change color"
     },
-    "timer": { 
+    "timer": {
       "title": "Timer",
       "finished": "FINISHED!"
     },
-    "tic_tac_toe": { 
+    "tic_tac_toe": {
       "title": "Tic-Tac-Toe",
       "player_1": "Player 1",
       "player_2": "Player 2",
@@ -299,7 +330,7 @@
       "next_round": "Next Round",
       "reset_all": "Reset all"
     },
-    "iframe": { 
+    "iframe": {
       "title": "Web Viewer",
       "url_placeholder": "Paste a URL here...",
       "load": "Load",
@@ -307,11 +338,11 @@
       "content_placeholder": "The URL content will be shown here.",
       "embed_notice": "Some sites may not allow being embedded."
     },
-    "directo_viewer": { 
+    "directo_viewer": {
       "title": "Live Connection",
       "go_to_repo": "Go to Live Connection repository"
     },
-    "drawing_pad": { 
+    "drawing_pad": {
       "title": "Drawing Pad",
       "clear_confirm": "Are you sure you want to clear the entire drawing? This will erase the image and strokes.",
       "default_filename": "my_drawing.png",

@@ -1,7 +1,9 @@
 import React, { useRef } from 'react';
 import { useTheme } from '../../context/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 export const ThemeSettings: React.FC = () => {
+  const { t } = useTranslation();
   const { theme, setTheme, setWallpaper, resetTheme } = useTheme();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -13,7 +15,6 @@ export const ThemeSettings: React.FC = () => {
   const handleWallpaperUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      // Convertimos la imagen a una URL de datos (Base64) para guardarla en LocalStorage
       const reader = new FileReader();
       reader.onload = (event) => {
         const result = event.target?.result as string;
@@ -24,22 +25,22 @@ export const ThemeSettings: React.FC = () => {
   };
 
   const colorOptions = [
-    { id: '--color-bg', label: 'Fondo del Escritorio' },
-    { id: '--color-widget-bg', label: 'Fondo del Widget' },
-    { id: '--color-widget-header', label: 'Cabecera del Widget' },
-    { id: '--color-accent', label: 'Color de Acento' },
-    { id: '--color-text-light', label: 'Texto Claro' },
-    { id: '--color-text-dark', label: 'Texto Oscuro' },
+    { id: '--color-bg', labelKey: 'desktop_bg' },
+    { id: '--color-widget-bg', labelKey: 'widget_bg' },
+    { id: '--color-widget-header', labelKey: 'widget_header' },
+    { id: '--color-accent', labelKey: 'accent' },
+    { id: '--color-text-light', labelKey: 'text_light' },
+    { id: '--color-text-dark', labelKey: 'text_dark' },
   ];
 
   return (
     <div className="p-4 space-y-6">
       <div>
-        <h3 className="text-lg font-semibold mb-2">Colores del Tema</h3>
+        <h3 className="text-lg font-semibold mb-2">{t('settings.theme.theme_colors_title')}</h3>
         <div className="grid grid-cols-2 gap-4">
-          {colorOptions.map(({ id, label }) => (
+          {colorOptions.map(({ id, labelKey }) => (
             <div key={id} className="flex items-center justify-between">
-              <label htmlFor={id} className="text-sm">{label}</label>
+              <label htmlFor={id} className="text-sm">{t(`settings.theme.colors.${labelKey}`)}</label>
               <input
                 type="color"
                 id={id}
@@ -54,19 +55,19 @@ export const ThemeSettings: React.FC = () => {
       </div>
 
       <div>
-        <h3 className="text-lg font-semibold mb-2">Fondo de Pantalla</h3>
+        <h3 className="text-lg font-semibold mb-2">{t('settings.theme.wallpaper_title')}</h3>
         <div className="flex gap-2">
             <button
                 onClick={() => fileInputRef.current?.click()}
                 className="flex-1 font-semibold py-2 px-4 rounded-lg bg-accent text-text-dark hover:bg-[#8ec9c9] transition-colors"
             >
-                Cargar Imagen
+                {t('settings.theme.upload_image_button')}
             </button>
             <button
                 onClick={() => setWallpaper('none')}
                 className="flex-1 font-semibold py-2 px-4 rounded-lg bg-gray-300 text-text-dark hover:bg-gray-400 transition-colors"
             >
-                Quitar Fondo
+                {t('settings.theme.remove_wallpaper_button')}
             </button>
         </div>
         <input
@@ -82,7 +83,7 @@ export const ThemeSettings: React.FC = () => {
         onClick={resetTheme}
         className="w-full font-bold py-2 px-4 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors mt-4"
         >
-        Restablecer Tema por Defecto
+        {t('settings.theme.reset_theme_button')}
         </button>
     </div>
   );

@@ -10,7 +10,23 @@
       "theme": "Apariencia"
     },
     "general": {
-      "language": "Idioma de la aplicación"
+      "language": "Idioma de la aplicación",
+      "languages": {
+        "en": "Inglés",
+        "es": "Español"
+      }
+    },
+    "profiles": {
+      "invalid_name_alert": "Nombre de perfil inválido o ya existente.",
+      "delete_last_alert": "No puedes eliminar el último perfil.",
+      "delete_confirm": "¿Estás seguro de que quieres eliminar el perfil \"{{name}}\"?",
+      "save_current_title": "Guardar Configuración Actual como Nuevo Perfil",
+      "new_profile_placeholder": "Nombre del nuevo perfil...",
+      "save_button": "Guardar",
+      "saved_profiles_title": "Perfiles Guardados",
+      "active_button": "Activo",
+      "load_button": "Cargar",
+      "delete_button": "Eliminar"
     },
     "widgets": {
       "search": "Buscar widget...",
@@ -18,6 +34,21 @@
       "add": "Añadir",
       "remove": "Quitar",
       "max_widgets_alert": "No se pueden fijar más de {{max}} widgets."
+    },
+    "theme": {
+      "theme_colors_title": "Colores del Tema",
+      "colors": {
+        "desktop_bg": "Fondo de Escritorio",
+        "widget_bg": "Fondo de Widget",
+        "widget_header": "Cabecera de Widget",
+        "accent": "Acento",
+        "text_light": "Texto Claro",
+        "text_dark": "Texto Oscuro"
+      },
+      "wallpaper_title": "Fondo de Pantalla",
+      "upload_image_button": "Subir Imagen",
+      "remove_wallpaper_button": "Quitar Fondo",
+      "reset_theme_button": "Restablecer Tema por Defecto"
     }
   },
   "toolbar": {
@@ -38,11 +69,11 @@
     "open_knowledge_decalogue": "Decálogo del Conocimiento Abierto"
   },
   "widgets": {
-    "attendance": { 
+    "attendance": {
       "title": "Control de Asistencia",
       "badges": {
         "excellent_work": "Excelente Trabajo",
-        "good_participation": "Buena Participación", 
+        "good_participation": "Buena Participación",
         "goal_achieved": "Objetivo Cumplido",
         "helps_classmates": "Ayuda a Compañeros"
       },
@@ -59,7 +90,7 @@
       "delete_all_tooltip": "Borrar todo",
       "reset_confirm": "¿Seguro que quieres borrar TODA la lista de estudiantes y TODOS los registros?",
       "present": "Presente",
-      "absent": "Ausente", 
+      "absent": "Ausente",
       "late": "Tarde",
       "date": "Fecha:",
       "attendance_tab": "Asistencia",
@@ -70,7 +101,7 @@
     },
     "scientific_calculator": { "title": "Calculadora Científica" },
     "calendar": { "title": "Calendario" },
-    "image_carousel": { 
+    "image_carousel": {
       "title": "Carrusel de Imágenes",
       "no_images": "No hay imágenes cargadas.",
       "select_images": "Seleccionar Imágenes",
@@ -101,14 +132,14 @@
         "kelvin": "Kelvin"
       }
     },
-    "stopwatch": { 
+    "stopwatch": {
       "title": "Cronómetro",
       "pause": "Pausa",
       "start": "Inicio",
       "lap": "Vuelta"
     },
     "dice": { "title": "Dados 3D" },
-    "group_generator": { 
+    "group_generator": {
       "title": "Generador de Grupos",
       "student_list_label": "Lista de Estudiantes",
       "placeholder": "Un nombre por línea...",
@@ -151,7 +182,7 @@
       }
     },
     "html_sandbox": { "title": "Sandbox HTML" },
-    "latex_markdown": { 
+    "latex_markdown": {
       "title": "Intérprete (MD/LaTeX)",
       "copy_source": "Copiar código fuente",
       "copy_image": "Copiar como imagen",
@@ -161,7 +192,7 @@
       "copy_failed": "No se pudo copiar",
       "image_copied": "Imagen copiada",
       "copy_image_failed": "Error al copiar imagen",
-      "sample_content": "# Teorema de Pitágoras\n\nEn un triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos.\n\n$$c = \\sqrt{a^2 + b^2}$$",
+      "sample_content": "# Teorema de Pitágoras\n\nEn un triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos.\n\n$$c = \sqrt{a^2 + b^2}$$",
       "latex_mode_title": "Modo exclusivo de LaTeX",
       "latex_mode_description": "Este modo muestra una única fórmula. El contenido actual parece ser texto o Markdown.",
       "how_to_proceed": "Cómo proceder",
@@ -171,7 +202,7 @@
       "latex_syntax_error": "Error de sintaxis en LaTeX:",
       "generic_error": "Ha ocurrido un error."
     },
-    "work_list": { 
+    "work_list": {
       "title": "Lista de Trabajo",
       "add_task_placeholder": "Añadir nueva tarea y pulsar Enter...",
       "load_csv": "Cargar CSV",
@@ -189,7 +220,7 @@
       "add_button": "Añadir",
       "reset_button_title": "Reiniciar todo a cero"
     },
-    "sound_meter": { 
+    "sound_meter": {
       "title": "Medidor de Ruido",
       "silence": "Silencio",
       "conversation": "Conversación",
@@ -246,13 +277,13 @@
       },
       "shuffle_button": "Barajar"
     },
-    "global_clocks": { 
+    "global_clocks": {
       "title": "Relojes Mundiales",
       "your_local_time": "Tu Hora Local",
       "add_clock": "Añadir Reloj",
       "cities": {
         "los_angeles": "Los Ángeles",
-        "new_york": "Nueva York", 
+        "new_york": "Nueva York",
         "london": "Londres",
         "paris": "París",
         "madrid": "Madrid",
@@ -284,11 +315,11 @@
       "icon_alt": "Semáforo",
       "tooltip": "Haz clic para cambiar de color"
     },
-    "timer": { 
+    "timer": {
       "title": "Temporizador",
       "finished": "¡FIN!"
     },
-    "tic_tac_toe": { 
+    "tic_tac_toe": {
       "title": "Tic-Tac-Toe",
       "player_1": "Jugador 1",
       "player_2": "Jugador 2",
@@ -299,7 +330,7 @@
       "next_round": "Siguiente Ronda",
       "reset_all": "Reiniciar todo"
     },
-    "iframe": { 
+    "iframe": {
       "title": "Visor Web",
       "url_placeholder": "Pega una URL aquí...",
       "load": "Cargar",
@@ -307,11 +338,11 @@
       "content_placeholder": "El contenido de la URL se mostrará aquí.",
       "embed_notice": "Algunos sitios pueden no permitir ser embebidos."
     },
-    "directo_viewer": { 
+    "directo_viewer": {
       "title": "Conexión en Directo",
       "go_to_repo": "Ir al repositorio de Conexión en Directo"
     },
-    "drawing_pad": { 
+    "drawing_pad": {
       "title": "Paleta de Dibujo",
       "clear_confirm": "¿Estás seguro de que quieres limpiar todo el dibujo? Esto borrará la imagen y los trazos.",
       "default_filename": "mi_dibujo.png",
@@ -332,7 +363,7 @@
       "clear_all": "Limpiar todo",
       "start_drawing": "Sube una imagen o empieza a dibujar",
       "pan_mode": "Activar modo navegación",
-      "exit_pan": "Salir del modo navegación", 
+      "exit_pan": "Salir del modo navegación",
       "center_view": "Centrar vista"
     },
     "scientific_calculator": {
