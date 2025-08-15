@@ -122,6 +122,12 @@ export const TicTacToeWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'tic-tac-toe',
   title: 'widgets.tic_tac_toe.title',
-  icon: <img src="/icons/TicTacToe.png" alt="Juego Gato" width="52" height="52" />,
+  icon: (() => {
+    const WidgetIcon: React.FC = () => {
+      const { t } = useTranslation();
+      return <img src="/icons/TicTacToe.png" alt={t('widgets.tic_tac_toe.title')} width={52} height={52} />;
+    };
+    return <WidgetIcon />;
+  })(),
   defaultSize: { width: 380, height: 520 },
 };

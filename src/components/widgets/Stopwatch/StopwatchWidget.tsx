@@ -64,7 +64,7 @@ export const StopwatchWidget: FC = () => {
       <div className="controls-container">
         <button onClick={handleReset} className="control-button reset">
           <RotateCcw size={20} />
-          <span>Reset</span>
+          <span>{t('widgets.stopwatch.reset')}</span>
         </button>
         <button onClick={handleStartStop} className={`control-button start-stop ${isActive ? 'active' : ''}`}>
           {isActive ? <Pause size={24} /> : <Play size={24} />}
@@ -72,7 +72,7 @@ export const StopwatchWidget: FC = () => {
         </button>
         <button onClick={handleLap} disabled={!isActive && time === 0} className="control-button lap">
           <Flag size={20} />
-          <span>Vuelta</span>
+          <span>{t('widgets.stopwatch.lap')}</span>
         </button>
       </div>
       
@@ -90,9 +90,14 @@ export const StopwatchWidget: FC = () => {
   );
 };
 
+const WidgetIcon: FC = () => {
+  const { t } = useTranslation();
+  return <img src="/icons/Stopwatch.png" alt={t('widgets.stopwatch.title')} width={52} height={52} />;
+}
+
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'stopwatch',
   title: 'widgets.stopwatch.title',
-  icon: <img src="/icons/Stopwatch.png" alt="Cronometro" width="52" height="52" />,
+  icon: <WidgetIcon />,
   defaultSize: { width: 320, height: 450 },
 };

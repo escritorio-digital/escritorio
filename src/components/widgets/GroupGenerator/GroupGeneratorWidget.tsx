@@ -116,6 +116,12 @@ export const GroupGeneratorWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'group-generator',
   title: 'widgets.group_generator.title',
-  icon: <img src="/icons/GroupGenerator.png" alt="Group Generator" width="52" height="52" />,
+  icon: (() => {
+    const WidgetIcon: React.FC = () => {
+      const { t } = useTranslation();
+      return <img src="/icons/GroupGenerator.png" alt={t('widgets.group_generator.title')} width={52} height={52} />;
+    };
+    return <WidgetIcon />;
+  })(),
   defaultSize: { width: 700, height: 550 },
 };

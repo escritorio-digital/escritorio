@@ -53,9 +53,14 @@ export const IframeWidget: FC = () => {
   );
 };
 
+const WidgetIcon: FC = () => {
+  const { t } = useTranslation();
+  return <img src="/icons/Iframe.png" alt={t('widgets.iframe.title')} width={52} height={52} />;
+};
+
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'iframe',
   title: 'widgets.iframe.title',
-  icon: <img src="/icons/Iframe.png" alt="Web Viewer" width="52" height="52" />,
+  icon: <WidgetIcon />,
   defaultSize: { width: 600, height: 500 },
 };

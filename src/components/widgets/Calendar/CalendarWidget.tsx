@@ -73,6 +73,12 @@ export const CalendarWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'calendar',
   title: 'widgets.calendar.title',
-  icon: <img src="/icons/Calendar.png" alt="Calendario" width="52" height="52" />,
+  icon: (() => {
+    const WidgetIcon: React.FC = () => {
+      const { t } = useTranslation();
+      return <img src="/icons/Calendar.png" alt={t('widgets.calendar.title')} width={52} height={52} />;
+    };
+    return <WidgetIcon />;
+  })(),
   defaultSize: { width: 320, height: 350 },
 };

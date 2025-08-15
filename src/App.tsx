@@ -110,7 +110,7 @@ const DesktopUI: React.FC<{
                 );
             })}
             <Toolbar pinnedWidgets={activeProfile.pinnedWidgets} onWidgetClick={addWidget} onSettingsClick={() => setSettingsOpen(true)} />
-            <button onClick={() => setIsCreditsOpen(true)} className="fixed bottom-4 left-4 z-[9999] p-3 bg-black/20 backdrop-blur-md rounded-full text-white hover:bg-black/40 transition-colors" title="Créditos y Licencia">
+            <button onClick={() => setIsCreditsOpen(true)} className="fixed bottom-4 left-4 z-[9999] p-3 bg-black/20 backdrop-blur-md rounded-full text-white hover:bg-black/40 transition-colors" title={t('credits.title')}>
                 <Copyright size={24} />
             </button>
             <SettingsModal isOpen={isSettingsOpen} onClose={() => setSettingsOpen(false)} pinnedWidgets={activeProfile.pinnedWidgets} setPinnedWidgets={setPinnedWidgets} profiles={profiles} setProfiles={setProfiles} activeProfileName={activeProfileName} setActiveProfileName={setActiveProfileName} />

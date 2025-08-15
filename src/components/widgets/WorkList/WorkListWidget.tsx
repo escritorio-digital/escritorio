@@ -106,7 +106,7 @@ export const WorkListWidget: React.FC = () => {
 
   // Si las traducciones no están listas, mostrar un loader simple
   if (!ready) {
-    return <div className="flex items-center justify-center h-full">Cargando...</div>;
+    return <div className="flex items-center justify-center h-full">{t('loading')}</div>;
   }
 
   return (
@@ -189,6 +189,12 @@ export const WorkListWidget: React.FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
     id: 'work-list',
     title: 'widgets.work_list.title',
-    icon: <img src="/icons/WorkList.png" alt="Lista de Trabajo" width="52" height="52" />,
+    icon: (() => {
+      const WidgetIcon: React.FC = () => {
+        const { t } = useTranslation();
+        return <img src="/icons/WorkList.png" alt={t('widgets.work_list.title')} width={52} height={52} />;
+      };
+      return <WidgetIcon />;
+    })(),
     defaultSize: { width: 380, height: 400 },
 };

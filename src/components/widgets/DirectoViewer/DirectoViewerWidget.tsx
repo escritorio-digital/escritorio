@@ -41,7 +41,7 @@ const infoButtonStyles: React.CSSProperties = {
 
 // --- Componente principal del Widget ---
 export const AppViewerWidget: FC = () => {
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation();
     const currentLanguage = i18n.language || 'es';
     const appUrl = `https://jjdeharo.github.io/directo/?lang=${currentLanguage}`;
     const repoUrl = "https://github.com/jjdeharo/directo/";
@@ -53,7 +53,7 @@ export const AppViewerWidget: FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={infoButtonStyles}
-                title="Ir al repositorio de Conexión en Directo"
+                title={t('widgets.directo_viewer.go_to_repo')}
                 onMouseOver={(e) => (e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.6)')}
                 onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.3)')}
             >
@@ -62,7 +62,7 @@ export const AppViewerWidget: FC = () => {
 
             <iframe
                 src={appUrl}
-                title="Conexión en Directo"
+                title={t('widgets.directo_viewer.title')}
                 style={iframeStyles}
                 sandbox="allow-scripts allow-same-origin allow-forms"
             />
@@ -71,9 +71,14 @@ export const AppViewerWidget: FC = () => {
 };
 
 // --- Configuración del Widget ---
+const WidgetIcon: React.FC = () => {
+  const { t } = useTranslation();
+  return <img src="/icons/Directo.png" alt={t('widgets.directo_viewer.title')} width={52} height={52} />;
+}
+
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'directo-viewer',
   title: 'widgets.directo_viewer.title',
-  icon: <img src="/icons/Directo.png" alt="Conexión en directo" width="52" height="52" />,
+  icon: <WidgetIcon />,
   defaultSize: { width: 800, height: 600 },
 };

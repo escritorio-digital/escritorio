@@ -65,7 +65,7 @@ export const GlobalClocksWidget: FC = () => {
         <div className="clock-row local">
           <div className="city-info">
             <span className="city-name">{t('widgets.global_clocks.your_local_time')}</span>
-            <span className="offset">GTM{localOffset >= 0 ? '+' : ''}{localOffset}</span>
+            <span className="offset">GMT{localOffset >= 0 ? '+' : ''}{localOffset}</span>
           </div>
           <span className="time-display">{currentTime.toLocaleTimeString()}</span>
         </div>
@@ -84,7 +84,7 @@ export const GlobalClocksWidget: FC = () => {
                 <span className="city-name">{t(`widgets.global_clocks.cities.${cityData.cityKey}`)}</span>
                 <span className="offset">{offsetDiff >= 0 ? '+' : ''}{offsetDiff}h</span>
               </div>
-              <span className="time-display">{currentTime.toLocaleTimeString('es-ES', { timeZone: tz })}</span>
+              <span className="time-display">{currentTime.toLocaleTimeString(undefined, { timeZone: tz })}</span>
               <button onClick={() => removeClock(tz)} className="remove-clock-btn"><Trash2 size={16} /></button>
             </div>
           );
@@ -106,6 +106,12 @@ export const GlobalClocksWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'global-clocks',
   title: 'widgets.global_clocks.title',
-  icon: <img src="/icons/GlobalClocks.png" alt="Global Clocks" width="52" height="52" />,
+  icon: (() => {
+    const WidgetIcon: React.FC = () => {
+      const { t } = useTranslation();
+      return <img src="/icons/GlobalClocks.png" alt={t('widgets.global_clocks.title')} width={52} height={52} />;
+    };
+    return <WidgetIcon />;
+  })(),
   defaultSize: { width: 350, height: 400 },
 };

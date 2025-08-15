@@ -14,7 +14,11 @@
       "languages": {
         "en": "English",
         "es": "Spanish"
-      }
+      },
+      "reset_title": "Reset Application",
+      "reset_description": "Removes all saved data (profiles, widgets, and preferences) and restarts as first run.",
+      "reset_button": "Factory Reset",
+      "reset_confirm": "Are you sure you want to remove all local preferences and data? This cannot be undone."
     },
     "profiles": {
       "invalid_name_alert": "Invalid or already existing profile name.",
@@ -26,7 +30,8 @@
       "saved_profiles_title": "Saved Profiles",
       "active_button": "Active",
       "load_button": "Load",
-      "delete_button": "Delete"
+      "delete_button": "Delete",
+      "switcher_title": "Switch Desktop"
     },
     "widgets": {
       "search": "Search widget...",
@@ -106,7 +111,8 @@
       "no_images": "No images loaded.",
       "select_images": "Select Images",
       "slide_alt": "Slide {{number}}",
-      "select_new_images": "Select new images"
+      "select_new_images": "Select new images",
+      "more_images_hint": "Load more images to navigate"
     },
     "unit_converter": {
       "title": "Unit Converter",
@@ -136,7 +142,8 @@
       "title": "Stopwatch",
       "pause": "Pause",
       "start": "Start",
-      "lap": "Lap"
+      "lap": "Lap",
+      "reset": "Reset"
     },
     "dice": { "title": "3D Dice" },
     "group_generator": {
@@ -181,7 +188,14 @@
         }
       }
     },
-    "html_sandbox": { "title": "HTML Sandbox" },
+    "html_sandbox": {
+      "title": "HTML Sandbox",
+      "paste_code_here": "Paste your code here!",
+      "your_javascript": "Your JavaScript",
+      "show_preview": "Show Preview",
+      "show_code": "Show Code",
+      "preview_title": "HTML Preview"
+    },
     "latex_markdown": {
       "title": "Interpreter (MD/LaTeX)",
       "copy_source": "Copy source code",
@@ -192,7 +206,7 @@
       "copy_failed": "Could not copy",
       "image_copied": "Image copied",
       "copy_image_failed": "Error copying image",
-      "sample_content": "# Pythagorean Theorem\n\nIn a right triangle, the square of the hypotenuse is equal to the sum of the squares of the legs.\n\n$$c = \sqrt{a^2 + b^2}$$",
+      "sample_content": "# Pythagorean Theorem\n\nIn a right triangle, the square of the hypotenuse is equal to the sum of the squares of the legs.\n\n$$c = \\sqrt{a^2 + b^2}$$",
       "latex_mode_title": "LaTeX Exclusive Mode",
       "latex_mode_description": "This mode displays a single formula. The current content appears to be text or Markdown.",
       "how_to_proceed": "How to proceed",

@@ -58,7 +58,7 @@ export const AttendanceWidget: FC = () => {
 
   // Si las traducciones no están listas, mostrar un loader simple
   if (!ready) {
-    return <div className="flex items-center justify-center h-full">Cargando...</div>;
+    return <div className="flex items-center justify-center h-full">{t('loading')}</div>;
   }
 
   const dateKey = formatDate(selectedDate);
@@ -274,6 +274,12 @@ export const AttendanceWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'attendance',
   title: 'widgets.attendance.title',
-  icon: <img src="/icons/Attendance.png" alt="Control de Asistencia" width="52" height="52" />,
+  icon: (() => {
+    const WidgetIcon: React.FC = () => {
+      const { t } = useTranslation();
+      return <img src="/icons/Attendance.png" alt={t('widgets.attendance.title')} width={52} height={52} />;
+    };
+    return <WidgetIcon />;
+  })(),
   defaultSize: { width: 450, height: 600 },
 };

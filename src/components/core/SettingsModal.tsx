@@ -58,6 +58,30 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     i18n.changeLanguage(event.target.value);
   };
+
+  const handleFactoryReset = () => {
+    if (!window.confirm(t('settings.general.reset_confirm'))) return;
+    const keysToClear = [
+      'desktop-profiles',
+      'active-profile-name',
+      'work-list-tasks',
+      'spinner-options',
+      'notepad-content-html',
+      'image-carousel-images',
+      'tictactoe-players',
+      'tictactoe-score',
+      'global-clocks-selection',
+      'attendance-records',
+      'traffic-light-state',
+      'scoreboard-players',
+      'i18nextLng'
+    ];
+    try {
+      keysToClear.forEach(k => window.localStorage.removeItem(k));
+    } catch {}
+    // Recargar la página para aplicar el estado inicial
+    window.location.reload();
+  };
   
   return (
     <AnimatePresence>
@@ -125,6 +149,14 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                       <option value="es">{t('settings.general.languages.es')}</option>
                       <option value="en">{t('settings.general.languages.en')}</option>
                     </select>
+                  </div>
+
+                  <div className="mt-6 p-4 border border-red-300 rounded-lg bg-red-50">
+                    <h4 className="font-semibold text-red-700 mb-2">{t('settings.general.reset_title')}</h4>
+                    <p className="text-sm text-red-700 mb-3">{t('settings.general.reset_description')}</p>
+                    <button onClick={handleFactoryReset} className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                      {t('settings.general.reset_button')}
+                    </button>
                   </div>
                 </div>
               )}

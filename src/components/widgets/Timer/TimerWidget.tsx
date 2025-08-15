@@ -94,6 +94,12 @@ export const TimerWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
     id: 'timer',
     title: 'widgets.timer.title',
-    icon: <img src="/icons/Timer.png" alt="Temporizador" width="52" height="52" />,
+    icon: (() => {
+      const WidgetIcon: React.FC = () => {
+        const { t } = useTranslation();
+        return <img src="/icons/Timer.png" alt={t('widgets.timer.title')} width={52} height={52} />;
+      };
+      return <WidgetIcon />;
+    })(),
     defaultSize: { width: 300, height: 300 },
 };

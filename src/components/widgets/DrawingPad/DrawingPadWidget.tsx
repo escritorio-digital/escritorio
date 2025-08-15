@@ -889,6 +889,12 @@ export const widgetConfig = {
   id: 'drawing-pad',
   title: 'widgets.drawing_pad.title',
   // RUTA DEL ICONO PERSONALIZADA: Asegúrate de que paleta.png esté en public/icons/
-  icon: <img src="/icons/paleta.png" alt="Paleta de Dibujo" className="w-8 h-8" />,
+  icon: (() => {
+    const WidgetIcon: React.FC = () => {
+      const { t } = useTranslation();
+      return <img src="/icons/paleta.png" alt={t('widgets.drawing_pad.title')} className="w-8 h-8" />;
+    };
+    return <WidgetIcon />;
+  })(),
   defaultSize: { width: 600, height: 450 },
 };

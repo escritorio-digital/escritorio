@@ -205,7 +205,7 @@ export const ScientificCalculatorWidget: FC = () => {
 
   // Si las traducciones no están listas, mostrar un loader simple
   if (!ready) {
-    return <div className="flex items-center justify-center h-full">Cargando...</div>;
+    return <div className="flex items-center justify-center h-full">{t('loading')}</div>;
   }
 
   return (
@@ -282,7 +282,12 @@ export const ScientificCalculatorWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'scientific-calculator',
   title: 'widgets.scientific_calculator.title',
-  icon: <img src="/icons/ScientificCalculator.png" alt="Calculadora" width="52" height="52" />,
+  icon: (() => {
+    const WidgetIcon: React.FC = () => {
+      const { t } = useTranslation();
+      return <img src="/icons/ScientificCalculator.png" alt={t('widgets.scientific_calculator.title')} width={52} height={52} />;
+    };
+    return <WidgetIcon />;
+  })(),
   defaultSize: { width: 400, height: 600 },
 };
-

@@ -188,7 +188,7 @@ export const LatexMarkdownWidget: FC = () => {
 
   // Si las traducciones no están listas, mostrar un loader simple
   if (!ready) {
-    return <div className="flex items-center justify-center h-full">Cargando...</div>;
+    return <div className="flex items-center justify-center h-full">{t('loading')}</div>;
   }
 
   return (
@@ -239,6 +239,12 @@ export const LatexMarkdownWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'latex-markdown',
   title: 'widgets.latex_markdown.title',
-  icon: <img src="/icons/LatexMarkdown.png" alt="Intérprete (MD/LaTeX)" width="52" height="52" />,
+  icon: (() => {
+    const WidgetIcon: React.FC = () => {
+      const { t } = useTranslation();
+      return <img src="/icons/LatexMarkdown.png" alt={t('widgets.latex_markdown.title')} width={52} height={52} />;
+    };
+    return <WidgetIcon />;
+  })(),
   defaultSize: { width: 900, height: 550 },
 };

@@ -14,7 +14,11 @@
       "languages": {
         "en": "Inglés",
         "es": "Español"
-      }
+      },
+      "reset_title": "Restablecer aplicación",
+      "reset_description": "Elimina todos los datos guardados (perfiles, widgets y preferencias) y reinicia como si fuera la primera vez.",
+      "reset_button": "Restablecer a valores de fábrica",
+      "reset_confirm": "¿Seguro que quieres eliminar todas las preferencias y datos locales? Esta acción no se puede deshacer."
     },
     "profiles": {
       "invalid_name_alert": "Nombre de perfil inválido o ya existente.",
@@ -26,7 +30,8 @@
       "saved_profiles_title": "Perfiles Guardados",
       "active_button": "Activo",
       "load_button": "Cargar",
-      "delete_button": "Eliminar"
+      "delete_button": "Eliminar",
+      "switcher_title": "Cambiar de Escritorio"
     },
     "widgets": {
       "search": "Buscar widget...",
@@ -106,7 +111,8 @@
       "no_images": "No hay imágenes cargadas.",
       "select_images": "Seleccionar Imágenes",
       "slide_alt": "Diapositiva {{number}}",
-      "select_new_images": "Seleccionar nuevas imágenes"
+      "select_new_images": "Seleccionar nuevas imágenes",
+      "more_images_hint": "Carga más imágenes para navegar"
     },
     "unit_converter": {
       "title": "Conversor de Unidades",
@@ -136,7 +142,8 @@
       "title": "Cronómetro",
       "pause": "Pausa",
       "start": "Inicio",
-      "lap": "Vuelta"
+      "lap": "Vuelta",
+      "reset": "Reiniciar"
     },
     "dice": { "title": "Dados 3D" },
     "group_generator": {
@@ -181,7 +188,14 @@
         }
       }
     },
-    "html_sandbox": { "title": "Sandbox HTML" },
+    "html_sandbox": {
+      "title": "Sandbox HTML",
+      "paste_code_here": "¡Pega tu código aquí!",
+      "your_javascript": "Tu JavaScript",
+      "show_preview": "Mostrar Vista Previa",
+      "show_code": "Mostrar Código",
+      "preview_title": "Vista previa HTML"
+    },
     "latex_markdown": {
       "title": "Intérprete (MD/LaTeX)",
       "copy_source": "Copiar código fuente",
@@ -192,7 +206,7 @@
       "copy_failed": "No se pudo copiar",
       "image_copied": "Imagen copiada",
       "copy_image_failed": "Error al copiar imagen",
-      "sample_content": "# Teorema de Pitágoras\n\nEn un triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos.\n\n$$c = \sqrt{a^2 + b^2}$$",
+      "sample_content": "# Teorema de Pitágoras\n\nEn un triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos.\n\n$$c = \\sqrt{a^2 + b^2}$$",
       "latex_mode_title": "Modo exclusivo de LaTeX",
       "latex_mode_description": "Este modo muestra una única fórmula. El contenido actual parece ser texto o Markdown.",
       "how_to_proceed": "Cómo proceder",

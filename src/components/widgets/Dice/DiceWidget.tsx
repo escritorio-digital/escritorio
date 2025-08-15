@@ -141,6 +141,12 @@ export const DiceWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'dice',
   title: 'widgets.dice.title',
-  icon: <img src="/icons/Dice.png" alt="Dados 3D" width="52" height="52" />,
+  icon: (() => {
+    const WidgetIcon: React.FC = () => {
+      const { t } = useTranslation();
+      return <img src="/icons/Dice.png" alt={t('widgets.dice.title')} width={52} height={52} />;
+    };
+    return <WidgetIcon />;
+  })(),
   defaultSize: { width: 400, height: 300 },
 };

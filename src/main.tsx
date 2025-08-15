@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 import i18n, { i18nReady } from './i18n'; // Importar i18next y esperar readiness
+import { useTranslation } from 'react-i18next';
+
+const I18nFallback: React.FC = () => {
+  const { t } = useTranslation();
+  return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>{t('loading')}</div>;
+};
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 
@@ -10,7 +16,7 @@ const root = ReactDOM.createRoot(document.getElementById('root')!);
 i18nReady.then(() => {
   root.render(
     <React.StrictMode>
-      <Suspense fallback="Cargando...">
+      <Suspense fallback={<I18nFallback />}>
         <App />
       </Suspense>
     </React.StrictMode>

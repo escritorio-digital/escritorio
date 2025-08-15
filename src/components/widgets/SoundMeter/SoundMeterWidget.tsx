@@ -140,6 +140,12 @@ export const SoundMeterWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'sound-meter',
   title: 'widgets.sound_meter.title',
-  icon: <img src="/icons/SoundMeter.png" alt="Medidor de ruido" width="52" height="52" />,
+  icon: (() => {
+    const WidgetIcon: React.FC = () => {
+      const { t } = useTranslation();
+      return <img src="/icons/SoundMeter.png" alt={t('widgets.sound_meter.title')} width={52} height={52} />;
+    };
+    return <WidgetIcon />;
+  })(),
   defaultSize: { width: 300, height: 300 },
 };

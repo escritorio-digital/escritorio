@@ -109,7 +109,7 @@ export const ImageCarouselWidget: FC = () => {
             {/* Debug indicator */}
             <div style={{position: 'absolute', top: '10px', left: '10px', background: 'rgba(0,0,0,0.7)', color: 'white', padding: '5px', borderRadius: '3px'}}>
               {currentIndex + 1} / {images.length}
-              {images.length === 1 && <div style={{fontSize: '12px', marginTop: '3px'}}>Carga más imágenes para navegar</div>}
+              {images.length === 1 && <div style={{fontSize: '12px', marginTop: '3px'}}>{t('widgets.image_carousel.more_images_hint')}</div>}
             </div>
           </div>
           
@@ -159,9 +159,14 @@ export const ImageCarouselWidget: FC = () => {
 };
 
 // Objeto de configuración del widget
+const WidgetIcon: FC = () => {
+  const { t } = useTranslation();
+  return <img src="/icons/ImageCarousel.png" alt={t('widgets.image_carousel.title')} width={52} height={52} />;
+};
+
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'image-carousel',
   title: 'widgets.image_carousel.title',
-  icon: <img src="/icons/ImageCarousel.png" alt="Image Carousel" width="52" height="52" />,
+  icon: <WidgetIcon />,
   defaultSize: { width: 500, height: 400 },
 };

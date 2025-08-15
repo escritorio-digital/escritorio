@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { WidgetConfig } from '../../../types';
 import { Play, Pause } from 'lucide-react';
 import './Metronome.css';
@@ -112,6 +113,12 @@ export const MetronomeWidget: FC = () => {
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'metronome',
   title: 'widgets.metronome.title',
-  icon: <img src="/icons/Metronome.png" alt="Metrónomo" width="52" height="52" />,
+  icon: (() => {
+    const WidgetIcon: React.FC = () => {
+      const { t } = useTranslation();
+      return <img src="/icons/Metronome.png" alt={t('widgets.metronome.title')} width={52} height={52} />;
+    };
+    return <WidgetIcon />;
+  })(),
   defaultSize: { width: 300, height: 400 },
 };
