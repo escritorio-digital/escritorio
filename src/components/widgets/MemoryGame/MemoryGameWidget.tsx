@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { WidgetConfig } from '../../../types';
 // 'Shuffle' ha sido eliminado de esta línea
 import { Upload, RotateCcw } from 'lucide-react'; 
@@ -16,6 +17,7 @@ interface Card {
 
 // El componente principal del Memorama
 export const MemoryGameWidget: FC = () => {
+  const { t } = useTranslation();
   const [cards, setCards] = useState<Card[]>([]);
   const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
   const [moves, setMoves] = useState(0);
@@ -49,7 +51,7 @@ export const MemoryGameWidget: FC = () => {
     if (e.target.files && e.target.files.length > 1) {
       setupGame(e.target.files);
     } else {
-      alert("Por favor, selecciona al menos 2 imágenes para jugar.");
+      alert(t('widgets.memory_game.min_images_alert'));
     }
   };
 
@@ -96,8 +98,8 @@ export const MemoryGameWidget: FC = () => {
     return (
       <div className="memory-placeholder">
         <Upload size={48} />
-        <p>Sube imágenes para crear el memorama</p>
-        <small>Selecciona de 2 a 10 imágenes</small>
+        <p>{t('widgets.memory_game.upload_prompt')}</p>
+        <small>{t('widgets.memory_game.upload_rule')}</small>
         <input type="file" multiple accept="image/*" onChange={handleFileSelect} />
       </div>
     );
@@ -122,23 +124,28 @@ export const MemoryGameWidget: FC = () => {
         ))}
       </div>
       <div className="game-footer">
-        <span>Movimientos: {moves}</span>
-        <button onClick={() => setCards([])}><RotateCcw size={16}/> Empezar de Nuevo</button>
+        <span>{t('widgets.memory_game.moves', { count: moves })}</span>
+        <button onClick={() => setCards([])}><RotateCcw size={16}/> {t('widgets.memory_game.start_over')}</button>
       </div>
        {isGameWon && (
         <div className="game-won-overlay">
-          <h2>¡Ganaste!</h2>
-          <p>Lo completaste en {moves} movimientos.</p>
-          <button onClick={() => setCards([])}>Jugar de Nuevo</button>
+          <h2>{t('widgets.memory_game.win_title')}</h2>
+          <p>{t('widgets.memory_game.win_message', { moves })}</p>
+          <button onClick={() => setCards([])}>{t('widgets.memory_game.play_again')}</button>
         </div>
       )}
     </div>
   );
 };
 
+const WidgetIcon: FC = () => {
+  const { t } = useTranslation();
+  return <img src="/icons/MemoryGame.png" alt={t('widgets.memory_game.icon_alt')} width="52" height="52" />;
+}
+
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'memory-game',
-  title: 'Memorama',
-  icon: <img src="/icons/MemoryGame.png" alt="Memorama" width="52" height="52" />,
+  title: 'widgets.memory_game.title',
+  icon: <WidgetIcon />,
   defaultSize: { width: 500, height: 550 },
 };

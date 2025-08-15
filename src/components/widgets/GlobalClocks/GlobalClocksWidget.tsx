@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { WidgetConfig } from '../../../types';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { Trash2 } from 'lucide-react';
@@ -7,18 +8,18 @@ import './GlobalClocks.css';
 
 // --- Lista de Zonas Horarias (Formato IANA) ---
 const TIMEZONES = [
-  { city: 'Los Ángeles', timezone: 'America/Los_Angeles' },
-  { city: 'Nueva York', timezone: 'America/New_York' },
-  { city: 'Londres', timezone: 'Europe/London' },
-  { city: 'París', timezone: 'Europe/Paris' },
-  { city: 'Madrid', timezone: 'Europe/Madrid' }, // <-- Madrid añadido aquí
-  { city: 'Tokio', timezone: 'Asia/Tokyo' },
-  { city: 'Sídney', timezone: 'Australia/Sydney' },
-  { city: 'Ciudad de México', timezone: 'America/Mexico_City' },
-  { city: 'Buenos Aires', timezone: 'America/Argentina/Buenos_Aires' },
-  { city: 'Moscú', timezone: 'Europe/Moscow' },
-  { city: 'Dubái', timezone: 'Asia/Dubai' },
-  { city: 'Shanghái', timezone: 'Asia/Shanghai' },
+  { cityKey: 'los_angeles', timezone: 'America/Los_Angeles' },
+  { cityKey: 'new_york', timezone: 'America/New_York' },
+  { cityKey: 'london', timezone: 'Europe/London' },
+  { cityKey: 'paris', timezone: 'Europe/Paris' },
+  { cityKey: 'madrid', timezone: 'Europe/Madrid' },
+  { cityKey: 'tokyo', timezone: 'Asia/Tokyo' },
+  { cityKey: 'sydney', timezone: 'Australia/Sydney' },
+  { cityKey: 'mexico_city', timezone: 'America/Mexico_City' },
+  { cityKey: 'buenos_aires', timezone: 'America/Argentina/Buenos_Aires' },
+  { cityKey: 'moscow', timezone: 'Europe/Moscow' },
+  { cityKey: 'dubai', timezone: 'Asia/Dubai' },
+  { cityKey: 'shanghai', timezone: 'Asia/Shanghai' },
 ];
 
 // Función para obtener la diferencia horaria en horas
@@ -31,6 +32,7 @@ const getOffset = (timeZone: string) => {
 
 // El componente principal del Reloj Mundial
 export const GlobalClocksWidget: FC = () => {
+  const { t } = useTranslation();
   const [selectedTimezones, setSelectedTimezones] = useLocalStorage<string[]>('global-clocks-selection', [
     'Europe/London',
     'Asia/Tokyo',
@@ -62,8 +64,8 @@ export const GlobalClocksWidget: FC = () => {
         {/* Reloj Local del Usuario */}
         <div className="clock-row local">
           <div className="city-info">
-            <span className="city-name">Tu Hora Local</span>
-            <span className="offset">GTM{localOffset >= 0 ? '+' : ''}{localOffset}</span>
+            <span className="city-name">{t('widgets.global_clocks.your_local_time')}</span>
+            <span className="offset">GMT{localOffset >= 0 ? '+' : ''}{localOffset}</span>
           </div>
           <span className="time-display">{currentTime.toLocaleTimeString()}</span>
         </div>
@@ -79,10 +81,10 @@ export const GlobalClocksWidget: FC = () => {
           return (
             <div key={tz} className="clock-row">
               <div className="city-info">
-                <span className="city-name">{cityData.city}</span>
+                <span className="city-name">{t(`widgets.global_clocks.cities.${cityData.cityKey}`)}</span>
                 <span className="offset">{offsetDiff >= 0 ? '+' : ''}{offsetDiff}h</span>
               </div>
-              <span className="time-display">{currentTime.toLocaleTimeString('es-ES', { timeZone: tz })}</span>
+              <span className="time-display">{currentTime.toLocaleTimeString(undefined, { timeZone: tz })}</span>
               <button onClick={() => removeClock(tz)} className="remove-clock-btn"><Trash2 size={16} /></button>
             </div>
           );
@@ -92,10 +94,10 @@ export const GlobalClocksWidget: FC = () => {
       <div className="clocks-footer">
         <select value={newTimezone} onChange={e => setNewTimezone(e.target.value)}>
           {TIMEZONES.filter(tz => !selectedTimezones.includes(tz.timezone)).map(tz => (
-            <option key={tz.timezone} value={tz.timezone}>{tz.city}</option>
+            <option key={tz.timezone} value={tz.timezone}>{t(`widgets.global_clocks.cities.${tz.cityKey}`)}</option>
           ))}
         </select>
-        <button onClick={addClock}>Añadir Reloj</button>
+        <button onClick={addClock}>{t('widgets.global_clocks.add_clock')}</button>
       </div>
     </div>
   );
@@ -103,7 +105,13 @@ export const GlobalClocksWidget: FC = () => {
 
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'global-clocks',
-  title: 'Relojes Mundiales',
-  icon: <img src="/icons/GlobalClocks.png" alt="Relojes mundiales" width="52" height="52" />,
+  title: 'widgets.global_clocks.title',
+  icon: (() => {
+    const WidgetIcon: React.FC = () => {
+      const { t } = useTranslation();
+      return <img src="/icons/GlobalClocks.png" alt={t('widgets.global_clocks.title')} width={52} height={52} />;
+    };
+    return <WidgetIcon />;
+  })(),
   defaultSize: { width: 350, height: 400 },
 };

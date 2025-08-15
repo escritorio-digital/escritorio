@@ -3,11 +3,13 @@ import type { FC } from 'react';
 import type { WidgetConfig } from '../../../types';
 import { Eye, Code } from 'lucide-react';
 import './HtmlSandboxWidget.css';
+import { useTranslation } from 'react-i18next';
 
 export const HtmlSandboxWidget: FC = () => {
-  const [code, setCode] = useState(
-    '<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    body { font-family: sans-serif; background-color: #282c34; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }\n    h1 { color: #61dafb; }\n  </style>\n</head>\n<body>\n  <h1>¡Pega tu código aquí!</h1>\n  <script>\n    // Tu JavaScript\n  </script>\n</body>\n</html>'
-  );
+  const { t } = useTranslation();
+  const [code, setCode] = useState(() => (
+    '<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    body { font-family: sans-serif; background-color: #282c34; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }\n    h1 { color: #61dafb; }\n  </style>\n</head>\n<body>\n  <h1>' + t('widgets.html_sandbox.paste_code_here') + '</h1>\n  <script>\n    // ' + t('widgets.html_sandbox.your_javascript') + '\n  </script>\n</body>\n</html>'
+  ));
   const [isEditorVisible, setIsEditorVisible] = useState(true);
 
   return (
@@ -15,7 +17,7 @@ export const HtmlSandboxWidget: FC = () => {
       <button
         onClick={() => setIsEditorVisible(!isEditorVisible)}
         className="toggle-view-button"
-        title={isEditorVisible ? 'Mostrar Vista Previa' : 'Mostrar Código'}
+        title={isEditorVisible ? t('widgets.html_sandbox.show_preview') : t('widgets.html_sandbox.show_code')}
       >
         {isEditorVisible ? <Eye size={20} /> : <Code size={20} />}
       </button>
@@ -34,8 +36,8 @@ export const HtmlSandboxWidget: FC = () => {
       <div className={`preview-area ${isEditorVisible ? 'hidden' : ''}`}>
         <iframe
           srcDoc={code}
-          title="HTML Preview"
-          sandbox="allow-scripts allow-same-origin"
+          title={t('widgets.html_sandbox.preview_title')}
+          sandbox="allow-scripts"
           className="preview-iframe"
         />
       </div>
@@ -43,9 +45,14 @@ export const HtmlSandboxWidget: FC = () => {
   );
 };
 
+const WidgetIcon: FC = () => {
+  const { t } = useTranslation();
+  return <img src="/icons/HtmlSandbox.png" alt={t('widgets.html_sandbox.title')} width={52} height={52} />;
+};
+
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'html-sandbox',
-  title: 'HTML Sandbox',
-  icon: <img src="/icons/HtmlSandbox.png" alt="HTML Sandbox" width="52" height="52" />,
+  title: 'widgets.html_sandbox.title',
+  icon: <WidgetIcon />,
   defaultSize: { width: 600, height: 450 },
 };

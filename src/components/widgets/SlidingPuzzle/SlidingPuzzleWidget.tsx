@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import type { FC } from 'react';
 import type { WidgetConfig } from '../../../types';
+import { useTranslation } from 'react-i18next';
 import { Upload, Shuffle } from 'lucide-react';
 import './SlidingPuzzle.css';
 
-// Comprueba si el puzzle generado tiene solución
 const isSolvable = (order: number[], gridSize: number): boolean => {
   let inversions = 0;
   const arr = order.filter(p => p !== gridSize * gridSize - 1);
@@ -24,8 +24,8 @@ const isSolvable = (order: number[], gridSize: number): boolean => {
   }
 };
 
-// El componente principal del Puzzle
 export const SlidingPuzzleWidget: FC = () => {
+  const { t } = useTranslation();
   const [image, setImage] = useState<string | null>(null);
   const [gridSize, setGridSize] = useState(3);
   const [pieces, setPieces] = useState<number[]>([]);
@@ -91,7 +91,7 @@ export const SlidingPuzzleWidget: FC = () => {
     return (
       <div className="puzzle-placeholder">
         <Upload size={48} />
-        <p>Sube una imagen para empezar</p>
+        <p>{t('widgets.sliding_puzzle.upload_prompt')}</p>
         <input type="file" accept="image/*" onChange={handleImageUpload} />
       </div>
     );
@@ -124,26 +124,31 @@ export const SlidingPuzzleWidget: FC = () => {
             </div>
           );
         })}
-        {isSolved && <div className="solved-overlay">¡Resuelto!</div>}
+        {isSolved && <div className="solved-overlay">{t('widgets.sliding_puzzle.solved_overlay')}</div>}
       </div>
       <div className="puzzle-controls">
         <label>
-          Complejidad:
+          {t('widgets.sliding_puzzle.complexity_label')}
           <select value={gridSize} onChange={e => setGridSize(Number(e.target.value))}>
-            <option value={3}>Fácil (3x3)</option>
-            <option value={4}>Normal (4x4)</option>
-            <option value={5}>Difícil (5x5)</option>
+            <option value={3}>{t('widgets.sliding_puzzle.difficulty.easy')}</option>
+            <option value={4}>{t('widgets.sliding_puzzle.difficulty.normal')}</option>
+            <option value={5}>{t('widgets.sliding_puzzle.difficulty.hard')}</option>
           </select>
         </label>
-        <button onClick={shufflePieces}><Shuffle size={16} /> Barajar</button>
+        <button onClick={shufflePieces}><Shuffle size={16} /> {t('widgets.sliding_puzzle.shuffle_button')}</button>
       </div>
     </div>
   );
 };
 
+const WidgetIcon: FC = () => {
+    const { t } = useTranslation();
+    return <img src="/icons/SlidePuzzle.png" alt={t('widgets.sliding_puzzle.icon_alt')} width="52" height="52" />;
+}
+
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'sliding-puzzle',
-  title: 'Puzzle Deslizante',
-  icon: <img src="/icons/SlidePuzzle.png" alt="Puzzle Deslizante" width="52" height="52" />,
+  title: 'widgets.sliding_puzzle.title',
+  icon: <WidgetIcon />,
   defaultSize: { width: 450, height: 550 },
 };

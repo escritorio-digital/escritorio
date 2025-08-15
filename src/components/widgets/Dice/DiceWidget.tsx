@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Dices, Info } from 'lucide-react';
 import type { WidgetConfig } from '../../../types';
 import './Dice.css';
@@ -12,6 +13,7 @@ interface DieState {
 }
 
 export const DiceWidget: FC = () => {
+  const { t } = useTranslation();
   const [numDice, setNumDice] = useState(2);
   const [dice, setDice] = useState<DieState[]>([]);
   const [total, setTotal] = useState(0);
@@ -94,7 +96,7 @@ export const DiceWidget: FC = () => {
     <div className="dice-widget">
         <div className="controls">
             <div className="dice-selector">
-                <label htmlFor="num-dice-input">Número de Dados:</label>
+                <label htmlFor="num-dice-input">{t('widgets.dice.num_dice')}</label>
                 <input
                     id="num-dice-input"
                     type="number"
@@ -107,7 +109,7 @@ export const DiceWidget: FC = () => {
             </div>
             <button onClick={rollDice} className="roll-button" disabled={isRolling}>
                 <Dices size={20} />
-                {isRolling ? 'Lanzando...' : 'Lanzar Dados'}
+                {isRolling ? t('widgets.dice.rolling') : t('widgets.dice.roll_dice')}
             </button>
         </div>
 
@@ -117,7 +119,7 @@ export const DiceWidget: FC = () => {
 
         {!isRolling && total > 0 && (
             <div className="total">
-                Total: <span>{total}</span>
+                {t('widgets.dice.total')} <span>{total}</span>
             </div>
         )}
 
@@ -137,8 +139,14 @@ export const DiceWidget: FC = () => {
 
 // ... (La configuración del widget no cambia)
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
-  id: 'dice-roller',
-  title: 'Dados 3D',
-  icon: <img src="/icons/Dice.png" alt="Dados 3D" width="52" height="52" />,
+  id: 'dice',
+  title: 'widgets.dice.title',
+  icon: (() => {
+    const WidgetIcon: React.FC = () => {
+      const { t } = useTranslation();
+      return <img src="/icons/Dice.png" alt={t('widgets.dice.title')} width={52} height={52} />;
+    };
+    return <WidgetIcon />;
+  })(),
   defaultSize: { width: 400, height: 300 },
 };

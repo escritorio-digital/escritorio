@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { WidgetConfig } from '../../../types';
 import { Play, Pause, RotateCcw, Flag } from 'lucide-react';
 import './Stopwatch.css';
@@ -14,6 +15,7 @@ const formatTime = (time: number) => {
 
 // El componente principal del Cronómetro
 export const StopwatchWidget: FC = () => {
+  const { t } = useTranslation();
   const [time, setTime] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [laps, setLaps] = useState<number[]>([]);
@@ -62,15 +64,15 @@ export const StopwatchWidget: FC = () => {
       <div className="controls-container">
         <button onClick={handleReset} className="control-button reset">
           <RotateCcw size={20} />
-          <span>Reset</span>
+          <span>{t('widgets.stopwatch.reset')}</span>
         </button>
         <button onClick={handleStartStop} className={`control-button start-stop ${isActive ? 'active' : ''}`}>
           {isActive ? <Pause size={24} /> : <Play size={24} />}
-          <span>{isActive ? 'Pausa' : 'Inicio'}</span>
+          <span>{isActive ? t('widgets.stopwatch.pause') : t('widgets.stopwatch.start')}</span>
         </button>
         <button onClick={handleLap} disabled={!isActive && time === 0} className="control-button lap">
           <Flag size={20} />
-          <span>Vuelta</span>
+          <span>{t('widgets.stopwatch.lap')}</span>
         </button>
       </div>
       
@@ -78,7 +80,7 @@ export const StopwatchWidget: FC = () => {
         <ul className="laps-list">
           {laps.map((lap, index) => (
             <li key={index} className="lap-item">
-              <span>Vuelta {laps.length - index}</span>
+              <span>{t('widgets.stopwatch.lap')} {laps.length - index}</span>
               <span>{formatTime(lap)}</span>
             </li>
           ))}
@@ -88,9 +90,14 @@ export const StopwatchWidget: FC = () => {
   );
 };
 
+const WidgetIcon: FC = () => {
+  const { t } = useTranslation();
+  return <img src="/icons/Stopwatch.png" alt={t('widgets.stopwatch.title')} width={52} height={52} />;
+}
+
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'stopwatch',
-  title: 'Cronómetro',
-  icon: <img src="/icons/Stopwatch.png" alt="Cronometro" width="52" height="52" />,
+  title: 'widgets.stopwatch.title',
+  icon: <WidgetIcon />,
   defaultSize: { width: 320, height: 450 },
 };

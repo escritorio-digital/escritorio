@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import type { WidgetConfig } from '../../../types';
 import { Trash2, Plus, Play, Expand, Minimize } from 'lucide-react';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
+import { useTranslation } from 'react-i18next';
 import './RandomSpinner.css';
 
 interface SpinnerOption {
@@ -13,23 +14,30 @@ interface SpinnerOption {
 const getRandomColor = () => `hsl(${Math.random() * 360}, 70%, 80%)`;
 
 export const RandomSpinnerWidget: FC = () => {
-  const [options, setOptions] = useLocalStorage<SpinnerOption[]>('spinner-options', [
-    { text: 'Opción 1', color: getRandomColor() },
-    { text: 'Opción 2', color: getRandomColor() },
-    { text: 'Opción 3', color: getRandomColor() },
-  ]);
+  const { t } = useTranslation();
+  const [options, setOptions] = useLocalStorage<SpinnerOption[]>('spinner-options', []);
+  
+  useEffect(() => {
+    const storedOptions = window.localStorage.getItem('spinner-options');
+    if (storedOptions === null) {
+        const defaultOptions = t('widgets.random_spinner.default_options', { returnObjects: true });
+        if (Array.isArray(defaultOptions)) {
+            setOptions(defaultOptions.map((opt: { text: string }) => ({ ...opt, color: getRandomColor() })));
+        }
+    }
+  }, [t, setOptions]);
+
   const [newOption, setNewOption] = useState('');
   const [isSpinning, setIsSpinning] = useState(false);
   const [result, setResult] = useState<string | null>(null);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [editingText, setEditingText] = useState('');
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [size, setSize] = useState(300); // Estado para el tamaño del canvas
+  const [size, setSize] = useState(300);
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null); // Ref para el contenedor
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Efecto para redimensionar el canvas cuando el contenedor cambia de tamaño
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -45,20 +53,20 @@ export const RandomSpinnerWidget: FC = () => {
     return () => resizeObserver.disconnect();
   }, []);
 
-
-  // Efecto para dibujar la ruleta
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Ajusta la resolución del canvas para que sea nítido
     canvas.width = size;
     canvas.height = size;
     
     const numOptions = options.length;
-    if (numOptions === 0) return;
+    if (numOptions === 0) {
+        ctx.clearRect(0, 0, size, size);
+        return;
+    };
 
     const arcSize = (2 * Math.PI) / numOptions;
     const centerX = size / 2;
@@ -86,9 +94,8 @@ export const RandomSpinnerWidget: FC = () => {
       ctx.fillText(text, radius - 10, 0);
       ctx.restore();
     });
-  }, [options, size]); // Se redibuja cuando las opciones o el tamaño cambian
+  }, [options, size]);
 
-  // ... (Las funciones addOption, removeOption, startEditing, finishEditing y spin no cambian)
   const addOption = () => {
     if (newOption.trim() && options.length < 20) {
       setOptions([...options, { text: newOption.trim(), color: getRandomColor() }]);
@@ -145,7 +152,6 @@ export const RandomSpinnerWidget: FC = () => {
     requestAnimationFrame(animate);
   };
 
-
   return (
     <div className={`random-spinner-widget ${isFullscreen ? 'fullscreen' : ''}`}>
       <div ref={containerRef} className="spinner-area">
@@ -157,28 +163,27 @@ export const RandomSpinnerWidget: FC = () => {
         {result && !isSpinning && (
           <div className="spinner-result" onClick={() => setResult(null)}>
             <span>{result}</span>
-            <small>Haz clic para volver a girar</small>
+            <small>{t('widgets.random_spinner.result_overlay_text')}</small>
           </div>
         )}
-        {/* BOTÓN DE PANTALLA COMPLETA AHORA ESTÁ AQUÍ, SIEMPRE VISIBLE */}
         <button 
             onClick={() => setIsFullscreen(!isFullscreen)} 
             className="fullscreen-button"
-            title={isFullscreen ? "Restaurar vista" : "Ampliar ruleta"}
+            title={isFullscreen ? t('widgets.random_spinner.restore_view_button_title') : t('widgets.random_spinner.fullscreen_button_title')}
         >
             {isFullscreen ? <Minimize size={16} /> : <Expand size={16} />}
         </button>
       </div>
       <div className="options-manager">
         <div className="options-header">
-            <h3>Opciones</h3>
+            <h3>{t('widgets.random_spinner.options_header')}</h3>
         </div>
         <div className="add-option">
           <input
             type="text"
             value={newOption}
             onChange={(e) => setNewOption(e.target.value)}
-            placeholder="Añadir opción..."
+            placeholder={t('widgets.random_spinner.add_option_placeholder')}
             maxLength={20}
             onKeyPress={(e) => e.key === 'Enter' && addOption()}
           />
@@ -210,9 +215,14 @@ export const RandomSpinnerWidget: FC = () => {
   );
 };
 
+const WidgetIcon: FC = () => {
+    const { t } = useTranslation();
+    return <img src="/icons/RandomSpinner.png" alt={t('widgets.random_spinner.icon_alt')} width="52" height="52" />;
+}
+
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'random-spinner',
-  title: 'Ruleta Aleatoria',
-  icon: <img src="/icons/RandomSpinner.png" alt="Ruleta Aleatoria" width="52" height="52" />,
+  title: 'widgets.random_spinner.title',
+  icon: <WidgetIcon />,
   defaultSize: { width: 550, height: 420 },
 };

@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { WidgetConfig } from '../../../types';
 // CORRECCIÓN: Se eliminaron 'Users' y 'ListCollapse' de esta línea
 import { Upload } from 'lucide-react';
@@ -8,6 +9,7 @@ import './GroupGeneratorWidget.css';
 type GroupMode = 'byCount' | 'bySize';
 
 export const GroupGeneratorWidget: FC = () => {
+  const { t } = useTranslation();
   const [studentList, setStudentList] = useState('Ana\nBeatriz\nCarlos\nDaniela\nEsteban\nFernanda\nGael\nHilda\nIván\nJulia');
   const [mode, setMode] = useState<GroupMode>('byCount');
   const [groupValue, setGroupValue] = useState(3);
@@ -57,14 +59,14 @@ export const GroupGeneratorWidget: FC = () => {
   return (
     <div className="group-generator-widget">
       <div className="input-panel">
-        <label className="panel-label">Lista de Estudiantes</label>
+        <label className="panel-label">{t('widgets.group_generator.student_list_label')}</label>
         <textarea
           value={studentList}
           onChange={(e) => setStudentList(e.target.value)}
-          placeholder="Un nombre por línea..."
+          placeholder={t('widgets.group_generator.placeholder')}
         />
         <button onClick={() => fileInputRef.current?.click()} className="upload-button">
-          <Upload size={16} /> Cargar desde .txt
+          <Upload size={16} /> {t('widgets.group_generator.load_from_file')}
         </button>
         <input type="file" ref={fileInputRef} onChange={handleFileLoad} accept=".txt" className="hidden" />
       </div>
@@ -72,11 +74,11 @@ export const GroupGeneratorWidget: FC = () => {
         <div className="mode-selection">
           <label>
             <input type="radio" name="mode" checked={mode === 'byCount'} onChange={() => setMode('byCount')} />
-            Número de Grupos
+            {t('widgets.group_generator.number_of_groups')}
           </label>
           <label>
             <input type="radio" name="mode" checked={mode === 'bySize'} onChange={() => setMode('bySize')} />
-            Estudiantes por Grupo
+            {t('widgets.group_generator.students_per_group')}
           </label>
         </div>
         <input
@@ -87,23 +89,23 @@ export const GroupGeneratorWidget: FC = () => {
           min="1"
         />
         <button onClick={generateGroups} className="generate-button">
-          Generar Grupos
+          {t('widgets.group_generator.generate_groups')}
         </button>
       </div>
       <div className="output-panel">
-        <label className="panel-label">Grupos Generados</label>
+        <label className="panel-label">{t('widgets.group_generator.generated_groups_label')}</label>
         <div className="groups-container">
           {generatedGroups.length > 0 ? (
             generatedGroups.map((group, index) => (
               <div key={index} className="group-card">
-                <h4 className="group-title">Grupo {index + 1}</h4>
+                <h4 className="group-title">{t('widgets.group_generator.group_title', { number: index + 1 })}</h4>
                 <ul>
                   {group.map(student => <li key={student}>{student}</li>)}
                 </ul>
               </div>
             ))
           ) : (
-            <p className="no-groups-message">Los grupos aparecerán aquí.</p>
+            <p className="no-groups-message">{t('widgets.group_generator.no_groups_message')}</p>
           )}
         </div>
       </div>
@@ -113,7 +115,13 @@ export const GroupGeneratorWidget: FC = () => {
 
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'group-generator',
-  title: 'Generador de Grupos',
-  icon: <img src="/icons/GroupGenerator.png" alt="Generador de Grupos" width="52" height="52" />,
+  title: 'widgets.group_generator.title',
+  icon: (() => {
+    const WidgetIcon: React.FC = () => {
+      const { t } = useTranslation();
+      return <img src="/icons/GroupGenerator.png" alt={t('widgets.group_generator.title')} width={52} height={52} />;
+    };
+    return <WidgetIcon />;
+  })(),
   defaultSize: { width: 700, height: 550 },
 };

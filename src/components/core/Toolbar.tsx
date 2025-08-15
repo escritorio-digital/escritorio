@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { WIDGET_REGISTRY } from '../widgets';
 
 interface ToolbarProps {
@@ -8,6 +9,8 @@ interface ToolbarProps {
 }
 
 export const Toolbar: React.FC<ToolbarProps> = ({ pinnedWidgets, onWidgetClick, onSettingsClick }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="fixed bottom-5 left-1/2 -translate-x-1/2 bg-widget-bg p-2 rounded-2xl flex items-center gap-2 shadow-lg z-[10000] border border-custom-border">
       {pinnedWidgets.map(widgetId => {
@@ -18,7 +21,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({ pinnedWidgets, onWidgetClick, 
             key={widget.id}
             onClick={() => onWidgetClick(widget.id)}
             className="w-14 h-14 bg-accent text-2xl rounded-lg flex items-center justify-center hover:brightness-110 transition-all duration-200 hover:scale-110"
-            title={widget.title}
+            title={t(widget.title)}
           >
             {widget.icon}
           </button>
@@ -28,10 +31,9 @@ export const Toolbar: React.FC<ToolbarProps> = ({ pinnedWidgets, onWidgetClick, 
       <button
         onClick={onSettingsClick}
         className="w-14 h-14 text-white text-2xl rounded-lg flex items-center justify-center hover:bg-black/20 transition-all duration-200 hover:scale-110"
-        title="Configuración"
+        title={t('toolbar.settings')}
       >
-        {/* ¡CORREGIDO OTRA VEZ! Apuntando al archivo con mayúscula. */}
-        <img src="/icons/Settings.png" alt="Configuración" width="52" height="52" />
+        <img src="/icons/Settings.png" alt={t('toolbar.settings')} width="52" height="52" />
       </button>
     </div>
   );

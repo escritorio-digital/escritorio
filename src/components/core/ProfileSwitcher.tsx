@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronUp, ChevronsUpDown } from 'lucide-react';
 import type { ProfileCollection } from '../../types';
+import { useTranslation } from 'react-i18next';
 
 // Definimos las propiedades que nuestro componente necesita
 interface ProfileSwitcherProps {
@@ -15,6 +16,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
   setActiveProfileName,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
   const profileNames = Object.keys(profiles);
 
   const handleProfileSelect = (name: string) => {
@@ -48,7 +50,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="w-56 h-12 px-4 bg-black/20 backdrop-blur-md rounded-full text-white hover:bg-black/40 transition-colors flex items-center justify-between"
-          title="Cambiar de Escritorio"
+          title={t('settings.profiles.switcher_title')}
         >
           <span className="font-semibold">{activeProfileName}</span>
           {/* El icono cambia si el menú está abierto o cerrado */}
