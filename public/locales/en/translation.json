@@ -77,7 +77,30 @@
       "slide_alt": "Slide {{number}}",
       "select_new_images": "Select new images"
     },
-    "unit_converter": { "title": "Unit Converter" },
+    "unit_converter": {
+      "title": "Unit Converter",
+      "icon_alt": "Unit Converter",
+      "category_label": "Category:",
+      "swap_button_title": "Swap units",
+      "categories": {
+        "length": "Length",
+        "weight": "Weight",
+        "temperature": "Temperature"
+      },
+      "units": {
+        "meters": "Meters",
+        "kilometers": "Kilometers",
+        "miles": "Miles",
+        "feet": "Feet",
+        "kilograms": "Kilograms",
+        "grams": "Grams",
+        "pounds": "Pounds",
+        "ounces": "Ounces",
+        "celsius": "Celsius",
+        "fahrenheit": "Fahrenheit",
+        "kelvin": "Kelvin"
+      }
+    },
     "stopwatch": { 
       "title": "Stopwatch",
       "pause": "Pause",
@@ -104,7 +127,29 @@
       "input_placeholder": "Type text or URL here...",
       "generate_button": "Generate QR"
     },
-    "work_gestures": { "title": "Work Gestures" },
+    "work_gestures": {
+      "title": "Work Gestures",
+      "icon_alt": "Work Gestures",
+      "back_button": "Back",
+      "gestures": {
+        "silence": {
+          "label": "Silence",
+          "description": "Individual work in silence."
+        },
+        "pairs": {
+          "label": "Pairs",
+          "description": "Collaborative work in pairs."
+        },
+        "teams": {
+          "label": "Teams",
+          "description": "Work in small groups."
+        },
+        "plenary": {
+          "label": "Plenary",
+          "description": "Sharing with the whole group."
+        }
+      }
+    },
     "html_sandbox": { "title": "HTML Sandbox" },
     "latex_markdown": { 
       "title": "Interpreter (MD/LaTeX)",
@@ -135,7 +180,15 @@
       "csv_error": "There was an error reading the CSV file. Please check its format.",
       "double_click_edit": "Double click on a task to edit it."
     },
-    "scoreboard": { "title": "Scoreboard" },
+    "scoreboard": {
+      "title": "Scoreboard",
+      "icon_alt": "Scoreboard",
+      "reset_confirm": "Are you sure you want to reset all scores to zero?",
+      "empty_message": "Add a team or player to start.",
+      "input_placeholder": "Team or player name...",
+      "add_button": "Add",
+      "reset_button_title": "Reset all to zero"
+    },
     "sound_meter": { 
       "title": "Sound Meter",
       "silence": "Silence",
@@ -180,7 +233,19 @@
         "download": "Download note (.md)"
       }
     },
-    "sliding_puzzle": { "title": "Sliding Puzzle" },
+    "sliding_puzzle": {
+      "title": "Sliding Puzzle",
+      "icon_alt": "Sliding Puzzle",
+      "upload_prompt": "Upload an image to start",
+      "solved_overlay": "Solved!",
+      "complexity_label": "Complexity:",
+      "difficulty": {
+        "easy": "Easy (3x3)",
+        "normal": "Normal (4x4)",
+        "hard": "Hard (5x5)"
+      },
+      "shuffle_button": "Shuffle"
+    },
     "global_clocks": { 
       "title": "World Clocks",
       "your_local_time": "Your Local Time",
@@ -214,7 +279,11 @@
       "options_header": "Options",
       "add_option_placeholder": "Add option..."
     },
-    "traffic_light": { "title": "Traffic Light" },
+    "traffic_light": {
+      "title": "Traffic Light",
+      "icon_alt": "Traffic Light",
+      "tooltip": "Click to change color"
+    },
     "timer": { 
       "title": "Timer",
       "finished": "FINISHED!"

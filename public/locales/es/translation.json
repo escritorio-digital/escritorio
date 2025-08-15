@@ -77,7 +77,30 @@
       "slide_alt": "Diapositiva {{number}}",
       "select_new_images": "Seleccionar nuevas imágenes"
     },
-    "unit_converter": { "title": "Conversor de Unidades" },
+    "unit_converter": {
+      "title": "Conversor de Unidades",
+      "icon_alt": "Conversor de Unidades",
+      "category_label": "Categoría:",
+      "swap_button_title": "Intercambiar unidades",
+      "categories": {
+        "length": "Longitud",
+        "weight": "Peso",
+        "temperature": "Temperatura"
+      },
+      "units": {
+        "meters": "Metros",
+        "kilometers": "Kilómetros",
+        "miles": "Millas",
+        "feet": "Pies",
+        "kilograms": "Kilogramos",
+        "grams": "Gramos",
+        "pounds": "Libras",
+        "ounces": "Onzas",
+        "celsius": "Celsius",
+        "fahrenheit": "Fahrenheit",
+        "kelvin": "Kelvin"
+      }
+    },
     "stopwatch": { 
       "title": "Cronómetro",
       "pause": "Pausa",
@@ -104,7 +127,29 @@
       "input_placeholder": "Escribe el texto o URL aquí...",
       "generate_button": "Generar QR"
     },
-    "work_gestures": { "title": "Gestos de Trabajo" },
+    "work_gestures": {
+      "title": "Gestos de Trabajo",
+      "icon_alt": "Gestos de trabajo",
+      "back_button": "Volver",
+      "gestures": {
+        "silence": {
+          "label": "Silencio",
+          "description": "Trabajo individual en silencio."
+        },
+        "pairs": {
+          "label": "Parejas",
+          "description": "Trabajo colaborativo en parejas."
+        },
+        "teams": {
+          "label": "Equipos",
+          "description": "Trabajo en pequeños grupos."
+        },
+        "plenary": {
+          "label": "Plenaria",
+          "description": "Puesta en común con todo el grupo."
+        }
+      }
+    },
     "html_sandbox": { "title": "Sandbox HTML" },
     "latex_markdown": { 
       "title": "Intérprete (MD/LaTeX)",
@@ -135,7 +180,15 @@
       "csv_error": "Hubo un error al leer el archivo CSV. Por favor, revisa su formato.",
       "double_click_edit": "Doble click en una tarea para editarla."
     },
-    "scoreboard": { "title": "Marcador de Puntos" },
+    "scoreboard": {
+      "title": "Marcador de Puntos",
+      "icon_alt": "Marcador de puntos",
+      "reset_confirm": "¿Seguro que quieres reiniciar todos los marcadores a cero?",
+      "empty_message": "Añade un equipo o jugador para empezar.",
+      "input_placeholder": "Nombre del equipo o jugador...",
+      "add_button": "Añadir",
+      "reset_button_title": "Reiniciar todo a cero"
+    },
     "sound_meter": { 
       "title": "Medidor de Ruido",
       "silence": "Silencio",
@@ -180,7 +233,19 @@
         "download": "Descargar nota (.md)"
       }
     },
-    "sliding_puzzle": { "title": "Puzzle Deslizante" },
+    "sliding_puzzle": {
+      "title": "Puzzle Deslizante",
+      "icon_alt": "Puzzle Deslizante",
+      "upload_prompt": "Sube una imagen para empezar",
+      "solved_overlay": "¡Resuelto!",
+      "complexity_label": "Complejidad:",
+      "difficulty": {
+        "easy": "Fácil (3x3)",
+        "normal": "Normal (4x4)",
+        "hard": "Difícil (5x5)"
+      },
+      "shuffle_button": "Barajar"
+    },
     "global_clocks": { 
       "title": "Relojes Mundiales",
       "your_local_time": "Tu Hora Local",
@@ -214,7 +279,11 @@
       "options_header": "Opciones",
       "add_option_placeholder": "Añadir opción..."
     },
-    "traffic_light": { "title": "Semáforo" },
+    "traffic_light": {
+      "title": "Semáforo",
+      "icon_alt": "Semáforo",
+      "tooltip": "Haz clic para cambiar de color"
+    },
     "timer": { 
       "title": "Temporizador",
       "finished": "¡FIN!"

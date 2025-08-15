@@ -1,56 +1,54 @@
 import { useState, useEffect } from 'react';
 import type { FC } from 'react';
 import type { WidgetConfig } from '../../../types';
+import { useTranslation } from 'react-i18next';
 import { ArrowRightLeft } from 'lucide-react';
 import './UnitConverter.css';
 
-// --- Base de Datos de Conversiones ---
-// Definimos tipos más explícitos para ayudar a TypeScript
 type UnitMap = { [unit: string]: (value: number) => number };
 
 const CONVERSIONS = {
-  Longitud: {
-    baseUnit: 'Metros',
+  length: {
+    baseUnit: 'meters',
     units: {
-      'Metros': (v: number) => v,
-      'Kilómetros': (v: number) => v / 1000,
-      'Millas': (v: number) => v / 1609.34,
-      'Pies': (v: number) => v * 3.28084,
+      'meters': (v: number) => v,
+      'kilometers': (v: number) => v / 1000,
+      'miles': (v: number) => v / 1609.34,
+      'feet': (v: number) => v * 3.28084,
     } as UnitMap,
   },
-  Peso: {
-    baseUnit: 'Kilogramos',
+  weight: {
+    baseUnit: 'kilograms',
     units: {
-      'Kilogramos': (v: number) => v,
-      'Gramos': (v: number) => v * 1000,
-      'Libras': (v: number) => v * 2.20462,
-      'Onzas': (v: number) => v * 35.274,
+      'kilograms': (v: number) => v,
+      'grams': (v: number) => v * 1000,
+      'pounds': (v: number) => v * 2.20462,
+      'ounces': (v: number) => v * 35.274,
     } as UnitMap,
   },
-  Temperatura: {
-    baseUnit: 'Celsius',
+  temperature: {
+    baseUnit: 'celsius',
     units: {
-      'Celsius': (v: number) => v,
-      'Fahrenheit': (v: number) => (v * 9/5) + 32,
-      'Kelvin': (v: number) => v + 273.15,
+      'celsius': (v: number) => v,
+      'fahrenheit': (v: number) => (v * 9/5) + 32,
+      'kelvin': (v: number) => v + 273.15,
     } as UnitMap,
   }
 };
 
 type Category = keyof typeof CONVERSIONS;
 
-// El componente principal del Conversor
 export const UnitConverterWidget: FC = () => {
-  const [category, setCategory] = useState<Category>('Longitud');
-  const [fromUnit, setFromUnit] = useState<string>('Metros');
-  const [toUnit, setToUnit] = useState<string>('Pies');
+  const { t } = useTranslation();
+  const [category, setCategory] = useState<Category>('length');
+  const [fromUnit, setFromUnit] = useState<string>('meters');
+  const [toUnit, setToUnit] = useState<string>('feet');
   const [fromValue, setFromValue] = useState<string | number>(1);
   const [toValue, setToValue] = useState<string | number>('');
   const [isTyping, setIsTyping] = useState<'from' | 'to'>('from');
 
   const availableUnits = Object.keys(CONVERSIONS[category].units);
 
-  // Efecto para recalcular cuando cambian las dependencias
   useEffect(() => {
     const fromVal = parseFloat(String(fromValue));
     const toVal = parseFloat(String(toValue));
@@ -63,9 +61,9 @@ export const UnitConverterWidget: FC = () => {
         return;
       }
       let baseValue: number;
-      if (category === 'Temperatura') {
-        if (fromUnit === 'Fahrenheit') baseValue = (fromVal - 32) * 5/9;
-        else if (fromUnit === 'Kelvin') baseValue = fromVal - 273.15;
+      if (category === 'temperature') {
+        if (fromUnit === 'fahrenheit') baseValue = (fromVal - 32) * 5/9;
+        else if (fromUnit === 'kelvin') baseValue = fromVal - 273.15;
         else baseValue = fromVal;
       } else {
         const toBaseConverter = Object.entries(units).find(([key, _]) => key === fromUnit)![1];
@@ -80,9 +78,9 @@ export const UnitConverterWidget: FC = () => {
             return;
         }
         let baseValue: number;
-        if (category === 'Temperatura') {
-            if (toUnit === 'Fahrenheit') baseValue = (toVal - 32) * 5/9;
-            else if (toUnit === 'Kelvin') baseValue = toVal - 273.15;
+        if (category === 'temperature') {
+            if (toUnit === 'fahrenheit') baseValue = (toVal - 32) * 5/9;
+            else if (toUnit === 'kelvin') baseValue = toVal - 273.15;
             else baseValue = toVal;
         } else {
             const toBaseConverter = Object.entries(units).find(([key, _]) => key === toUnit)![1];
@@ -123,9 +121,9 @@ export const UnitConverterWidget: FC = () => {
   return (
     <div className="unit-converter-widget">
       <div className="category-selector">
-        <label htmlFor="category">Categoría:</label>
+        <label htmlFor="category">{t('widgets.unit_converter.category_label')}</label>
         <select id="category" value={category} onChange={handleCategoryChange}>
-          {Object.keys(CONVERSIONS).map(cat => <option key={cat} value={cat}>{cat}</option>)}
+          {Object.keys(CONVERSIONS).map(cat => <option key={cat} value={cat}>{t(`widgets.unit_converter.categories.${cat}`)}</option>)}
         </select>
       </div>
 
@@ -133,18 +131,18 @@ export const UnitConverterWidget: FC = () => {
         <div className="unit-group">
           <input type="number" value={fromValue} onChange={handleFromChange} />
           <select value={fromUnit} onChange={e => { setFromUnit(e.target.value); setIsTyping('from'); }}>
-            {availableUnits.map(unit => <option key={unit} value={unit}>{unit}</option>)}
+            {availableUnits.map(unit => <option key={unit} value={unit}>{t(`widgets.unit_converter.units.${unit}`)}</option>)}
           </select>
         </div>
 
-        <button onClick={swapUnits} className="swap-button" title="Intercambiar unidades">
+        <button onClick={swapUnits} className="swap-button" title={t('widgets.unit_converter.swap_button_title')}>
           <ArrowRightLeft size={20} />
         </button>
 
         <div className="unit-group">
           <input type="number" value={toValue} onChange={handleToChange} />
           <select value={toUnit} onChange={e => { setToUnit(e.target.value); setIsTyping('to'); }}>
-            {availableUnits.map(unit => <option key={unit} value={unit}>{unit}</option>)}
+            {availableUnits.map(unit => <option key={unit} value={unit}>{t(`widgets.unit_converter.units.${unit}`)}</option>)}
           </select>
         </div>
       </div>
@@ -152,10 +150,14 @@ export const UnitConverterWidget: FC = () => {
   );
 };
 
+const WidgetIcon: FC = () => {
+    const { t } = useTranslation();
+    return <img src="/icons/UnitConverter.png" alt={t('widgets.unit_converter.icon_alt')} width="52" height="52" />;
+}
 
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'unit-converter',
   title: 'widgets.unit_converter.title',
-  icon: <img src="/icons/UnitConverter.png" alt="Conversor de Unidades" width="52" height="52" />,
+  icon: <WidgetIcon />,
   defaultSize: { width: 450, height: 200 },
 };
