@@ -1,0 +1,292 @@
+{
+  "loading": "Cargando...",
+  "settings": {
+    "title": "Configuración",
+    "close": "Cerrar",
+    "tabs": {
+      "general": "General",
+      "profiles": "Perfiles",
+      "widgets": "Widgets",
+      "theme": "Apariencia"
+    },
+    "general": {
+      "language": "Idioma de la aplicación"
+    },
+    "widgets": {
+      "search": "Buscar widget...",
+      "pinned_info": "Selecciona los widgets que quieres en tu barra de herramientas. ({{count}}/{{max}})",
+      "add": "Añadir",
+      "remove": "Quitar",
+      "max_widgets_alert": "No se pueden fijar más de {{max}} widgets."
+    }
+  },
+  "toolbar": {
+    "settings": "Configuración",
+    "widgetLibrary": "Librería de Widgets"
+  },
+  "credits": {
+    "title": "Créditos y Licencia",
+    "original_project": "El proyecto original <strong>Escritorio Interactivo para el Aula</strong> y su idea pertenecen a <strong>María Teresa González</strong>.",
+    "original_link": "Puedes visitar la aplicación original en:",
+    "new_version": "Esta nueva versión fue desarrollada en colaboración por <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> y <strong>Pablo G. Guízar</strong>. El repositorio de este proyecto se encuentra en:",
+    "repository_link_text": "Escritorio Digital",
+    "vibe_community": "Tanto el proyecto original como esta migración están indexados en el <strong>Repositorio de aplicaciones educativas</strong>, una colección de recursos creados por la comunidad <strong>Vibe Coding Educativo</strong>.",
+    "vibe_apps_link_text": "Consulta más aplicaciones de esta comunidad en:",
+    "vibe_apps_repo_text": "Repositorio Vibe Coding Educativo",
+    "vibe_telegram_link_text": "Únete a la comunidad en Telegram:",
+    "open_knowledge_adherence": "Este proyecto se adhiere al",
+    "open_knowledge_decalogue": "Decálogo del Conocimiento Abierto"
+  },
+  "widgets": {
+    "attendance": { 
+      "title": "Control de Asistencia",
+      "badges": {
+        "excellent_work": "Excelente Trabajo",
+        "good_participation": "Buena Participación", 
+        "goal_achieved": "Objetivo Cumplido",
+        "helps_classmates": "Ayuda a Compañeros"
+      },
+      "alerts": {
+        "talks_in_class": "Platica en clase",
+        "doesnt_work": "No trabaja",
+        "bad_behavior": "Mala conducta",
+        "incomplete_homework": "Incumple con la tarea"
+      },
+      "no_name": "Sin Nombre",
+      "new_student_placeholder": "Nuevo estudiante...",
+      "import_csv_tooltip": "Importar CSV (reemplaza la lista del día actual)",
+      "export_records_tooltip": "Exportar todos los registros",
+      "delete_all_tooltip": "Borrar todo",
+      "reset_confirm": "¿Seguro que quieres borrar TODA la lista de estudiantes y TODOS los registros?",
+      "present": "Presente",
+      "absent": "Ausente", 
+      "late": "Tarde",
+      "date": "Fecha:",
+      "attendance_tab": "Asistencia",
+      "badges_tab": "Insignias",
+      "alerts_tab": "Alertas",
+      "no_students_message": "No hay estudiantes en la lista para esta fecha.",
+      "add_students_instruction": "Añade estudiantes o importa un archivo CSV."
+    },
+    "scientific_calculator": { "title": "Calculadora Científica" },
+    "calendar": { "title": "Calendario" },
+    "image_carousel": { 
+      "title": "Carrusel de Imágenes",
+      "no_images": "No hay imágenes cargadas.",
+      "select_images": "Seleccionar Imágenes",
+      "slide_alt": "Diapositiva {{number}}",
+      "select_new_images": "Seleccionar nuevas imágenes"
+    },
+    "unit_converter": { "title": "Conversor de Unidades" },
+    "stopwatch": { 
+      "title": "Cronómetro",
+      "pause": "Pausa",
+      "start": "Inicio",
+      "lap": "Vuelta"
+    },
+    "dice": { "title": "Dados 3D" },
+    "group_generator": { 
+      "title": "Generador de Grupos",
+      "student_list_label": "Lista de Estudiantes",
+      "placeholder": "Un nombre por línea...",
+      "load_from_file": "Cargar desde .txt",
+      "number_of_groups": "Número de Grupos",
+      "students_per_group": "Estudiantes por Grupo",
+      "generate_groups": "Generar Grupos",
+      "generated_groups_label": "Grupos Generados",
+      "group_title": "Grupo {{number}}",
+      "no_groups_message": "Los grupos aparecerán aquí."
+    },
+    "qr_code_generator": {
+      "title": "Generador QR",
+      "icon_alt": "Generador QR",
+      "placeholder": "Introduce texto para generar un código QR.",
+      "input_placeholder": "Escribe el texto o URL aquí...",
+      "generate_button": "Generar QR"
+    },
+    "work_gestures": { "title": "Gestos de Trabajo" },
+    "html_sandbox": { "title": "Sandbox HTML" },
+    "latex_markdown": { 
+      "title": "Intérprete (MD/LaTeX)",
+      "copy_source": "Copiar código fuente",
+      "copy_image": "Copiar como imagen",
+      "save_file": "Guardar archivo (.md/.tex)",
+      "export_pdf": "Exportar como PDF (texto)",
+      "source_copied": "Código fuente copiado",
+      "copy_failed": "No se pudo copiar",
+      "image_copied": "Imagen copiada",
+      "copy_image_failed": "Error al copiar imagen",
+      "sample_content": "# Teorema de Pitágoras\n\nEn un triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos.\n\n$$c = \\sqrt{a^2 + b^2}$$",
+      "latex_mode_title": "Modo exclusivo de LaTeX",
+      "latex_mode_description": "Este modo muestra una única fórmula. El contenido actual parece ser texto o Markdown.",
+      "how_to_proceed": "Cómo proceder",
+      "isolated_formula": "Para una fórmula aislada, deja solo LaTeX. Ejemplo:",
+      "text_with_formulas": "Para texto con fórmulas, usa el modo",
+      "markdown": "Markdown",
+      "latex_syntax_error": "Error de sintaxis en LaTeX:",
+      "generic_error": "Ha ocurrido un error."
+    },
+    "work_list": { 
+      "title": "Lista de Trabajo",
+      "add_task_placeholder": "Añadir nueva tarea y pulsar Enter...",
+      "load_csv": "Cargar CSV",
+      "download_csv": "Descargar como CSV",
+      "replace_list_confirm": "¿Quieres reemplazar la lista actual con las tareas del archivo? \n(Haz clic en \"Cancelar\" para añadirlas al final)",
+      "csv_error": "Hubo un error al leer el archivo CSV. Por favor, revisa su formato.",
+      "double_click_edit": "Doble click en una tarea para editarla."
+    },
+    "scoreboard": { "title": "Marcador de Puntos" },
+    "sound_meter": { 
+      "title": "Medidor de Ruido",
+      "silence": "Silencio",
+      "conversation": "Conversación",
+      "noise": "Ruido",
+      "no_audio_support": "Tu navegador no soporta la API de audio necesaria.",
+      "microphone_error": "Error al acceder al micrófono:",
+      "access_denied": "Acceso al micrófono denegado.",
+      "enable_browser_settings": "Debes permitir el acceso en la configuración de tu navegador.",
+      "permission_needed": "Se necesita permiso para usar el micrófono.",
+      "activate_meter": "Activar Medidor"
+    },
+    "memory_game": {
+      "title": "Memorama",
+      "min_images_alert": "Por favor, selecciona al menos 2 imágenes para jugar.",
+      "upload_prompt": "Sube imágenes para crear el memorama",
+      "upload_rule": "Selecciona de 2 a 10 imágenes",
+      "moves": "Movimientos: {{count}}",
+      "start_over": "Empezar de Nuevo",
+      "win_title": "¡Ganaste!",
+      "win_message": "Lo completaste en {{moves}} movimientos.",
+      "play_again": "Jugar de Nuevo",
+      "icon_alt": "Memorama"
+    },
+    "metronome": { "title": "Metrónomo" },
+    "notepad": {
+      "title": "Bloc de Notas",
+      "icon_alt": "Bloc de notas",
+      "initial_content": "<p>¡Hola! Escribe aquí.</p>",
+      "default_filename": "mi-nota.md",
+      "menubar": {
+        "bold": "Negrita",
+        "italic": "Cursiva",
+        "strike": "Tachado",
+        "bullet_list": "Lista de viñetas",
+        "ordered_list": "Lista numerada",
+        "paragraph": "Párrafo",
+        "h1": "Título (H1)",
+        "h2": "Subtítulo (H2)",
+        "h3": "Subtítulo Menor (H3)",
+        "upload": "Cargar nota (.md)",
+        "download": "Descargar nota (.md)"
+      }
+    },
+    "sliding_puzzle": { "title": "Puzzle Deslizante" },
+    "global_clocks": { 
+      "title": "Relojes Mundiales",
+      "your_local_time": "Tu Hora Local",
+      "add_clock": "Añadir Reloj",
+      "cities": {
+        "los_angeles": "Los Ángeles",
+        "new_york": "Nueva York", 
+        "london": "Londres",
+        "paris": "París",
+        "madrid": "Madrid",
+        "tokyo": "Tokio",
+        "sydney": "Sídney",
+        "mexico_city": "Ciudad de México",
+        "buenos_aires": "Buenos Aires",
+        "moscow": "Moscú",
+        "dubai": "Dubái",
+        "shanghai": "Shanghái"
+      }
+    },
+    "random_spinner": {
+      "title": "Ruleta Aleatoria",
+      "icon_alt": "Ruleta Aleatoria",
+      "default_options": [
+        { "text": "Opción 1" },
+        { "text": "Opción 2" },
+        { "text": "Opción 3" }
+      ],
+      "result_overlay_text": "Haz clic para volver a girar",
+      "fullscreen_button_title": "Ampliar ruleta",
+      "restore_view_button_title": "Restaurar vista",
+      "options_header": "Opciones",
+      "add_option_placeholder": "Añadir opción..."
+    },
+    "traffic_light": { "title": "Semáforo" },
+    "timer": { 
+      "title": "Temporizador",
+      "finished": "¡FIN!"
+    },
+    "tic_tac_toe": { 
+      "title": "Tic-Tac-Toe",
+      "player_1": "Jugador 1",
+      "player_2": "Jugador 2",
+      "reset_confirm": "¿Seguro que quieres reiniciar el juego y los marcadores?",
+      "winner": "Ganador:",
+      "draw": "¡Es un empate!",
+      "next_turn": "Siguiente turno:",
+      "next_round": "Siguiente Ronda",
+      "reset_all": "Reiniciar todo"
+    },
+    "iframe": { 
+      "title": "Visor Web",
+      "url_placeholder": "Pega una URL aquí...",
+      "load": "Cargar",
+      "embedded_content": "Contenido Embebido",
+      "content_placeholder": "El contenido de la URL se mostrará aquí.",
+      "embed_notice": "Algunos sitios pueden no permitir ser embebidos."
+    },
+    "directo_viewer": { 
+      "title": "Conexión en Directo",
+      "go_to_repo": "Ir al repositorio de Conexión en Directo"
+    },
+    "drawing_pad": { 
+      "title": "Paleta de Dibujo",
+      "clear_confirm": "¿Estás seguro de que quieres limpiar todo el dibujo? Esto borrará la imagen y los trazos.",
+      "default_filename": "mi_dibujo.png",
+      "brush": "Pincel",
+      "eraser": "Goma de Borrar",
+      "pencil": "Lápiz",
+      "marker": "Rotulador",
+      "spray": "Spray",
+      "line": "Línea Recta",
+      "rectangle": "Rectángulo",
+      "circle": "Círculo/Elipse",
+      "arrow": "Flecha",
+      "text": "Texto",
+      "select_color": "Seleccionar color",
+      "brush_size": "Tamaño del pincel",
+      "upload_image": "Subir Imagen",
+      "save_drawing": "Guardar Dibujo",
+      "clear_all": "Limpiar todo",
+      "start_drawing": "Sube una imagen o empieza a dibujar",
+      "pan_mode": "Activar modo navegación",
+      "exit_pan": "Salir del modo navegación", 
+      "center_view": "Centrar vista"
+    },
+    "scientific_calculator": {
+      "title": "Calculadora Científica",
+      "basic": "Básica",
+      "standard": "Estándar",
+      "scientific": "Científica",
+      "history": "Historial",
+      "no_history": "No hay historial.",
+      "error": "Error",
+      "infinity": "Infinity"
+    },
+    "calendar": {
+      "title": "Calendario",
+      "days": ["Lu", "Ma", "Mi", "Ju", "Vi", "Sá", "Do"],
+      "months": ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+    },
+    "dice": {
+      "title": "Dados 3D",
+      "num_dice": "Número de Dados:",
+      "rolling": "Lanzando...",
+      "roll_dice": "Lanzar Dados",
+      "total": "Total:"
+    }
+  }
+}

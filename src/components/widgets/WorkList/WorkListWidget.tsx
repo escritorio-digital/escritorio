@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { X, Edit, Download, Upload } from 'lucide-react';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import Papa from 'papaparse';
@@ -11,6 +12,7 @@ interface Task {
 }
 
 export const WorkListWidget: React.FC = () => {
+  const { t, ready } = useTranslation();
   const [tasks, setTasks] = useLocalStorage<Task[]>('work-list-tasks', []);
   const [newTask, setNewTask] = useState('');
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
@@ -80,7 +82,7 @@ export const WorkListWidget: React.FC = () => {
             completed: String(row.completed).toLowerCase() === 'true'
           })).filter(task => task.text);
 
-          if (window.confirm('¿Quieres reemplazar la lista actual con las tareas del archivo? \n(Haz clic en "Cancelar" para añadirlas al final)')) {
+          if (window.confirm(t('widgets.work_list.replace_list_confirm'))) {
             setTasks(newTasks);
           } else {
             setTasks(prevTasks => [...prevTasks, ...newTasks]);
@@ -88,12 +90,24 @@ export const WorkListWidget: React.FC = () => {
         },
         error: (error) => {
           console.error("Error al parsear el CSV:", error);
-          alert("Hubo un error al leer el archivo CSV. Por favor, revisa su formato.");
+          alert(t('widgets.work_list.csv_error'));
         }
       });
     }
     if(e.target) e.target.value = '';
   };
+
+  // Debug: verificar qué devuelve t()
+  console.log('WorkList translations:', {
+    ready,
+    placeholder: t('widgets.work_list.add_task_placeholder'),
+    title: t('widgets.work_list.title')
+  });
+
+  // Si las traducciones no están listas, mostrar un loader simple
+  if (!ready) {
+    return <div className="flex items-center justify-center h-full">Cargando...</div>;
+  }
 
   return (
     <div className="flex flex-col h-full text-text-dark p-4">
@@ -101,7 +115,7 @@ export const WorkListWidget: React.FC = () => {
         <input
           type="text"
           className="flex-grow bg-custom-bg border-2 border-accent rounded p-2 focus:border-widget-header outline-none"
-          placeholder="Añadir nueva tarea y pulsar Enter..."
+          placeholder={t('widgets.work_list.add_task_placeholder')}
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
           onKeyPress={addTask}
@@ -109,14 +123,14 @@ export const WorkListWidget: React.FC = () => {
         <button 
           onClick={() => fileInputRef.current?.click()}
           className="p-2 bg-accent rounded hover:bg-[#8ec9c9] transition-colors"
-          title="Cargar CSV"
+          title={t('widgets.work_list.load_csv')}
         >
           <Upload size={20} />
         </button>
         <button 
           onClick={downloadAsCSV}
           className="p-2 bg-accent rounded hover:bg-[#8ec9c9] transition-colors"
-          title="Descargar como CSV"
+          title={t('widgets.work_list.download_csv')}
         >
           <Download size={20} />
         </button>
@@ -159,7 +173,7 @@ export const WorkListWidget: React.FC = () => {
           </li>
         ))}
       </ul>
-      <p className="text-xs text-gray-500 mt-2 text-center">Doble click en una tarea para editarla.</p>
+      <p className="text-xs text-gray-500 mt-2 text-center">{t('widgets.work_list.double_click_edit')}</p>
 
       <input
         type="file"
@@ -174,7 +188,7 @@ export const WorkListWidget: React.FC = () => {
 
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
     id: 'work-list',
-    title: 'Lista de Trabajo',
+    title: 'widgets.work_list.title',
     icon: <img src="/icons/WorkList.png" alt="Lista de Trabajo" width="52" height="52" />,
     defaultSize: { width: 380, height: 400 },
 };

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { WidgetConfig } from '../../../types';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { RotateCcw, X, Circle } from 'lucide-react';
@@ -7,9 +8,21 @@ import './TicTacToe.css';
 
 // El componente principal del Tic-Tac-Toe
 export const TicTacToeWidget: FC = () => {
+  const { t } = useTranslation();
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
   const [players, setPlayers] = useLocalStorage('tictactoe-players', { X: 'Jugador 1', O: 'Jugador 2' });
+  
+  // Actualizar nombres de jugadores por defecto cuando cambien las traducciones
+  useEffect(() => {
+    const player1 = t('widgets.tic_tac_toe.player_1');
+    const player2 = t('widgets.tic_tac_toe.player_2');
+    if (player1 !== 'widgets.tic_tac_toe.player_1' && player2 !== 'widgets.tic_tac_toe.player_2') {
+      if (players.X === 'Jugador 1' && players.O === 'Jugador 2') {
+        setPlayers({ X: player1, O: player2 });
+      }
+    }
+  }, [t, players, setPlayers]);
   const [score, setScore] = useLocalStorage('tictactoe-score', { X: 0, O: 0 });
   const [winner, setWinner] = useState<string | null>(null);
 
@@ -56,19 +69,19 @@ export const TicTacToeWidget: FC = () => {
   };
 
   const resetGame = () => {
-    if (window.confirm('¿Seguro que quieres reiniciar el juego y los marcadores?')) {
+    if (window.confirm(t('widgets.tic_tac_toe.reset_confirm'))) {
         resetRound();
         setScore({ X: 0, O: 0 });
-        setPlayers({ X: 'Jugador 1', O: 'Jugador 2' });
+        setPlayers({ X: t('widgets.tic_tac_toe.player_1'), O: t('widgets.tic_tac_toe.player_2') });
     }
   };
 
   const isDraw = !winner && board.every(Boolean);
   const status = winner 
-    ? `Ganador: ${players[winner as 'X' | 'O']}!`
+    ? `${t('widgets.tic_tac_toe.winner')} ${players[winner as 'X' | 'O']}!`
     : isDraw 
-    ? '¡Es un empate!' 
-    : `Siguiente turno: ${players[isXNext ? 'X' : 'O']}`;
+    ? t('widgets.tic_tac_toe.draw') 
+    : `${t('widgets.tic_tac_toe.next_turn')} ${players[isXNext ? 'X' : 'O']}`;
 
   return (
     <div className="tic-tac-toe-widget">
@@ -99,8 +112,8 @@ export const TicTacToeWidget: FC = () => {
 
       <div className="game-footer">
         <p className="status">{status}</p>
-        {(winner || isDraw) && <button onClick={resetRound} className="action-button">Siguiente Ronda</button>}
-        <button onClick={resetGame} className="reset-game-button" title="Reiniciar todo"><RotateCcw size={16}/></button>
+        {(winner || isDraw) && <button onClick={resetRound} className="action-button">{t('widgets.tic_tac_toe.next_round')}</button>}
+        <button onClick={resetGame} className="reset-game-button" title={t('widgets.tic_tac_toe.reset_all')}><RotateCcw size={16}/></button>
       </div>
     </div>
   );
@@ -108,7 +121,7 @@ export const TicTacToeWidget: FC = () => {
 
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'tic-tac-toe',
-  title: 'Tic-Tac-Toe',
+  title: 'widgets.tic_tac_toe.title',
   icon: <img src="/icons/TicTacToe.png" alt="Juego Gato" width="52" height="52" />,
   defaultSize: { width: 380, height: 520 },
 };

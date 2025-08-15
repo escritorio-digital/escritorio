@@ -35,7 +35,7 @@ export const HtmlSandboxWidget: FC = () => {
         <iframe
           srcDoc={code}
           title="HTML Preview"
-          sandbox="allow-scripts allow-same-origin"
+          sandbox="allow-scripts"
           className="preview-iframe"
         />
       </div>
@@ -45,7 +45,7 @@ export const HtmlSandboxWidget: FC = () => {
 
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'html-sandbox',
-  title: 'HTML Sandbox',
+  title: 'widgets.html_sandbox.title',
   icon: <img src="/icons/HtmlSandbox.png" alt="HTML Sandbox" width="52" height="52" />,
   defaultSize: { width: 600, height: 450 },
 };

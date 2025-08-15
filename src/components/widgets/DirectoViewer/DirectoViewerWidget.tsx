@@ -2,6 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import type { WidgetConfig } from '../../../types';
 import { Info } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 // --- Estilos CSS como objetos de JavaScript ---
 
@@ -40,7 +41,9 @@ const infoButtonStyles: React.CSSProperties = {
 
 // --- Componente principal del Widget ---
 export const AppViewerWidget: FC = () => {
-    const appUrl = "https://jjdeharo.github.io/directo/";
+    const { i18n } = useTranslation();
+    const currentLanguage = i18n.language || 'es';
+    const appUrl = `https://jjdeharo.github.io/directo/?lang=${currentLanguage}`;
     const repoUrl = "https://github.com/jjdeharo/directo/";
 
     return (
@@ -70,7 +73,7 @@ export const AppViewerWidget: FC = () => {
 // --- Configuración del Widget ---
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'directo-viewer',
-  title: 'Conexión en Directo',
+  title: 'widgets.directo_viewer.title',
   icon: <img src="/icons/Directo.png" alt="Conexión en directo" width="52" height="52" />,
   defaultSize: { width: 800, height: 600 },
 };

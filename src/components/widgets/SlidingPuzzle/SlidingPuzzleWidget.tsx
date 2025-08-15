@@ -143,7 +143,7 @@ export const SlidingPuzzleWidget: FC = () => {
 
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'sliding-puzzle',
-  title: 'Puzzle Deslizante',
+  title: 'widgets.sliding_puzzle.title',
   icon: <img src="/icons/SlidePuzzle.png" alt="Puzzle Deslizante" width="52" height="52" />,
   defaultSize: { width: 450, height: 550 },
 };

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { WidgetConfig } from '../../../types';
 import { marked } from 'marked';
 import katex from 'katex';
@@ -53,9 +54,16 @@ function renderContentInto(target: HTMLElement, mode: Mode, input: string) {
 }
 
 export const LatexMarkdownWidget: FC = () => {
-  const [input, setInput] = useState<string>(
-    '# Teorema de Pitágoras\n\nEn un triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos.\n\n$$c = \\sqrt{a^2 + b^2}$$'
-  );
+  const { t, i18n, ready } = useTranslation();
+  const [input, setInput] = useState<string>('# Teorema de Pitágoras\n\nEn un triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos.\n\n$$c = \\sqrt{a^2 + b^2}$$');
+  
+  // Actualizar contenido cuando cambie el idioma
+  useEffect(() => {
+    const sampleContent = t('widgets.latex_markdown.sample_content');
+    if (sampleContent !== 'widgets.latex_markdown.sample_content') {
+      setInput(sampleContent);
+    }
+  }, [t, i18n.language]);
   const [mode, setMode] = useState<Mode>('markdown');
   const [feedback, setFeedback] = useState<string>('');
   const previewRef = useRef<HTMLDivElement>(null);
@@ -85,8 +93,8 @@ export const LatexMarkdownWidget: FC = () => {
   const handleCopySource = () => {
     navigator.clipboard
       .writeText(input)
-      .then(() => showFeedback('Código fuente copiado'))
-      .catch(() => showFeedback('No se pudo copiar'));
+      .then(() => showFeedback(t('widgets.latex_markdown.source_copied')))
+      .catch(() => showFeedback(t('widgets.latex_markdown.copy_failed')));
   };
 
   const handleCopyAsImage = async () => {
@@ -102,9 +110,9 @@ export const LatexMarkdownWidget: FC = () => {
       });
       const blob = await (await fetch(dataUrl)).blob();
       await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
-      showFeedback('Imagen copiada');
+      showFeedback(t('widgets.latex_markdown.image_copied'));
     } catch {
-      showFeedback('Error al copiar imagen');
+      showFeedback(t('widgets.latex_markdown.copy_image_failed'));
     }
   };
 
@@ -150,24 +158,38 @@ export const LatexMarkdownWidget: FC = () => {
       renderContentInto(previewElement, mode, input);
     } catch (error) {
       if (mode === 'latex' && error instanceof Error) {
+        const title = t('widgets.latex_markdown.latex_mode_title');
+        const description = t('widgets.latex_markdown.latex_mode_description');
+        const howToProceed = t('widgets.latex_markdown.how_to_proceed');
+        const isolatedFormula = t('widgets.latex_markdown.isolated_formula');
+        const textWithFormulas = t('widgets.latex_markdown.text_with_formulas');
+        const markdown = t('widgets.latex_markdown.markdown');
+        
         previewElement.innerHTML = `
           <div class="friendly-error-pane">
-            <h3>Modo exclusivo de LaTeX</h3>
-            <p>Este modo muestra una única fórmula. El contenido actual parece ser texto o Markdown.</p>
-            <h4>Cómo proceder</h4>
+            <h3>${title}</h3>
+            <p>${description}</p>
+            <h4>${howToProceed}</h4>
             <ul>
-              <li>Para una fórmula aislada, deja solo LaTeX. Ejemplo: <code>c = \\\\sqrt{a^2 + b^2}</code>.</li>
-              <li>Para texto con fórmulas, usa el modo <strong>Markdown</strong>.</li>
+              <li>${isolatedFormula} <code>c = \\\\sqrt{a^2 + b^2}</code>.</li>
+              <li>${textWithFormulas} <strong>${markdown}</strong>.</li>
             </ul>
           </div>
         `;
       } else if (error instanceof Error) {
-        previewElement.innerHTML = `<div class="error-message">Error de sintaxis en LaTeX: ${error.message}</div>`;
+        const syntaxError = t('widgets.latex_markdown.latex_syntax_error');
+        previewElement.innerHTML = `<div class="error-message">${syntaxError} ${error.message}</div>`;
       } else {
-        previewElement.innerHTML = `<div class="error-message">Ha ocurrido un error.</div>`;
+        const genericError = t('widgets.latex_markdown.generic_error');
+        previewElement.innerHTML = `<div class="error-message">${genericError}</div>`;
       }
     }
   }, [input, mode]);
+
+  // Si las traducciones no están listas, mostrar un loader simple
+  if (!ready) {
+    return <div className="flex items-center justify-center h-full">Cargando...</div>;
+  }
 
   return (
     <>
@@ -191,16 +213,16 @@ export const LatexMarkdownWidget: FC = () => {
         <div className="preview-container">
           <div className="preview-toolbar">
             {feedback && <span className="feedback-message">{feedback}</span>}
-            <button title="Copiar código fuente" onClick={handleCopySource}>
+            <button title={t('widgets.latex_markdown.copy_source')} onClick={handleCopySource}>
               <Clipboard size={18} />
             </button>
-            <button title="Copiar como imagen" onClick={handleCopyAsImage}>
+            <button title={t('widgets.latex_markdown.copy_image')} onClick={handleCopyAsImage}>
               <ImageIcon size={18} />
             </button>
-            <button title="Guardar archivo (.md/.tex)" onClick={handleSaveToFile}>
+            <button title={t('widgets.latex_markdown.save_file')} onClick={handleSaveToFile}>
               <FileDown size={18} />
             </button>
-            <button title="Exportar como PDF (texto)" onClick={handleExportAsPdfText}>
+            <button title={t('widgets.latex_markdown.export_pdf')} onClick={handleExportAsPdfText}>
               <FileText size={18} />
             </button>
           </div>
@@ -215,8 +237,8 @@ export const LatexMarkdownWidget: FC = () => {
 };
 
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
-  id: 'latex-markdown-interpreter',
-  title: 'Intérprete (MD/LaTeX)',
+  id: 'latex-markdown',
+  title: 'widgets.latex_markdown.title',
   icon: <img src="/icons/LatexMarkdown.png" alt="Intérprete (MD/LaTeX)" width="52" height="52" />,
   defaultSize: { width: 900, height: 550 },
 };

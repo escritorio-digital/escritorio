@@ -1,11 +1,26 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import React, { Suspense } from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
+import i18n, { i18nReady } from './i18n'; // Importar i18next y esperar readiness
 
-// ¡ELIMINAMOS THEMEPROVIDER DE AQUÍ!
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+
+// Esperar a que i18next esté inicializado y el ns cargado antes de renderizar
+i18nReady.then(() => {
+  root.render(
+    <React.StrictMode>
+      <Suspense fallback="Cargando...">
+        <App />
+      </Suspense>
+    </React.StrictMode>
+  );
+}).catch((err) => {
+  // En caso de error, renderizar igualmente para no bloquear la app
+  console.error('i18n init error:', err);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+});

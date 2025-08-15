@@ -1,10 +1,12 @@
 import { useState, useMemo } from 'react'; // Corregido: 'React' no es necesario
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { WidgetConfig } from '../../../types';
 
 // A. El Componente de React con toda la lógica
 export const CalendarWidget: FC = () => {
+  const { t } = useTranslation();
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
@@ -45,14 +47,16 @@ export const CalendarWidget: FC = () => {
           <ChevronLeft size={20} />
         </button>
         <h3 className="text-lg font-bold">
-          {currentDate.toLocaleString('es-ES', { month: 'long', year: 'numeric' })}
+          {((t('widgets.calendar.months', { returnObjects: true }) as string[]) || ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'])[currentDate.getMonth()]} {currentDate.getFullYear()}
         </h3>
         <button onClick={goToNextMonth} className="p-2 rounded-full hover:bg-accent/50">
           <ChevronRight size={20} />
         </button>
       </div>
       <div className="grid grid-cols-7 text-center font-semibold text-sm mb-2">
-        <span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sá</span><span>Do</span>
+        {((t('widgets.calendar.days', { returnObjects: true }) as string[]) || ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá', 'Do']).map((day, index) => (
+          <span key={index}>{day}</span>
+        ))}
       </div>
       <div className="grid grid-cols-7 text-center gap-1">
         {calendarDays.map((d, index) => (
@@ -68,7 +72,7 @@ export const CalendarWidget: FC = () => {
 // B. El objeto de configuración que permite la detección automática
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'calendar',
-  title: 'Calendario',
+  title: 'widgets.calendar.title',
   icon: <img src="/icons/Calendar.png" alt="Calendario" width="52" height="52" />,
   defaultSize: { width: 320, height: 350 },
 };

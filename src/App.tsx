@@ -1,6 +1,7 @@
 // src/App.tsx
 
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { WIDGET_REGISTRY } from './components/widgets';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { WidgetWindow } from './components/core/WidgetWindow';
@@ -20,6 +21,7 @@ const DesktopUI: React.FC<{
     activeProfileName: string;
     setActiveProfileName: (name: string) => void;
 }> = ({ profiles, setProfiles, activeProfileName, setActiveProfileName }) => {
+    const { t } = useTranslation();
     const activeProfile = profiles[activeProfileName] || Object.values(profiles)[0];
 
     const setActiveWidgets = (updater: React.SetStateAction<ActiveWidget[]>) => {
@@ -90,7 +92,7 @@ const DesktopUI: React.FC<{
                     <WidgetWindow
                         key={widget.instanceId}
                         id={widget.instanceId}
-                        title={config.title}
+                        title={t(config.title)}
                         position={widget.position}
                         size={widget.size}
                         zIndex={widget.zIndex}

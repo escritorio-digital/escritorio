@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import type { FC } from 'react'; // <-- CORRECCIÓN 2: Importación de tipo
+import { useTranslation } from 'react-i18next';
 import { Play, Pause, RotateCw } from 'lucide-react';
 import type { WidgetConfig } from '../../../types';
 
 export const TimerWidget: FC = () => {
+    const { t } = useTranslation();
     const [minutesInput, setMinutesInput] = useState(5);
     const [secondsInput, setSecondsInput] = useState(0);
     const [totalDuration, setTotalDuration] = useState(300);
@@ -56,7 +58,7 @@ export const TimerWidget: FC = () => {
     return (
         <div className="flex flex-col items-center justify-center h-full text-text-dark p-4">
             <div className="text-6xl font-bold font-mono mb-4">
-                {remainingSeconds === 0 && !isActive ? "¡FIN!" : formatTime(remainingSeconds)}
+                {remainingSeconds === 0 && !isActive ? t('widgets.timer.finished') : formatTime(remainingSeconds)}
             </div>
             
             <div className="flex items-center gap-2 mb-4">
@@ -91,7 +93,7 @@ export const TimerWidget: FC = () => {
 
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
     id: 'timer',
-    title: 'Temporizador',
+    title: 'widgets.timer.title',
     icon: <img src="/icons/Timer.png" alt="Temporizador" width="52" height="52" />,
     defaultSize: { width: 300, height: 300 },
 };

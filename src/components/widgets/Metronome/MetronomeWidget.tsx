@@ -111,7 +111,7 @@ export const MetronomeWidget: FC = () => {
 
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'metronome',
-  title: 'Metrónomo',
+  title: 'widgets.metronome.title',
   icon: <img src="/icons/Metronome.png" alt="Metrónomo" width="52" height="52" />,
   defaultSize: { width: 300, height: 400 },
 };

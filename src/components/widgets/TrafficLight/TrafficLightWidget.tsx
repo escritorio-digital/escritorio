@@ -57,7 +57,7 @@ export const TrafficLightWidget: FC = () => {
 // Configuración para que el sistema detecte el widget automáticamente
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'traffic-light',
-  title: 'Semáforo',
+  title: 'widgets.traffic_light.title',
   icon: <img src="/icons/TrafficLight.png" alt="Semáforo" width="52" height="52" />,
   defaultSize: { width: 150, height: 350 },
 };

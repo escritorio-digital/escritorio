@@ -155,7 +155,7 @@ export const UnitConverterWidget: FC = () => {
 
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'unit-converter',
-  title: 'Conversor de Unidades',
+  title: 'widgets.unit_converter.title',
   icon: <img src="/icons/UnitConverter.png" alt="Conversor de Unidades" width="52" height="52" />,
   defaultSize: { width: 450, height: 200 },
 };
