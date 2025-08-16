@@ -38,7 +38,6 @@ export const DrawingPadWidget: React.FC = () => {
   
   // Canvas oculto para mantener el contenido completo durante redimensionamientos
   const backupCanvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [maxCanvasSize, setMaxCanvasSize] = useState({ width: 600, height: 450 }); // Inicializar con tamaño por defecto
   const [hasBackupContent, setHasBackupContent] = useState(false);
   // DPI: factor de escala de dispositivo
   const dprRef = useRef<number>(typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1);
@@ -161,7 +160,6 @@ export const DrawingPadWidget: React.FC = () => {
     }
     
     setHasBackupContent(true);
-    setMaxCanvasSize({ width: backupCanvas.width, height: backupCanvas.height });
   }, [getBackupCanvas]);
 
 
@@ -318,7 +316,6 @@ export const DrawingPadWidget: React.FC = () => {
           );
           hasBackupContentRef.current = true;
           setHasBackupContent(true);
-          setMaxCanvasSize({ width: backupCanvas.width, height: backupCanvas.height });
         }
 
         // 3) Redimensionar el canvas principal (esto limpia el contenido)
@@ -629,7 +626,6 @@ export const DrawingPadWidget: React.FC = () => {
           }
         }
         setHasBackupContent(false);
-        setMaxCanvasSize({ width: 0, height: 0 });
         setPanOffset({ x: 0, y: 0 });
         setPanDragStart(null);
       }

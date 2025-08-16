@@ -22,7 +22,7 @@ export const RandomSpinnerWidget: FC = () => {
     if (storedOptions === null) {
         const defaultOptions = t('widgets.random_spinner.default_options', { returnObjects: true });
         if (Array.isArray(defaultOptions)) {
-            setOptions(defaultOptions.map((opt: { text: string }) => ({ ...opt, color: getRandomColor() })));
+            setOptions(defaultOptions.map((opt: any) => ({ ...opt, color: getRandomColor() })));
         }
     }
   }, [t, setOptions]);

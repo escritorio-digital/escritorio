@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
-import i18n, { i18nReady } from './i18n'; // Importar i18next y esperar readiness
+import { i18nReady } from './i18n'; // Importar i18next y esperar readiness
 import { useTranslation } from 'react-i18next';
 
 const I18nFallback: React.FC = () => {
