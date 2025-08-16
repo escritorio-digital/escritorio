@@ -1,0 +1,406 @@
+{
+  "loading": "Loading...",
+  "settings": {
+    "title": "Settings",
+    "close": "Close",
+    "tabs": {
+      "general": "General",
+      "profiles": "Profiles",
+      "widgets": "Widgets",
+      "theme": "Appearance"
+    },
+    "general": {
+      "language": "Application Language",
+      "languages": {
+        "en": "English",
+        "es": "Spanish"
+      },
+      "reset_title": "Reset Application",
+      "reset_description": "Removes all saved data (profiles, widgets, and preferences) and restarts as first run.",
+      "reset_button": "Factory Reset",
+      "reset_confirm": "Are you sure you want to remove all local preferences and data? This cannot be undone."
+    },
+    "profiles": {
+      "invalid_name_alert": "Invalid or already existing profile name.",
+      "delete_last_alert": "You cannot delete the last profile.",
+      "delete_confirm": "Are you sure you want to delete the profile \"{{name}}\"?",
+      "save_current_title": "Save Current Settings as a New Profile",
+      "new_profile_placeholder": "New profile name...",
+      "save_button": "Save",
+      "saved_profiles_title": "Saved Profiles",
+      "active_button": "Active",
+      "load_button": "Load",
+      "delete_button": "Delete",
+      "switcher_title": "Switch Desktop"
+    },
+    "widgets": {
+      "search": "Search widget...",
+      "pinned_info": "Select the widgets you want on your toolbar. ({{count}}/{{max}})",
+      "add": "Add",
+      "remove": "Remove",
+      "max_widgets_alert": "You cannot pin more than {{max}} widgets."
+    },
+    "theme": {
+      "theme_colors_title": "Theme Colors",
+      "colors": {
+        "desktop_bg": "Desktop Background",
+        "widget_bg": "Widget Background",
+        "widget_header": "Widget Header",
+        "accent": "Accent",
+        "text_light": "Light Text",
+        "text_dark": "Dark Text"
+      },
+      "wallpaper_title": "Wallpaper",
+      "upload_image_button": "Upload Image",
+      "remove_wallpaper_button": "Remove Wallpaper",
+      "reset_theme_button": "Reset to Default Theme"
+    }
+  },
+  "toolbar": {
+    "settings": "Settings",
+    "widgetLibrary": "Widget Library"
+  },
+  "credits": {
+    "title": "Credits and License",
+    "original_project": "The original project <strong>Interactive Classroom Desktop</strong> and its idea belong to <strong>María Teresa González</strong>.",
+    "original_link": "You can visit the original application at:",
+    "new_version": "This new version was developed in collaboration by <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong>, and <strong>Pablo G. Guízar</strong>. The repository for this project is located at:",
+    "repository_link_text": "Digital Desktop",
+    "vibe_community": "Both the original project and this migration are indexed in the <strong>Educational Applications Repository</strong>, a collection of resources created by the <strong>Vibe Coding Educativo</strong> community.",
+    "vibe_apps_link_text": "Check out more applications from this community at:",
+    "vibe_apps_repo_text": "Vibe Coding Educativo Repository",
+    "vibe_telegram_link_text": "Join the community on Telegram:",
+    "open_knowledge_adherence": "This project adheres to the",
+    "open_knowledge_decalogue": "Open Knowledge Decalogue"
+  },
+  "widgets": {
+    "attendance": {
+      "title": "Attendance Tracker",
+      "badges": {
+        "excellent_work": "Excellent Work",
+        "good_participation": "Good Participation",
+        "goal_achieved": "Goal Achieved",
+        "helps_classmates": "Helps Classmates"
+      },
+      "alerts": {
+        "talks_in_class": "Talks in class",
+        "doesnt_work": "Doesn't work",
+        "bad_behavior": "Bad behavior",
+        "incomplete_homework": "Incomplete homework"
+      },
+      "no_name": "No Name",
+      "new_student_placeholder": "New student...",
+      "import_csv_tooltip": "Import CSV (replaces current day list)",
+      "export_records_tooltip": "Export all records",
+      "delete_all_tooltip": "Delete all",
+      "reset_confirm": "Are you sure you want to delete ALL the student list and ALL records?",
+      "present": "Present",
+      "absent": "Absent",
+      "late": "Late",
+      "date": "Date:",
+      "attendance_tab": "Attendance",
+      "badges_tab": "Badges",
+      "alerts_tab": "Alerts",
+      "no_students_message": "No students in the list for this date.",
+      "add_students_instruction": "Add students or import a CSV file."
+    },
+    "scientific_calculator": { "title": "Scientific Calculator" },
+    "calendar": { "title": "Calendar" },
+    "image_carousel": {
+      "title": "Image Carousel",
+      "no_images": "No images loaded.",
+      "select_images": "Select Images",
+      "slide_alt": "Slide {{number}}",
+      "select_new_images": "Select new images",
+      "more_images_hint": "Load more images to navigate"
+    },
+    "unit_converter": {
+      "title": "Unit Converter",
+      "icon_alt": "Unit Converter",
+      "category_label": "Category:",
+      "swap_button_title": "Swap units",
+      "categories": {
+        "length": "Length",
+        "weight": "Weight",
+        "temperature": "Temperature"
+      },
+      "units": {
+        "meters": "Meters",
+        "kilometers": "Kilometers",
+        "miles": "Miles",
+        "feet": "Feet",
+        "kilograms": "Kilograms",
+        "grams": "Grams",
+        "pounds": "Pounds",
+        "ounces": "Ounces",
+        "celsius": "Celsius",
+        "fahrenheit": "Fahrenheit",
+        "kelvin": "Kelvin"
+      }
+    },
+    "stopwatch": {
+      "title": "Stopwatch",
+      "pause": "Pause",
+      "start": "Start",
+      "lap": "Lap",
+      "reset": "Reset"
+    },
+    "dice": { "title": "3D Dice" },
+    "group_generator": {
+      "title": "Group Generator",
+      "student_list_label": "Student List",
+      "placeholder": "One name per line...",
+      "load_from_file": "Load from .txt",
+      "number_of_groups": "Number of Groups",
+      "students_per_group": "Students per Group",
+      "generate_groups": "Generate Groups",
+      "generated_groups_label": "Generated Groups",
+      "group_title": "Group {{number}}",
+      "no_groups_message": "Groups will appear here."
+    },
+    "qr_code_generator": {
+      "title": "QR Code Generator",
+      "icon_alt": "QR Code Generator",
+      "placeholder": "Enter text to generate a QR code.",
+      "input_placeholder": "Type text or URL here...",
+      "generate_button": "Generate QR"
+    },
+    "work_gestures": {
+      "title": "Work Gestures",
+      "icon_alt": "Work Gestures",
+      "back_button": "Back",
+      "gestures": {
+        "silence": {
+          "label": "Silence",
+          "description": "Individual work in silence."
+        },
+        "pairs": {
+          "label": "Pairs",
+          "description": "Collaborative work in pairs."
+        },
+        "teams": {
+          "label": "Teams",
+          "description": "Work in small groups."
+        },
+        "plenary": {
+          "label": "Plenary",
+          "description": "Sharing with the whole group."
+        }
+      }
+    },
+    "html_sandbox": {
+      "title": "HTML Sandbox",
+      "paste_code_here": "Paste your code here!",
+      "your_javascript": "Your JavaScript",
+      "show_preview": "Show Preview",
+      "show_code": "Show Code",
+      "preview_title": "HTML Preview"
+    },
+    "latex_markdown": {
+      "title": "Interpreter (MD/LaTeX)",
+      "copy_source": "Copy source code",
+      "copy_image": "Copy as image",
+      "save_file": "Save file (.md/.tex)",
+      "export_pdf": "Export as PDF (text)",
+      "source_copied": "Source code copied",
+      "copy_failed": "Could not copy",
+      "image_copied": "Image copied",
+      "copy_image_failed": "Error copying image",
+      "sample_content": "# Pythagorean Theorem\n\nIn a right triangle, the square of the hypotenuse is equal to the sum of the squares of the legs.\n\n$$c = \\sqrt{a^2 + b^2}$$",
+      "latex_mode_title": "LaTeX Exclusive Mode",
+      "latex_mode_description": "This mode displays a single formula. The current content appears to be text or Markdown.",
+      "how_to_proceed": "How to proceed",
+      "isolated_formula": "For an isolated formula, leave only LaTeX. Example:",
+      "text_with_formulas": "For text with formulas, use",
+      "markdown": "Markdown",
+      "latex_syntax_error": "LaTeX syntax error:",
+      "generic_error": "An error occurred."
+    },
+    "work_list": {
+      "title": "Work List",
+      "add_task_placeholder": "Add new task and press Enter...",
+      "load_csv": "Load CSV",
+      "download_csv": "Download as CSV",
+      "replace_list_confirm": "Do you want to replace the current list with tasks from the file? \n(Click \"Cancel\" to add them to the end)",
+      "csv_error": "There was an error reading the CSV file. Please check its format.",
+      "double_click_edit": "Double click on a task to edit it."
+    },
+    "scoreboard": {
+      "title": "Scoreboard",
+      "icon_alt": "Scoreboard",
+      "reset_confirm": "Are you sure you want to reset all scores to zero?",
+      "empty_message": "Add a team or player to start.",
+      "input_placeholder": "Team or player name...",
+      "add_button": "Add",
+      "reset_button_title": "Reset all to zero"
+    },
+    "sound_meter": {
+      "title": "Sound Meter",
+      "silence": "Silence",
+      "conversation": "Conversation",
+      "noise": "Noise",
+      "no_audio_support": "Your browser does not support the required audio API.",
+      "microphone_error": "Error accessing microphone:",
+      "access_denied": "Microphone access denied.",
+      "enable_browser_settings": "You must allow access in your browser settings.",
+      "permission_needed": "Permission is needed to use the microphone.",
+      "activate_meter": "Activate Meter"
+    },
+    "memory_game": {
+      "title": "Memory Game",
+      "min_images_alert": "Please select at least 2 images to play.",
+      "upload_prompt": "Upload images to create the memory game",
+      "upload_rule": "Select from 2 to 10 images",
+      "moves": "Moves: {{count}}",
+      "start_over": "Start Over",
+      "win_title": "You Won!",
+      "win_message": "You completed it in {{moves}} moves.",
+      "play_again": "Play Again",
+      "icon_alt": "Memory Game"
+    },
+    "metronome": { "title": "Metronome" },
+    "notepad": {
+      "title": "Notepad",
+      "icon_alt": "Notepad",
+      "initial_content": "<p>Hello! Write here.</p>",
+      "default_filename": "my-note.md",
+      "menubar": {
+        "bold": "Bold",
+        "italic": "Italic",
+        "strike": "Strikethrough",
+        "bullet_list": "Bulleted List",
+        "ordered_list": "Numbered List",
+        "paragraph": "Paragraph",
+        "h1": "Title (H1)",
+        "h2": "Subtitle (H2)",
+        "h3": "Minor Subtitle (H3)",
+        "upload": "Upload note (.md)",
+        "download": "Download note (.md)"
+      }
+    },
+    "sliding_puzzle": {
+      "title": "Sliding Puzzle",
+      "icon_alt": "Sliding Puzzle",
+      "upload_prompt": "Upload an image to start",
+      "solved_overlay": "Solved!",
+      "complexity_label": "Complexity:",
+      "difficulty": {
+        "easy": "Easy (3x3)",
+        "normal": "Normal (4x4)",
+        "hard": "Hard (5x5)"
+      },
+      "shuffle_button": "Shuffle"
+    },
+    "global_clocks": {
+      "title": "World Clocks",
+      "your_local_time": "Your Local Time",
+      "add_clock": "Add Clock",
+      "cities": {
+        "los_angeles": "Los Angeles",
+        "new_york": "New York",
+        "london": "London",
+        "paris": "Paris",
+        "madrid": "Madrid",
+        "tokyo": "Tokyo",
+        "sydney": "Sydney",
+        "mexico_city": "Mexico City",
+        "buenos_aires": "Buenos Aires",
+        "moscow": "Moscow",
+        "dubai": "Dubai",
+        "shanghai": "Shanghai"
+      }
+    },
+    "random_spinner": {
+      "title": "Random Spinner",
+      "icon_alt": "Random Spinner",
+      "default_options": [
+        { "text": "Option 1" },
+        { "text": "Option 2" },
+        { "text": "Option 3" }
+      ],
+      "result_overlay_text": "Click to spin again",
+      "fullscreen_button_title": "Enlarge spinner",
+      "restore_view_button_title": "Restore view",
+      "options_header": "Options",
+      "add_option_placeholder": "Add option..."
+    },
+    "traffic_light": {
+      "title": "Traffic Light",
+      "icon_alt": "Traffic Light",
+      "tooltip": "Click to change color"
+    },
+    "timer": {
+      "title": "Timer",
+      "finished": "FINISHED!"
+    },
+    "tic_tac_toe": {
+      "title": "Tic-Tac-Toe",
+      "player_1": "Player 1",
+      "player_2": "Player 2",
+      "reset_confirm": "Are you sure you want to reset the game and scores?",
+      "winner": "Winner:",
+      "draw": "It's a draw!",
+      "next_turn": "Next turn:",
+      "next_round": "Next Round",
+      "reset_all": "Reset all"
+    },
+    "iframe": {
+      "title": "Web Viewer",
+      "url_placeholder": "Paste a URL here...",
+      "load": "Load",
+      "embedded_content": "Embedded Content",
+      "content_placeholder": "The URL content will be shown here.",
+      "embed_notice": "Some sites may not allow being embedded."
+    },
+    "directo_viewer": {
+      "title": "Live Connection",
+      "go_to_repo": "Go to Live Connection repository"
+    },
+    "drawing_pad": {
+      "title": "Drawing Pad",
+      "clear_confirm": "Are you sure you want to clear the entire drawing? This will erase the image and strokes.",
+      "default_filename": "my_drawing.png",
+      "brush": "Brush",
+      "eraser": "Eraser",
+      "pencil": "Pencil",
+      "marker": "Marker",
+      "spray": "Spray",
+      "line": "Straight Line",
+      "rectangle": "Rectangle",
+      "circle": "Circle/Ellipse",
+      "arrow": "Arrow",
+      "text": "Text",
+      "select_color": "Select color",
+      "brush_size": "Brush size",
+      "upload_image": "Upload Image",
+      "save_drawing": "Save Drawing",
+      "clear_all": "Clear all",
+      "start_drawing": "Upload an image or start drawing",
+      "pan_mode": "Toggle pan mode",
+      "exit_pan": "Exit pan mode",
+      "center_view": "Center view"
+    },
+    "scientific_calculator": {
+      "title": "Scientific Calculator",
+      "basic": "Basic",
+      "standard": "Standard",
+      "scientific": "Scientific",
+      "history": "History",
+      "no_history": "No history.",
+      "error": "Error",
+      "infinity": "Infinity"
+    },
+    "calendar": {
+      "title": "Calendar",
+      "days": ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+      "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    },
+    "dice": {
+      "title": "3D Dice",
+      "num_dice": "Number of Dice:",
+      "rolling": "Rolling...",
+      "roll_dice": "Roll Dice",
+      "total": "Total:"
+    }
+  }
+}
