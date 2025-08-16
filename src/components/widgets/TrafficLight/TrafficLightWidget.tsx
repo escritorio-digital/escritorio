@@ -1,15 +1,13 @@
 import type { FC } from 'react';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import type { WidgetConfig } from '../../../types';
+import { useTranslation } from 'react-i18next';
 
-// Definimos los posibles estados del semáforo
 type LightState = 'red' | 'yellow' | 'green';
 
-// Componente para una sola luz del semáforo
 const Light: FC<{ color: string; active: boolean }> = ({ color, active }) => {
   const baseStyle = 'w-20 h-20 rounded-full border-4 border-gray-700 transition-all duration-300';
   
-  // Tailwind necesita clases completas, por eso este truco para los colores dinámicos
   const colorVariants = {
     red: 'bg-red-500 shadow-[0_0_20px_5px_var(--tw-shadow-color)] shadow-red-400',
     yellow: 'bg-yellow-500 shadow-[0_0_20px_5px_var(--tw-shadow-color)] shadow-yellow-400',
@@ -22,13 +20,11 @@ const Light: FC<{ color: string; active: boolean }> = ({ color, active }) => {
   return <div className={`${baseStyle} ${dynamicActiveStyle}`} />;
 };
 
-
 export const TrafficLightWidget: FC = () => {
-  // El estado persiste en el almacenamiento local
+  const { t } = useTranslation();
   const [activeLight, setActiveLight] = useLocalStorage<LightState>('traffic-light-state', 'red');
 
   const handleClick = () => {
-    // Ciclo: red -> green -> yellow -> red
     if (activeLight === 'red') {
       setActiveLight('green');
     } else if (activeLight === 'green') {
@@ -40,13 +36,12 @@ export const TrafficLightWidget: FC = () => {
 
   return (
     <div 
-      className="flex flex-col items-center justify-center cursor-pointer  p-4"
+      className="flex flex-col items-center justify-center cursor-pointer p-4"
       onClick={handleClick}
-      title="Haz clic para cambiar de color"
+      title={t('widgets.traffic_light.tooltip')}
     >
       <div className="bg-gray-800 p-4 rounded-2xl flex flex-col gap-4 border-4 border-gray-600">
         <Light color="red" active={activeLight === 'red'} />
-        {/* ¡AQUÍ ESTABA EL ERROR CORREGIDO! */}
         <Light color="yellow" active={activeLight === 'yellow'} />
         <Light color="green" active={activeLight === 'green'} />
       </div>
@@ -54,10 +49,14 @@ export const TrafficLightWidget: FC = () => {
   );
 };
 
-// Configuración para que el sistema detecte el widget automáticamente
+const WidgetIcon: FC = () => {
+    const { t } = useTranslation();
+    return <img src="/icons/TrafficLight.png" alt={t('widgets.traffic_light.icon_alt')} width="52" height="52" />;
+}
+
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'traffic-light',
-  title: 'Semáforo',
-  icon: <img src="/icons/TrafficLight.png" alt="Semáforo" width="52" height="52" />,
+  title: 'widgets.traffic_light.title',
+  icon: <WidgetIcon />,
   defaultSize: { width: 150, height: 350 },
 };

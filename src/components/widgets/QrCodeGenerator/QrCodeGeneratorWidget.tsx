@@ -3,11 +3,12 @@ import type { FC } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import type { WidgetConfig } from '../../../types';
 import { QrCode } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import './QrCodeGenerator.css';
 
 export const QrCodeGeneratorWidget: FC = () => {
+  const { t } = useTranslation();
   const [text, setText] = useState('https://escritorio-digital.github.io/');
-  // Estado separado para evitar regenerar el QR en cada pulsación de tecla
   const [qrValue, setQrValue] = useState('https://escritorio-digital.github.io/');
 
   const handleGenerate = () => {
@@ -20,7 +21,7 @@ export const QrCodeGeneratorWidget: FC = () => {
         {qrValue ? (
           <QRCodeSVG
             value={qrValue}
-            size={256} // Tamaño base, se ajustará con CSS
+            size={256}
             bgColor={"#ffffff"}
             fgColor={"#000000"}
             level={"L"}
@@ -30,7 +31,7 @@ export const QrCodeGeneratorWidget: FC = () => {
         ) : (
           <div className="qr-placeholder">
             <QrCode size={64} />
-            <p>Introduce texto para generar un código QR.</p>
+            <p>{t('widgets.qr_code_generator.placeholder')}</p>
           </div>
         )}
       </div>
@@ -38,20 +39,25 @@ export const QrCodeGeneratorWidget: FC = () => {
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Escribe el texto o URL aquí..."
+          placeholder={t('widgets.qr_code_generator.input_placeholder')}
           className="qr-input"
         />
         <button onClick={handleGenerate} className="generate-button">
-          Generar QR
+          {t('widgets.qr_code_generator.generate_button')}
         </button>
       </div>
     </div>
   );
 };
 
+const WidgetIcon: FC = () => {
+    const { t } = useTranslation();
+    return <img src="/icons/QrCodeGenerator.png" alt={t('widgets.qr_code_generator.icon_alt')} width="52" height="52" />;
+}
+
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'qr-code-generator',
-  title: 'Generador QR',
-  icon: <img src="/icons/QrCodeGenerator.png" alt="Generador QR" width="52" height="52" />,
+  title: 'widgets.qr_code_generator.title',
+  icon: <WidgetIcon />,
   defaultSize: { width: 350, height: 500 },
 };

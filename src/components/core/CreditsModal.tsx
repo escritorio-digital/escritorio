@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation, Trans } from 'react-i18next';
 import { X } from 'lucide-react';
 
 interface CreditsModalProps {
@@ -7,6 +8,7 @@ interface CreditsModalProps {
 }
 
 export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) => {
+  const { t } = useTranslation();
   if (!isOpen) return null;
 
   return (
@@ -16,34 +18,48 @@ export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) =
         onClick={e => e.stopPropagation()}
       >
         <header className="p-4 border-b flex justify-between items-center">
-          <h2 className="text-xl font-bold">Créditos, Licencia y Agradecimientos</h2>
+          <h2 className="text-xl font-bold">{t('credits.title')}</h2>
           <button onClick={onClose} className="p-1 rounded-full hover:bg-black/10"><X size={20}/></button>
         </header>
 
         <div className="p-6 overflow-y-auto text-sm space-y-4">
+          <p dangerouslySetInnerHTML={{ __html: t('credits.original_project') }} />
           <p>
-            El proyecto original <strong>Escritorio Interactivo para el Aula</strong> y su idea pertenecen a <strong>María Teresa González</strong>.
-            Puedes visitar la aplicación original en: <a href="https://mtgonzalezm.github.io/escritorio-interactivo-aula/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">https://mtgonzalezm.github.io/escritorio-interactivo-aula/</a>
+            {t('credits.original_link')}{' '}
+            <a href="https://mtgonzalezm.github.io/escritorio-interactivo-aula/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+              https://mtgonzalezm.github.io/escritorio-interactivo-aula/
+            </a>
           </p>
           <p>
-            Esta nueva versión fue desarrollada en colaboración por <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> y <strong>Pablo G. Guízar</strong>. El repositorio de este proyecto se encuentra en: <a href="https://github.com/escritorio-digital/escritorio" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Escritorio Digital</a>
+            <Trans i18nKey="credits.new_version">
+              Esta nueva versión fue desarrollada en colaboración por <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> y <strong>Pablo G. Guízar</strong>. El repositorio de este proyecto se encuentra en:
+              <a href="https://github.com/escritorio-digital/escritorio" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                {{text: t('credits.repository_link_text')}}
+              </a>
+            </Trans>
           </p>
           <hr />
-          <p>
-            Tanto el proyecto original como esta migración están indexados en el <strong>Repositorio de aplicaciones educativas</strong>, una colección de recursos creados por la comunidad <strong>Vibe Coding Educativo</strong>.
-          </p>
+          <p dangerouslySetInnerHTML={{ __html: t('credits.vibe_community') }} />
           <ul className="list-disc list-inside space-y-2">
             <li>
-              Consulta más aplicaciones de esta comunidad en: <a href="https://vibe-coding-educativo.github.io/app_edu/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Repositorio Vibe Coding Educativo</a>
+              {t('credits.vibe_apps_link_text')}{' '}
+              <a href="https://vibe-coding-educativo.github.io/app_edu/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                {t('credits.vibe_apps_repo_text')}
+              </a>
             </li>
             <li>
-              Únete a la comunidad en Telegram: <a href="https://t.me/vceduca" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">t.me/vceduca</a>
+              {t('credits.vibe_telegram_link_text')}{' '}
+              <a href="https://t.me/vceduca" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                t.me/vceduca
+              </a>
             </li>
           </ul>
            <hr />
           <div className="text-center p-4 bg-gray-100 rounded-lg">
-            <p className="font-semibold">Este proyecto se adhiere al</p>
-            <a href="https://conocimiento-abierto.github.io/" target="_blank" rel="noopener noreferrer" className="text-lg font-bold text-blue-600 hover:underline">Decálogo del Conocimiento Abierto</a>
+            <p className="font-semibold">{t('credits.open_knowledge_adherence')}</p>
+            <a href="https://conocimiento-abierto.github.io/" target="_blank" rel="noopener noreferrer" className="text-lg font-bold text-blue-600 hover:underline">
+              {t('credits.open_knowledge_decalogue')}
+            </a>
             <p className="mt-4">
               <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" rel="noopener noreferrer" className="inline-block" title="Creative Commons Attribution-ShareAlike 4.0 International License">
                 <img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="Licencia Creative Commons BY-SA 4.0" />

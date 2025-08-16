@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { WidgetConfig } from '../../../types';
 import './ScientificCalculatorWidget.css';
 
@@ -24,6 +25,7 @@ const operators = ['=', '+', '−', '×', '÷', '^', '%'];
 const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
 
 export const ScientificCalculatorWidget: FC = () => {
+  const { t, ready } = useTranslation();
   const [display, setDisplay] = useState('0');
   const [expression, setExpression] = useState('');
   const [isRadians, setIsRadians] = useState(true);
@@ -201,24 +203,29 @@ export const ScientificCalculatorWidget: FC = () => {
 
   const gridClass = mode === 'Scientific' ? 'grid-cols-5' : 'grid-cols-4';
 
+  // Si las traducciones no están listas, mostrar un loader simple
+  if (!ready) {
+    return <div className="flex items-center justify-center h-full">{t('loading')}</div>;
+  }
+
   return (
     <div className="scientific-calculator">
       <div className="top-bar">
         <div className="mode-selector">
-          <button className={`mode-button ${mode === 'Basic' ? 'mode-active' : ''}`} onClick={() => setMode('Basic')}>Básica</button>
-          <button className={`mode-button ${mode === 'Standard' ? 'mode-active' : ''}`} onClick={() => setMode('Standard')}>Estándar</button>
-          <button className={`mode-button ${mode === 'Scientific' ? 'mode-active' : ''}`} onClick={() => setMode('Scientific')}>Científica</button>
+          <button className={`mode-button ${mode === 'Basic' ? 'mode-active' : ''}`} onClick={() => setMode('Basic')}>{t('widgets.scientific_calculator.basic')}</button>
+          <button className={`mode-button ${mode === 'Standard' ? 'mode-active' : ''}`} onClick={() => setMode('Standard')}>{t('widgets.scientific_calculator.standard')}</button>
+          <button className={`mode-button ${mode === 'Scientific' ? 'mode-active' : ''}`} onClick={() => setMode('Scientific')}>{t('widgets.scientific_calculator.scientific')}</button>
         </div>
 
         {mode === 'Scientific' && (<span className="angle-mode-indicator">{isRadians ? 'RAD' : 'DEG'}</span>)}
 
-        <button className={`mode-button history-toggle ${showHistory ? 'mode-active' : ''}`} onClick={() => setShowHistory(!showHistory)}>Historial</button>
+        <button className={`mode-button history-toggle ${showHistory ? 'mode-active' : ''}`} onClick={() => setShowHistory(!showHistory)}>{t('widgets.scientific_calculator.history')}</button>
       </div>
 
       {showHistory && (
         <div className="history-panel">
           {history.length === 0
-            ? <p className="history-empty">No hay historial.</p>
+            ? <p className="history-empty">{t('widgets.scientific_calculator.no_history')}</p>
             : history.map((item, index) => <p key={index} className="history-entry">{item}</p>)}
         </div>
       )}
@@ -274,8 +281,13 @@ export const ScientificCalculatorWidget: FC = () => {
 
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'scientific-calculator',
-  title: 'Calculadora',
-  icon: <img src="/icons/ScientificCalculator.png" alt="Calculadora" width="52" height="52" />,
+  title: 'widgets.scientific_calculator.title',
+  icon: (() => {
+    const WidgetIcon: React.FC = () => {
+      const { t } = useTranslation();
+      return <img src="/icons/ScientificCalculator.png" alt={t('widgets.scientific_calculator.title')} width={52} height={52} />;
+    };
+    return <WidgetIcon />;
+  })(),
   defaultSize: { width: 400, height: 600 },
 };
-

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import type { FC } from 'react'; // <-- Se ha separado la importación del tipo FC
+import { useTranslation } from 'react-i18next';
 import type { WidgetConfig } from '../../../types';
 import { Mic, MicOff } from 'lucide-react';
 import './SoundMeter.css';
@@ -8,24 +9,24 @@ import './SoundMeter.css';
 type NoiseLevel = 'silence' | 'conversation' | 'noise';
 
 interface LevelInfo {
-  label: string;
+  labelKey: string;
   emoji: string;
   className: string;
 }
 
 const LEVEL_CONFIG: Record<NoiseLevel, LevelInfo> = {
   silence: {
-    label: 'Silencio',
+    labelKey: 'widgets.sound_meter.silence',
     emoji: '🤫',
     className: 'level-silence',
   },
   conversation: {
-    label: 'Conversación',
+    labelKey: 'widgets.sound_meter.conversation',
     emoji: '🗣️',
     className: 'level-conversation',
   },
   noise: {
-    label: 'Ruido',
+    labelKey: 'widgets.sound_meter.noise',
     emoji: '💥',
     className: 'level-noise',
   },
@@ -33,6 +34,7 @@ const LEVEL_CONFIG: Record<NoiseLevel, LevelInfo> = {
 
 
 export const SoundMeterWidget: FC = () => {
+  const { t } = useTranslation();
   const [currentLevel, setCurrentLevel] = useState<NoiseLevel>('silence');
   const [permission, setPermission] = useState<'granted' | 'denied' | 'prompt'>('prompt');
   
@@ -50,7 +52,7 @@ export const SoundMeterWidget: FC = () => {
   const startMeter = async () => {
     try {
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        alert('Tu navegador no soporta la API de audio necesaria.');
+        alert(t('widgets.sound_meter.no_audio_support'));
         setPermission('denied');
         return;
       }
@@ -79,7 +81,7 @@ export const SoundMeterWidget: FC = () => {
       updateVolume();
 
     } catch (err) {
-      console.error("Error al acceder al micrófono:", err);
+      console.error(t('widgets.sound_meter.microphone_error'), err);
       setPermission('denied');
     }
   };
@@ -98,11 +100,11 @@ export const SoundMeterWidget: FC = () => {
 
   const renderContent = () => {
     if (permission === 'granted') {
-      const { label, emoji, className } = LEVEL_CONFIG[currentLevel];
+      const { labelKey, emoji, className } = LEVEL_CONFIG[currentLevel];
       return (
         <div className={`level-card ${className}`}>
           <span className="emoji">{emoji}</span>
-          <span className="label">{label}</span>
+          <span className="label">{t(labelKey)}</span>
         </div>
       );
     }
@@ -112,15 +114,15 @@ export const SoundMeterWidget: FC = () => {
         {permission === 'denied' ? (
           <>
             <MicOff size={48} className="text-red-500" />
-            <p>Acceso al micrófono denegado.</p>
-            <small>Debes permitir el acceso en la configuración de tu navegador.</small>
+            <p>{t('widgets.sound_meter.access_denied')}</p>
+            <small>{t('widgets.sound_meter.enable_browser_settings')}</small>
           </>
         ) : (
           <>
             <Mic size={48} />
-            <p>Se necesita permiso para usar el micrófono.</p>
+            <p>{t('widgets.sound_meter.permission_needed')}</p>
             <button onClick={startMeter} className="permission-button">
-              Activar Medidor
+              {t('widgets.sound_meter.activate_meter')}
             </button>
           </>
         )}
@@ -137,7 +139,13 @@ export const SoundMeterWidget: FC = () => {
 
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'sound-meter',
-  title: 'Medidor de Ruido',
-  icon: <img src="/icons/SoundMeter.png" alt="Medidor de ruido" width="52" height="52" />,
+  title: 'widgets.sound_meter.title',
+  icon: (() => {
+    const WidgetIcon: React.FC = () => {
+      const { t } = useTranslation();
+      return <img src="/icons/SoundMeter.png" alt={t('widgets.sound_meter.title')} width={52} height={52} />;
+    };
+    return <WidgetIcon />;
+  })(),
   defaultSize: { width: 300, height: 300 },
 };

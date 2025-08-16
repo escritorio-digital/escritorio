@@ -2,18 +2,18 @@ import { useState } from 'react';
 import type { FC } from 'react';
 import type { WidgetConfig } from '../../../types';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
+import { useTranslation } from 'react-i18next';
 import { Plus, Minus, UserPlus, RotateCcw, Trash2 } from 'lucide-react';
 import './Scoreboard.css';
 
-// Interfaz para cada jugador
 interface Player {
   id: number;
   name: string;
   score: number;
 }
 
-// El componente principal del Marcador
 export const ScoreboardWidget: FC = () => {
+  const { t } = useTranslation();
   const [players, setPlayers] = useLocalStorage<Player[]>('scoreboard-players', []);
   const [newPlayerName, setNewPlayerName] = useState('');
 
@@ -39,7 +39,7 @@ export const ScoreboardWidget: FC = () => {
   };
 
   const resetAllScores = () => {
-    if (window.confirm('¿Seguro que quieres reiniciar todos los marcadores a cero?')) {
+    if (window.confirm(t('widgets.scoreboard.reset_confirm'))) {
       setPlayers(players.map(p => ({ ...p, score: 0 })));
     }
   };
@@ -48,13 +48,12 @@ export const ScoreboardWidget: FC = () => {
     <div className="scoreboard-widget">
       <div className="player-list">
         {players.length === 0 ? (
-          <p className="empty-message">Añade un equipo o jugador para empezar.</p>
+          <p className="empty-message">{t('widgets.scoreboard.empty_message')}</p>
         ) : (
           players.map(player => (
             <div key={player.id} className="player-row">
               <span className="player-name">{player.name}</span>
               <div className="player-controls">
-                {/* --- LÍNEAS CORREGIDAS --- */}
                 <button onClick={() => updateScore(player.id, -1)} className="score-button minus">
                   <Minus size={16} />
                 </button>
@@ -76,14 +75,14 @@ export const ScoreboardWidget: FC = () => {
             type="text"
             value={newPlayerName}
             onChange={(e) => setNewPlayerName(e.target.value)}
-            placeholder="Nombre del equipo o jugador..."
+            placeholder={t('widgets.scoreboard.input_placeholder')}
             onKeyPress={(e) => e.key === 'Enter' && addPlayer()}
           />
           <button onClick={addPlayer}>
-            <UserPlus size={18} /> Añadir
+            <UserPlus size={18} /> {t('widgets.scoreboard.add_button')}
           </button>
         </div>
-        <button onClick={resetAllScores} className="reset-button" title="Reiniciar todo a cero">
+        <button onClick={resetAllScores} className="reset-button" title={t('widgets.scoreboard.reset_button_title')}>
           <RotateCcw size={18} />
         </button>
       </div>
@@ -91,10 +90,14 @@ export const ScoreboardWidget: FC = () => {
   );
 };
 
-// Objeto de configuración del widget
+const WidgetIcon: FC = () => {
+    const { t } = useTranslation();
+    return <img src="/icons/Scoreboard.png" alt={t('widgets.scoreboard.icon_alt')} width="52" height="52" />;
+}
+
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'scoreboard',
-  title: 'Marcador de Puntos',
-  icon: <img src="/icons/Scoreboard.png" alt="Marcador de puntos" width="52" height="52" />,
+  title: 'widgets.scoreboard.title',
+  icon: <WidgetIcon />,
   defaultSize: { width: 400, height: 450 },
 };
