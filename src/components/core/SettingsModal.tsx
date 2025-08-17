@@ -142,12 +142,15 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                     <label htmlFor="language-select" className="font-medium">{t('settings.general.language')}:</label>
                     <select 
                       id="language-select"
-                      value={i18n.language} 
+                      value={i18n.language.split('-')[0]} 
                       onChange={handleLanguageChange}
                       className="p-2 border rounded-lg bg-white/80 focus:ring-2 focus:ring-accent focus:outline-none"
                     >
-                      <option value="es">{t('settings.general.languages.es')}</option>
-                      <option value="en">{t('settings.general.languages.en')}</option>
+                      {Object.keys(t('settings.general.languages', { returnObjects: true })).map((lang) => (
+                        <option key={lang} value={lang}>
+                          {t(`settings.general.languages.${lang}`)}
+                        </option>
+                      ))}
                     </select>
                   </div>
 

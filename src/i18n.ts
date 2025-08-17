@@ -15,6 +15,7 @@ i18n
   .init({
     // Idioma por defecto si no se detecta ninguno
     fallbackLng: 'es',
+    supportedLngs: ['en', 'es', 'ca'],
     // Activa el modo debug en desarrollo
     debug: true,
     // Forzar recarga

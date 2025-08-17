@@ -1,0 +1,397 @@
+{
+  "loading": "Carregant...",
+  "settings": {
+    "title": "Configuració",
+    "close": "Tancar",
+    "tabs": {
+      "general": "General",
+      "profiles": "Perfils",
+      "widgets": "Ginys",
+      "theme": "Aparença"
+    },
+    "general": {
+      "language": "Idioma de l\'aplicació",
+      "languages": {
+        "en": "Anglès",
+        "es": "Espanyol",
+        "ca": "Català"
+      },
+      "reset_title": "Restablir l\'aplicació",
+      "reset_description": "Elimina totes les dades desades (perfils, ginys i preferències) i reinicia com si fos la primera vegada.",
+      "reset_button": "Restablir a valors de fàbrica",
+      "reset_confirm": "Estàs segur que vols eliminar totes les preferències i dades locals? Aquesta acció no es pot desfer."
+    },
+    "profiles": {
+      "invalid_name_alert": "Nom de perfil invàlid o ja existent.",
+      "delete_last_alert": "No pots eliminar l\'últim perfil.",
+      "delete_confirm": "Estàs segur que vols eliminar el perfil \"{{name}}\"?",
+      "save_current_title": "Desar la Configuració Actual com a Nou Perfil",
+      "new_profile_placeholder": "Nom del nou perfil...",
+      "save_button": "Desar",
+      "saved_profiles_title": "Perfils Desats",
+      "active_button": "Actiu",
+      "load_button": "Carregar",
+      "delete_button": "Eliminar",
+      "switcher_title": "Canviar d\'Escriptori"
+    },
+    "widgets": {
+      "search": "Cercar giny...",
+      "pinned_info": "Selecciona els ginys que vols a la teva barra d\'eines. ({{count}}/{{max}})",
+      "add": "Afegir",
+      "remove": "Treure",
+      "max_widgets_alert": "No es poden fixar més de {{max}} ginys."
+    },
+    "theme": {
+      "theme_colors_title": "Colors del Tema",
+      "colors": {
+        "desktop_bg": "Fons d\'Escriptori",
+        "widget_bg": "Fons de Giny",
+        "widget_header": "Capçalera de Giny",
+        "accent": "Accent",
+        "text_light": "Text Clar",
+        "text_dark": "Text Fosc"
+      },
+      "wallpaper_title": "Fons de Pantalla",
+      "upload_image_button": "Pujar Imatge",
+      "remove_wallpaper_button": "Treure Fons",
+      "reset_theme_button": "Restablir Tema per Defecte"
+    }
+  },
+  "toolbar": {
+    "settings": "Configuració",
+    "widgetLibrary": "Biblioteca de Ginys"
+  },
+  "credits": {
+    "title": "Crèdits i Llicència",
+    "original_project": "El projecte original <strong>Escriptori Interactiu per a l\'Aula</strong> i la seva idea pertanyen a <strong>María Teresa González</strong>.",
+    "original_link": "Pots visitar l\'aplicació original a:",
+    "new_version": "Aquesta nova versió va ser desenvolupada en col·laboració per <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> i <strong>Pablo G. Guízar</strong>. El repositori d\'aquest projecte es troba a:",
+    "repository_link_text": "Escriptori Digital",
+    "vibe_community": "Tant el projecte original com aquesta migració estan indexats al <strong>Repositori d\'aplicacions educatives</strong>, una col·lecció de recursos creats per la comunitat <strong>Vibe Coding Educativo</strong>.",
+    "vibe_apps_link_text": "Consulta més aplicacions d\'aquesta comunitat a:",
+    "vibe_apps_repo_text": "Repositori Vibe Coding Educativo",
+    "vibe_telegram_link_text": "Uneix-te a la comunitat a Telegram:",
+    "open_knowledge_adherence": "Aquest projecte s\'adhereix al",
+    "open_knowledge_decalogue": "Decàleg del Coneixement Obert"
+  },
+  "widgets": {
+    "attendance": {
+      "title": "Control d\'Assistència",
+      "badges": {
+        "excellent_work": "Feina Excel·lent",
+        "good_participation": "Bona Participació",
+        "goal_achieved": "Objectiu Aconseguit",
+        "helps_classmates": "Ajuda els Companys"
+      },
+      "alerts": {
+        "talks_in_class": "Parla a classe",
+        "doesnt_work": "No treballa",
+        "bad_behavior": "Mala conducta",
+        "incomplete_homework": "Incompleix la tasca"
+      },
+      "no_name": "Sense Nom",
+      "new_student_placeholder": "Nou estudiant...",
+      "import_csv_tooltip": "Importar CSV (reemplaça la llista del dia actual)",
+      "export_records_tooltip": "Exportar tots els registres",
+      "delete_all_tooltip": "Esborrar-ho tot",
+      "reset_confirm": "Estàs segur que vols esborrar TOTA la llista d\'estudiants i TOTS els registres?",
+      "present": "Present",
+      "absent": "Absent",
+      "late": "Tard",
+      "date": "Data:",
+      "attendance_tab": "Assistència",
+      "badges_tab": "Insígnies",
+      "alerts_tab": "Alertes",
+      "no_students_message": "No hi ha estudiants a la llista per a aquesta data.",
+      "add_students_instruction": "Afegeix estudiants o importa un fitxer CSV."
+    },
+    "scientific_calculator": { "title": "Calculadora Científica" },
+    "calendar": { "title": "Calendari" },
+    "image_carousel": {
+      "title": "Carrusel d\'Imatges",
+      "no_images": "No hi ha imatges carregades.",
+      "select_images": "Seleccionar Imatges",
+      "slide_alt": "Diapositiva {{number}}",
+      "select_new_images": "Seleccionar noves imatges",
+      "more_images_hint": "Carrega més imatges per navegar"
+    },
+    "unit_converter": {
+      "title": "Conversor d\'Unitats",
+      "icon_alt": "Conversor d\'Unitats",
+      "category_label": "Categoria:",
+      "swap_button_title": "Intercanviar unitats",
+      "categories": {
+        "length": "Longitud",
+        "weight": "Pes",
+        "temperature": "Temperatura"
+      },
+      "units": {
+        "meters": "Metres",
+        "kilometers": "Quilòmetres",
+        "miles": "Milles",
+        "feet": "Peus",
+        "kilograms": "Quilograms",
+        "grams": "Grams",
+        "pounds": "Lliures",
+        "ounces": "Unces",
+        "celsius": "Celsius",
+        "fahrenheit": "Fahrenheit",
+        "kelvin": "Kelvin"
+      }
+    },
+    "stopwatch": {
+      "title": "Cronòmetre",
+      "pause": "Pausa",
+      "start": "Inici",
+      "lap": "Volta",
+      "reset": "Reiniciar"
+    },
+    "dice": { "title": "Daus 3D" },
+    "group_generator": {
+      "title": "Generador de Grups",
+      "student_list_label": "Llista d\'Estudiants",
+      "placeholder": "Un nom per línia...",
+      "load_from_file": "Carregar des de .txt",
+      "number_of_groups": "Nombre de Grups",
+      "students_per_group": "Estudiants per Grup",
+      "generate_groups": "Generar Grups",
+      "generated_groups_label": "Grups Generats",
+      "group_title": "Grup {{number}}",
+      "no_groups_message": "Els grups apareixeran aquí."
+    },
+    "qr_code_generator": {
+      "title": "Generador QR",
+      "icon_alt": "Generador QR",
+      "placeholder": "Introdueix text per generar un codi QR.",
+      "input_placeholder": "Escriu el text o URL aquí...",
+      "generate_button": "Generar QR"
+    },
+    "work_gestures": {
+      "title": "Gestos de Treball",
+      "icon_alt": "Gestos de treball",
+      "back_button": "Tornar",
+      "gestures": {
+        "silence": {
+          "label": "Silenci",
+          "description": "Treball individual en silenci."
+        },
+        "pairs": {
+          "label": "Parelles",
+          "description": "Treball col·laboratiu en parelles."
+        },
+        "teams": {
+          "label": "Equips",
+          "description": "Treball en petits grups."
+        },
+        "plenary": {
+          "label": "Plenària",
+          "description": "Posa en comú amb tot el grup."
+        }
+      }
+    },
+    "html_sandbox": {
+      "title": "Sandbox HTML",
+      "paste_code_here": "Enganxa el teu codi aquí!",
+      "your_javascript": "El teu JavaScript",
+      "show_preview": "Mostrar Vista Prèvia",
+      "show_code": "Mostrar Codi",
+      "preview_title": "Vista prèvia HTML"
+    },
+    "latex_markdown": {
+      "title": "Intèrpret (MD/LaTeX)",
+      "copy_source": "Copiar codi font",
+      "copy_image": "Copiar com a imatge",
+      "save_file": "Desar fitxer (.md/.tex)",
+      "export_pdf": "Exportar com a PDF (text)",
+      "source_copied": "Codi font copiat",
+      "copy_failed": "No s\'ha pogut copiar",
+      "image_copied": "Imatge copiada",
+      "copy_image_failed": "Error en copiar la imatge",
+      "sample_content": "# Teorema de Pitàgores\n\nEn un triangle rectangle, el quadrat de la hipotenusa és igual a la suma dels quadrats dels catets.\n\n$$c = \sqrt{a^2 + b^2}$$",
+      "latex_mode_title": "Mode exclusiu de LaTeX",
+      "latex_mode_description": "Aquest mode mostra una única fórmula. El contingut actual sembla ser text o Markdown.",
+      "how_to_proceed": "Com procedir",
+      "isolated_formula": "Per a una fórmula aïllada, deixa només LaTeX. Exemple:",
+      "text_with_formulas": "Per a text amb fórmules, fes servir el mode",
+      "markdown": "Markdown",
+      "latex_syntax_error": "Error de sintaxi a LaTeX:",
+      "generic_error": "Ha ocorregut un error."
+    },
+    "work_list": {
+      "title": "Llista de Treball",
+      "add_task_placeholder": "Afegir nova tasca i prémer Enter...",
+      "load_csv": "Carregar CSV",
+      "download_csv": "Descarregar com a CSV",
+      "replace_list_confirm": "Vols reemplaçar la llista actual amb les tasques del fitxer? \n(Fes clic a \"Cancel·lar\" per afegir-les al final)",
+      "csv_error": "Hi ha hagut un error en llegir el fitxer CSV. Si us plau, revisa el seu format.",
+      "double_click_edit": "Doble clic en una tasca per editar-la."
+    },
+    "scoreboard": {
+      "title": "Marcador de Punts",
+      "icon_alt": "Marcador de punts",
+      "reset_confirm": "Estàs segur que vols reiniciar tots els marcadors a zero?",
+      "empty_message": "Afegeix un equip o jugador per començar.",
+      "input_placeholder": "Nom de l\'equip o jugador...",
+      "add_button": "Afegir",
+      "reset_button_title": "Reiniciar-ho tot a zero"
+    },
+    "sound_meter": {
+      "title": "Mesurador de Soroll",
+      "silence": "Silenci",
+      "conversation": "Conversa",
+      "noise": "Soroll",
+      "no_audio_support": "El teu navegador no suporta l\'API d\'àudio necessària.",
+      "microphone_error": "Error en accedir al micròfon:",
+      "access_denied": "Accés al micròfon denegat.",
+      "enable_browser_settings": "Has de permetre l\'accés a la configuració del teu navegador.",
+      "permission_needed": "Es necessita permís per utilitzar el micròfon.",
+      "activate_meter": "Activar Mesurador"
+    },
+    "memory_game": {
+      "title": "Memorama",
+      "min_images_alert": "Si us plau, selecciona almenys 2 imatges per jugar.",
+      "upload_prompt": "Puja imatges per crear el memorama",
+      "upload_rule": "Selecciona de 2 a 10 imatges",
+      "moves": "Moviments: {{count}}",
+      "start_over": "Començar de Nou",
+      "win_title": "Has Guanyat!",
+      "win_message": "Ho has completat en {{moves}} moviments.",
+      "play_again": "Jugar de Nou",
+      "icon_alt": "Memorama"
+    },
+    "metronome": { "title": "Metrònom" },
+    "notepad": {
+      "title": "Bloc de Notes",
+      "icon_alt": "Bloc de notes",
+      "initial_content": "<p>Hola! Escriu aquí.</p>",
+      "default_filename": "la-meva-nota.md",
+      "menubar": {
+        "bold": "Negreta",
+        "italic": "Cursiva",
+        "strike": "Ratllat",
+        "bullet_list": "Llista de vinyetes",
+        "ordered_list": "Llista numerada",
+        "paragraph": "Paràgraf",
+        "h1": "Títol (H1)",
+        "h2": "Subtítol (H2)",
+        "h3": "Subtítol Menor (H3)",
+        "upload": "Carregar nota (.md)",
+        "download": "Descarregar nota (.md)"
+      }
+    },
+    "sliding_puzzle": {
+      "title": "Puzzle Lliscant",
+      "icon_alt": "Puzzle Lliscant",
+      "upload_prompt": "Puja una imatge per començar",
+      "solved_overlay": "Resolt!",
+      "complexity_label": "Complexitat:",
+      "difficulty": {
+        "easy": "Fàcil (3x3)",
+        "normal": "Normal (4x4)",
+        "hard": "Difícil (5x5)"
+      },
+      "shuffle_button": "Barrejar"
+    },
+    "global_clocks": {
+      "title": "Rellotges Mundials",
+      "your_local_time": "La Teva Hora Local",
+      "add_clock": "Afegir Rellotge",
+      "cities": {
+        "los_angeles": "Los Angeles",
+        "new_york": "Nova York",
+        "london": "Londres",
+        "paris": "París",
+        "madrid": "Madrid",
+        "tokyo": "Tòquio",
+        "sydney": "Sydney",
+        "mexico_city": "Ciutat de Mèxic",
+        "buenos_aires": "Buenos Aires",
+        "moscow": "Moscou",
+        "dubai": "Dubai",
+        "shanghai": "Xangai"
+      }
+    },
+    "random_spinner": {
+      "title": "Ruleta Aleatòria",
+      "icon_alt": "Ruleta Aleatòria",
+      "default_options": [
+        { "text": "Opció 1" },
+        { "text": "Opció 2" },
+        { "text": "Opció 3" }
+      ],
+      "result_overlay_text": "Fes clic per tornar a girar",
+      "fullscreen_button_title": "Ampliar ruleta",
+      "restore_view_button_title": "Restaurar vista",
+      "options_header": "Opcions",
+      "add_option_placeholder": "Afegir opció..."
+    },
+    "traffic_light": {
+      "title": "Semàfor",
+      "icon_alt": "Semàfor",
+      "tooltip": "Fes clic per canviar de color"
+    },
+    "timer": {
+      "title": "Temporitzador",
+      "finished": "FI!"
+    },
+    "tic_tac_toe": {
+      "title": "Tres en Ratlla",
+      "player_1": "Jugador 1",
+      "player_2": "Jugador 2",
+      "reset_confirm": "Estàs segur que vols reiniciar el joc i els marcadors?",
+      "winner": "Guanyador:",
+      "draw": "És un empat!",
+      "next_turn": "Següent torn:",
+      "next_round": "Següent Ronda",
+      "reset_all": "Reiniciar-ho tot"
+    },
+    "iframe": {
+      "title": "Visor Web",
+      "url_placeholder": "Enganxa una URL aquí...",
+      "load": "Carregar",
+      "embedded_content": "Contingut Incrustat",
+      "content_placeholder": "El contingut de la URL es mostrarà aquí.",
+      "embed_notice": "Alguns llocs poden no permetre ser incrustats."
+    },
+    "directo_viewer": {
+      "title": "Connexió en Directe",
+      "go_to_repo": "Anar al repositori de Connexió en Directe"
+    },
+    "drawing_pad": {
+      "title": "Paleta de Dibuix",
+      "clear_confirm": "Estàs segur que vols netejar tot el dibuix? Això esborrarà la imatge i els traços.",
+      "default_filename": "el_meu_dibuix.png",
+      "brush": "Pinzell",
+      "eraser": "Goma d\'Esborrar",
+      "pencil": "Llapis",
+      "marker": "Retolador",
+      "spray": "Esprai",
+      "line": "Línia Recta",
+      "rectangle": "Rectangle",
+      "circle": "Cercle/El·lipse",
+      "arrow": "Fletxa",
+      "text": "Text",
+      "select_color": "Seleccionar color",
+      "brush_size": "Mida del pinzell",
+      "upload_image": "Pujar Imatge",
+      "save_drawing": "Desar Dibuix",
+      "clear_all": "Netejar-ho tot",
+      "start_drawing": "Puja una imatge o comença a dibuixar",
+      "pan_mode": "Activar mode navegació",
+      "exit_pan": "Sortir del mode navegació",
+      "center_view": "Centrar vista"
+    },
+    "calendar": {
+      "title": "Calendari",
+      "days": ["Dl", "Dt", "Dc", "Dj", "Dv", "Ds", "Dg"],
+      "months": ["gener", "febrer", "març", "abril", "maig", "juny", "juliol", "agost", "setembre", "octubre", "novembre", "desembre"]
+    },
+    "dice": {
+      "title": "Daus 3D",
+      "num_dice": "Nombre de Daus:",
+      "rolling": "Llançant...",
+      "roll_dice": "Llançar Daus",
+      "total": "Total:"
+    }
+  }
+}
