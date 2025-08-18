@@ -147,11 +147,15 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                       onChange={handleLanguageChange}
                       className="p-2 border rounded-lg bg-white/80 focus:ring-2 focus:ring-accent focus:outline-none"
                     >
-                      <option value="en">English</option>
+                      {/* Orden lógico: ES + cooficiales, luego románicas vecinas, y EN al final */}
                       <option value="es">Español</option>
                       <option value="ca">Català</option>
-                      <option value="gl">Galego</option>
                       <option value="eu">Euskara</option>
+                      <option value="gl">Galego</option>
+                      <option value="pt">Português</option>
+                      <option value="fr">Français</option>
+                      <option value="it">Italiano</option>
+                      <option value="en">English</option>
                     </select>
                   </div>
 
