@@ -10,20 +10,22 @@
       "theme": "Aparença"
     },
     "general": {
-      "language": "Idioma de l\'aplicació",
+      "language": "Idioma de l'aplicació",
       "languages": {
         "en": "Anglès",
         "es": "Espanyol",
-        "ca": "Català"
+        "ca": "Català",
+        "gl": "Gallec",
+        "eu": "Basc"
       },
-      "reset_title": "Restablir l\'aplicació",
+      "reset_title": "Restablir l'aplicació",
       "reset_description": "Elimina totes les dades desades (perfils, ginys i preferències) i reinicia com si fos la primera vegada.",
       "reset_button": "Restablir a valors de fàbrica",
       "reset_confirm": "Estàs segur que vols eliminar totes les preferències i dades locals? Aquesta acció no es pot desfer."
     },
     "profiles": {
       "invalid_name_alert": "Nom de perfil invàlid o ja existent.",
-      "delete_last_alert": "No pots eliminar l\'últim perfil.",
+      "delete_last_alert": "No pots eliminar l'últim perfil.",
       "delete_confirm": "Estàs segur que vols eliminar el perfil \"{{name}}\"?",
       "save_current_title": "Desar la Configuració Actual com a Nou Perfil",
       "new_profile_placeholder": "Nom del nou perfil...",
@@ -32,11 +34,11 @@
       "active_button": "Actiu",
       "load_button": "Carregar",
       "delete_button": "Eliminar",
-      "switcher_title": "Canviar d\'Escriptori"
+      "switcher_title": "Canviar d'Escriptori"
     },
     "widgets": {
       "search": "Cercar giny...",
-      "pinned_info": "Selecciona els ginys que vols a la teva barra d\'eines. ({{count}}/{{max}})",
+      "pinned_info": "Selecciona els ginys que vols a la teva barra d'eines. ({{count}}/{{max}})",
       "add": "Afegir",
       "remove": "Treure",
       "max_widgets_alert": "No es poden fixar més de {{max}} ginys."
@@ -44,7 +46,7 @@
     "theme": {
       "theme_colors_title": "Colors del Tema",
       "colors": {
-        "desktop_bg": "Fons d\'Escriptori",
+        "desktop_bg": "Fons d'Escriptori",
         "widget_bg": "Fons de Giny",
         "widget_header": "Capçalera de Giny",
         "accent": "Accent",
@@ -63,20 +65,20 @@
   },
   "credits": {
     "title": "Crèdits i Llicència",
-    "original_project": "El projecte original <strong>Escriptori Interactiu per a l\'Aula</strong> i la seva idea pertanyen a <strong>María Teresa González</strong>.",
-    "original_link": "Pots visitar l\'aplicació original a:",
-    "new_version": "Aquesta nova versió va ser desenvolupada en col·laboració per <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> i <strong>Pablo G. Guízar</strong>. El repositori d\'aquest projecte es troba a:",
+    "original_project": "El projecte original <strong>Escriptori Interactiu per a l'Aula</strong> i la seva idea pertanyen a <strong>María Teresa González</strong>.",
+    "original_link": "Pots visitar l'aplicació original a:",
+    "new_version": "Aquesta nova versió va ser desenvolupada en col·laboració per <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> i <strong>Pablo G. Guízar</strong>. El repositori d'aquest projecte es troba a:",
     "repository_link_text": "Escriptori Digital",
-    "vibe_community": "Tant el projecte original com aquesta migració estan indexats al <strong>Repositori d\'aplicacions educatives</strong>, una col·lecció de recursos creats per la comunitat <strong>Vibe Coding Educativo</strong>.",
-    "vibe_apps_link_text": "Consulta més aplicacions d\'aquesta comunitat a:",
+    "vibe_community": "Tant el projecte original com aquesta migració estan indexats al <strong>Repositori d'aplicacions educatives</strong>, una col·lecció de recursos creats per la comunitat <strong>Vibe Coding Educativo</strong>.",
+    "vibe_apps_link_text": "Consulta més aplicacions d'aquesta comunitat a:",
     "vibe_apps_repo_text": "Repositori Vibe Coding Educativo",
     "vibe_telegram_link_text": "Uneix-te a la comunitat a Telegram:",
-    "open_knowledge_adherence": "Aquest projecte s\'adhereix al",
+    "open_knowledge_adherence": "Aquest projecte s'adhereix al",
     "open_knowledge_decalogue": "Decàleg del Coneixement Obert"
   },
   "widgets": {
     "attendance": {
-      "title": "Control d\'Assistència",
+      "title": "Control d'Assistència",
       "badges": {
         "excellent_work": "Feina Excel·lent",
         "good_participation": "Bona Participació",
@@ -94,7 +96,7 @@
       "import_csv_tooltip": "Importar CSV (reemplaça la llista del dia actual)",
       "export_records_tooltip": "Exportar tots els registres",
       "delete_all_tooltip": "Esborrar-ho tot",
-      "reset_confirm": "Estàs segur que vols esborrar TOTA la llista d\'estudiants i TOTS els registres?",
+      "reset_confirm": "Estàs segur que vols esborrar TOTA la llista d'estudiants i TOTS els registres?",
       "present": "Present",
       "absent": "Absent",
       "late": "Tard",
@@ -108,7 +110,7 @@
     "scientific_calculator": { "title": "Calculadora Científica" },
     "calendar": { "title": "Calendari" },
     "image_carousel": {
-      "title": "Carrusel d\'Imatges",
+      "title": "Carrusel d'Imatges",
       "no_images": "No hi ha imatges carregades.",
       "select_images": "Seleccionar Imatges",
       "slide_alt": "Diapositiva {{number}}",
@@ -116,8 +118,8 @@
       "more_images_hint": "Carrega més imatges per navegar"
     },
     "unit_converter": {
-      "title": "Conversor d\'Unitats",
-      "icon_alt": "Conversor d\'Unitats",
+      "title": "Conversor d'Unitats",
+      "icon_alt": "Conversor d'Unitats",
       "category_label": "Categoria:",
       "swap_button_title": "Intercanviar unitats",
       "categories": {
@@ -149,7 +151,7 @@
     "dice": { "title": "Daus 3D" },
     "group_generator": {
       "title": "Generador de Grups",
-      "student_list_label": "Llista d\'Estudiants",
+      "student_list_label": "Llista d'Estudiants",
       "placeholder": "Un nom per línia...",
       "load_from_file": "Carregar des de .txt",
       "number_of_groups": "Nombre de Grups",
@@ -204,10 +206,10 @@
       "save_file": "Desar fitxer (.md/.tex)",
       "export_pdf": "Exportar com a PDF (text)",
       "source_copied": "Codi font copiat",
-      "copy_failed": "No s\'ha pogut copiar",
+      "copy_failed": "No s'ha pogut copiar",
       "image_copied": "Imatge copiada",
       "copy_image_failed": "Error en copiar la imatge",
-      "sample_content": "# Teorema de Pitàgores\n\nEn un triangle rectangle, el quadrat de la hipotenusa és igual a la suma dels quadrats dels catets.\n\n$$c = \sqrt{a^2 + b^2}$$",
+      "sample_content": "# Teorema de Pitàgores\n\nEn un triangle rectangle, el quadrat de la hipotenusa és igual a la suma dels quadrats dels catets.\n\n$$c = \\\\sqrt{a^2 + b^2}$$",
       "latex_mode_title": "Mode exclusiu de LaTeX",
       "latex_mode_description": "Aquest mode mostra una única fórmula. El contingut actual sembla ser text o Markdown.",
       "how_to_proceed": "Com procedir",
@@ -231,7 +233,7 @@
       "icon_alt": "Marcador de punts",
       "reset_confirm": "Estàs segur que vols reiniciar tots els marcadors a zero?",
       "empty_message": "Afegeix un equip o jugador per començar.",
-      "input_placeholder": "Nom de l\'equip o jugador...",
+      "input_placeholder": "Nom de l'equip o jugador...",
       "add_button": "Afegir",
       "reset_button_title": "Reiniciar-ho tot a zero"
     },
@@ -240,10 +242,10 @@
       "silence": "Silenci",
       "conversation": "Conversa",
       "noise": "Soroll",
-      "no_audio_support": "El teu navegador no suporta l\'API d\'àudio necessària.",
+      "no_audio_support": "El teu navegador no suporta l'API d'àudio necessària.",
       "microphone_error": "Error en accedir al micròfon:",
       "access_denied": "Accés al micròfon denegat.",
-      "enable_browser_settings": "Has de permetre l\'accés a la configuració del teu navegador.",
+      "enable_browser_settings": "Has de permetre l'accés a la configuració del teu navegador.",
       "permission_needed": "Es necessita permís per utilitzar el micròfon.",
       "activate_meter": "Activar Mesurador"
     },
@@ -362,7 +364,7 @@
       "clear_confirm": "Estàs segur que vols netejar tot el dibuix? Això esborrarà la imatge i els traços.",
       "default_filename": "el_meu_dibuix.png",
       "brush": "Pinzell",
-      "eraser": "Goma d\'Esborrar",
+      "eraser": "Goma d'Esborrar",
       "pencil": "Llapis",
       "marker": "Retolador",
       "spray": "Esprai",

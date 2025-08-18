@@ -14,7 +14,9 @@
       "languages": {
         "en": "English",
         "es": "Spanish",
-        "ca": "Catalan"
+        "ca": "Catalan",
+        "gl": "Galician",
+        "eu": "Basque"
       },
       "reset_title": "Reset Application",
       "reset_description": "Removes all saved data (profiles, widgets, and preferences) and restarts as first run.",
