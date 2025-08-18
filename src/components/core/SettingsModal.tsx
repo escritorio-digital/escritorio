@@ -151,6 +151,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                       <option value="es">Español</option>
                       <option value="ca">Català</option>
                       <option value="gl">Galego</option>
+                      <option value="eu">Euskara</option>
                     </select>
                   </div>
 

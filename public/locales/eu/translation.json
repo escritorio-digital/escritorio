@@ -33,7 +33,7 @@
       "active_button": "Aktibo",
       "load_button": "Kargatu",
       "delete_button": "Ezabatu",
-      "switcher_title": "Idazmahai-z aldatu"
+      "switcher_title": "Idazmahaiz aldatu"
     },
     "widgets": {
       "search": "Bilatu widget-a...",
@@ -208,7 +208,7 @@
       "copy_failed": "Ezin izan da kopiatu",
       "image_copied": "Irudia kopiatuta",
       "copy_image_failed": "Errorea irudia kopiatzean",
-      "sample_content": "# Pitagorasen Teorema\n\nTriangelu zuzen batean, hipotenusaren karratua katetoen karratuen baturaren berdina da.\n\n$$c = \sqrt{a^2 + b^2} $$",
+      "sample_content": "# Pitagorasen Teorema\n\nTriangelu zuzen batean, hipotenusaren karratua katetoen karratuen baturaren berdina da.\n\n$$c = \sqrt{a^2 + b^2}$$",
       "latex_mode_title": "LaTeX modu esklusiboa",
       "latex_mode_description": "Modu honek formula bakarra erakusten du. Uneko edukiak testua edo Markdown dirudi.",
       "how_to_proceed": "Nola jarraitu",
