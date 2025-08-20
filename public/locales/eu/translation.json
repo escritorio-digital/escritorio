@@ -1,0 +1,408 @@
+{
+  "loading": "Kargatzen...",
+  "settings": {
+    "title": "Ezarpenak",
+    "close": "Itxi",
+    "tabs": {
+      "general": "Orokorra",
+      "profiles": "Profilak",
+      "widgets": "Widget-ak",
+      "theme": "Itxura"
+    },
+    "general": {
+      "language": "Aplikazioaren hizkuntza",
+      "languages": {
+        "en": "Ingelesa",
+        "es": "Gaztelania",
+        "ca": "Katalana",
+        "eu": "Euskara"
+      },
+      "reset_title": "Aplikazioa berrezarri",
+      "reset_description": "Gordetako datu guztiak ezabatzen ditu (profilak, widget-ak eta lehentasunak) eta lehen aldia balitz bezala berrabiarazten du.",
+      "reset_button": "Fabrikako balioetara berrezarri",
+      "reset_confirm": "Ziur zaude lehentasun eta datu lokal guztiak ezabatu nahi dituzula? Ekintza hau ezin da desegin."
+    },
+    "profiles": {
+      "invalid_name_alert": "Profilaren izen baliogabea edo lehendik dagoena.",
+      "delete_last_alert": "Ezin duzu azken profila ezabatu.",
+      "delete_confirm": "Ziur zaude \"{{name}}\" profila ezabatu nahi duzula?",
+      "save_current_title": "Gorde uneko konfigurazioa profil berri gisa",
+      "new_profile_placeholder": "Profil berriaren izena...",
+      "save_button": "Gorde",
+      "saved_profiles_title": "Gordetako profilak",
+      "active_button": "Aktibo",
+      "load_button": "Kargatu",
+      "delete_button": "Ezabatu",
+      "switcher_title": "Idazmahaiz aldatu"
+    },
+    "widgets": {
+      "search": "Bilatu widget-a...",
+      "pinned_info": "Hautatu zure tresna-barran nahi dituzun widget-ak. ({{count}}/{{max}})",
+      "add": "Gehitu",
+      "remove": "Kendu",
+      "max_widgets_alert": "Ezin dira {{max}} widget baino gehiago finkatu."
+    },
+    "theme": {
+      "theme_colors_title": "Gaiaren koloreak",
+      "colors": {
+        "desktop_bg": "Idazmahai-atzealdea",
+        "widget_bg": "Widget-atzealdea",
+        "widget_header": "Widget-goiburua",
+        "accent": "Azentua",
+        "text_light": "Testu argia",
+        "text_dark": "Testu iluna"
+      },
+      "wallpaper_title": "Horma-papera",
+      "upload_image_button": "Irudia igo",
+      "remove_wallpaper_button": "Kendu atzealdea",
+      "reset_theme_button": "Berrezarri gai lehenetsia"
+    }
+  },
+  "toolbar": {
+    "settings": "Ezarpenak",
+    "widgetLibrary": "Widget Liburutegia"
+  },
+  "credits": {
+    "title": "Kredituak eta Lizentzia",
+    "original_project": "<strong>Ikasgelarako Idazmahai Interaktiboa</strong> jatorrizko proiektua eta bere ideia <strong>María Teresa González</strong>enak dira.",
+    "original_link": "Jatorrizko aplikazioa hemen bisita dezakezu:",
+    "new_version": "Bertsio berri hau <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> eta <strong>Pablo G. Guízar</strong>-en artean garatu zen. Proiektu honen biltegia hemen dago:",
+    "repository_link_text": "Idazmahai Digitala",
+    "vibe_community": "Bai jatorrizko proiektua, bai migrazio hau <strong>Hezkuntza-aplikazioen Biltegian</strong> indexatuta daude, <strong>Vibe Coding Educativo</strong> komunitateak sortutako baliabide bilduma batean.",
+    "vibe_apps_link_text": "Kontsultatu komunitate honetako aplikazio gehiago hemen:",
+    "vibe_apps_repo_text": "Vibe Coding Educativo Biltegia",
+    "vibe_telegram_link_text": "Batu komunitatera Telegramen:",
+    "open_knowledge_adherence": "Proiektu honek bat egiten du",
+    "open_knowledge_decalogue": "Ezagutza Irekiaren Dekalogoarekin"
+  },
+  "widgets": {
+    "attendance": {
+      "title": "Asistentzia Kontrola",
+      "badges": {
+        "excellent_work": "Lan Bikaina",
+        "good_participation": "Partaidetza Ona",
+        "goal_achieved": "Helburua Lortuta",
+        "helps_classmates": "Ikaskideei Laguntzen Die"
+      },
+      "alerts": {
+        "talks_in_class": "Klasen hitz egiten du",
+        "doesnt_work": "Ez du lanik egiten",
+        "bad_behavior": "Portaera txarra",
+        "incomplete_homework": "Etxeko lanak ez ditu betetzen"
+      },
+      "no_name": "Izenik gabe",
+      "new_student_placeholder": "Ikasle berria...",
+      "import_csv_tooltip": "Inportatu CSV (uneko eguneko zerrenda ordezkatzen du)",
+      "export_records_tooltip": "Esportatu erregistro guztiak",
+      "delete_all_tooltip": "Ezabatu dena",
+      "reset_confirm": "Ziur zaude ikasleen zerrenda OSOA eta erregistro GUZTIAK ezabatu nahi dituzula?",
+      "present": "Bertan",
+      "absent": "Ez dago",
+      "late": "Berandu",
+      "date": "Data:",
+      "attendance_tab": "Asistentzia",
+      "badges_tab": "Intsigniak",
+      "alerts_tab": "Alertak",
+      "no_students_message": "Ez dago ikaslerik zerrendan data honetarako.",
+      "add_students_instruction": "Gehitu ikasleak edo inportatu CSV fitxategi bat."
+    },
+    "scientific_calculator": { "title": "Kalkulagailu Zientifikoa" },
+    "calendar": { "title": "Egutegia" },
+    "image_carousel": {
+      "title": "Irudi-karrusela",
+      "no_images": "Ez dago irudirik kargatuta.",
+      "select_images": "Hautatu Irudiak",
+      "slide_alt": "{{number}} diapositiba",
+      "select_new_images": "Hautatu irudi berriak",
+      "more_images_hint": "Kargatu irudi gehiago nabigatzeko"
+    },
+    "unit_converter": {
+      "title": "Unitate Bihurgailua",
+      "icon_alt": "Unitate Bihurgailua",
+      "category_label": "Kategoria:",
+      "swap_button_title": "Trukatu unitateak",
+      "categories": {
+        "length": "Luzera",
+        "weight": "Pisua",
+        "temperature": "Tenperatura"
+      },
+      "units": {
+        "meters": "Metroak",
+        "kilometers": "Kilometroak",
+        "miles": "Miliak",
+        "feet": "Oinak",
+        "kilograms": "Kilogramoak",
+        "grams": "Gramoak",
+        "pounds": "Librak",
+        "ounces": "Ontzak",
+        "celsius": "Celsius",
+        "fahrenheit": "Fahrenheit",
+        "kelvin": "Kelvin"
+      }
+    },
+    "stopwatch": {
+      "title": "Kronometroa",
+      "pause": "Pausatu",
+      "start": "Hasi",
+      "lap": "Itzulia",
+      "reset": "Berrezarri"
+    },
+    "dice": { "title": "3D Dadoak" },
+    "group_generator": {
+      "title": "Talde Sortzailea",
+      "student_list_label": "Ikasleen Zerrenda",
+      "placeholder": "Izen bat lerroko...",
+      "load_from_file": "Kargatu .txt-tik",
+      "number_of_groups": "Talde Kopurua",
+      "students_per_group": "Ikasle Taldeko",
+      "generate_groups": "Sortu Taldeak",
+      "generated_groups_label": "Sortutako Taldeak",
+      "group_title": "{{number}} Taldea",
+      "no_groups_message": "Taldeak hemen agertuko dira."
+    },
+    "qr_code_generator": {
+      "title": "QR Sortzailea",
+      "icon_alt": "QR Sortzailea",
+      "placeholder": "Sartu testua QR kode bat sortzeko.",
+      "input_placeholder": "Idatzi testua edo URLa hemen...",
+      "generate_button": "Sortu QR"
+    },
+    "work_gestures": {
+      "title": "Lan Keinuak",
+      "icon_alt": "Lan keinuak",
+      "back_button": "Itzuli",
+      "gestures": {
+        "silence": {
+          "label": "Isiltasuna",
+          "description": "Banakako lana isiltasunean."
+        },
+        "pairs": {
+          "label": "Binaka",
+          "description": "Lankidetza-lana binaka."
+        },
+        "teams": {
+          "label": "Taldeka",
+          "description": "Talde txikietan lan egin."
+        },
+        "plenary": {
+          "label": "Osoko Bilkura",
+          "description": "Talde osoarekin bateratzea."
+        }
+      }
+    },
+    "html_sandbox": {
+      "title": "HTML Sandbox",
+      "paste_code_here": "Itsatsi zure kodea hemen!",
+      "your_javascript": "Zure JavaScript",
+      "show_preview": "Erakutsi Aurrebista",
+      "show_code": "Erakutsi Kodea",
+      "preview_title": "HTML aurrebista"
+    },
+    "latex_markdown": {
+      "title": "Interpretatzailea (MD/LaTeX)",
+      "copy_source": "Kopiatu iturburu-kodea",
+      "copy_image": "Kopiatu irudi gisa",
+      "save_file": "Gorde fitxategia (.md/.tex)",
+      "export_pdf": "Esportatu PDF gisa (testua)",
+      "source_copied": "Iturburu-kodea kopiatuta",
+      "copy_failed": "Ezin izan da kopiatu",
+      "image_copied": "Irudia kopiatuta",
+      "copy_image_failed": "Errorea irudia kopiatzean",
+      "sample_content": "# Pitagorasen Teorema\n\nTriangelu zuzen batean, hipotenusaren karratua katetoen karratuen baturaren berdina da.\n\n$$c = \\sqrt{a^2 + b^2}$$",
+      "latex_mode_title": "LaTeX modu esklusiboa",
+      "latex_mode_description": "Modu honek formula bakarra erakusten du. Uneko edukiak testua edo Markdown dirudi.",
+      "how_to_proceed": "Nola jarraitu",
+      "isolated_formula": "Formula isolatu baterako, utzi LaTeX bakarrik. Adibidez:",
+      "text_with_formulas": "Formulak dituen testurako, erabili modua",
+      "markdown": "Markdown",
+      "latex_syntax_error": "Sintaxi-errorea LaTeX-en:",
+      "generic_error": "Errore bat gertatu da."
+    },
+    "work_list": {
+      "title": "Lan Zerrenda",
+      "add_task_placeholder": "Gehitu zeregin berria eta sakatu Sartu...",
+      "load_csv": "Kargatu CSV",
+      "download_csv": "Deskargatu CSV gisa",
+      "replace_list_confirm": "Zerrenda unekoa fitxategiko zereginekin ordezkatu nahi duzu? \n(Egin klik \"Utzi\" botoian amaieran gehitzeko)",
+      "csv_error": "Errore bat gertatu da CSV fitxategia irakurtzean. Mesedez, egiaztatu formatua.",
+      "double_click_edit": "Egin klik bikoitza zeregin batean editatzeko."
+    },
+    "scoreboard": {
+      "title": "Puntuazio Markagailua",
+      "icon_alt": "Puntuazio markagailua",
+      "reset_confirm": "Ziur zaude markagailu guztiak zerora berrezarri nahi dituzula?",
+      "empty_message": "Gehitu talde edo jokalari bat hasteko.",
+      "input_placeholder": "Taldearen edo jokalariaren izena...",
+      "add_button": "Gehitu",
+      "reset_button_title": "Berrezarri dena zerora"
+    },
+    "sound_meter": {
+      "title": "Zarata Neurgailua",
+      "silence": "Isiltasuna",
+      "conversation": "Elkarrizketa",
+      "noise": "Zarata",
+      "no_audio_support": "Zure nabigatzaileak ez du beharrezko audio APIa onartzen.",
+      "microphone_error": "Errorea mikrofonoa atzitzean:",
+      "access_denied": "Mikrofonoaren sarbidea ukatuta.",
+      "enable_browser_settings": "Sarbidea baimendu behar duzu zure nabigatzailearen ezarpenetan.",
+      "permission_needed": "Baimena behar da mikrofonoa erabiltzeko.",
+      "activate_meter": "Aktibatu Neurgailua"
+    },
+    "memory_game": {
+      "title": "Memorama",
+      "min_images_alert": "Mesedez, hautatu gutxienez 2 irudi jolasteko.",
+      "upload_prompt": "Igo irudiak memorama sortzeko",
+      "upload_rule": "Hautatu 2 eta 10 irudi artean",
+      "moves": "Mugimenduak: {{count}}",
+      "start_over": "Hasi Berriro",
+      "win_title": "Irabazi duzu!",
+      "win_message": "{{moves}} mugimendutan osatu duzu.",
+      "play_again": "Jolastu Berriro",
+      "icon_alt": "Memorama"
+    },
+    "metronome": { "title": "Metronomoa" },
+    "notepad": {
+      "title": "Ohar Bloka",
+      "icon_alt": "Ohar bloka",
+      "initial_content": "<p>Kaixo! Idatzi hemen.</p>",
+      "default_filename": "nire-oharra.md",
+      "menubar": {
+        "bold": "Lodia",
+        "italic": "Etzana",
+        "strike": "Marratua",
+        "bullet_list": "Bulet zerrenda",
+        "ordered_list": "Zenbakitutako zerrenda",
+        "paragraph": "Paragrafoa",
+        "h1": "Izenburua (H1)",
+        "h2": "Azpititulua (H2)",
+        "h3": "Azpititulu Txikia (H3)",
+        "upload": "Kargatu oharra (.md)",
+        "download": "Deskargatu oharra (.md)"
+      }
+    },
+    "sliding_puzzle": {
+      "title": "Puzzle Lerragarria",
+      "icon_alt": "Puzzle Lerragarria",
+      "upload_prompt": "Igo irudi bat hasteko",
+      "solved_overlay": "Ebatzi da!",
+      "complexity_label": "Konplexutasuna:",
+      "difficulty": {
+        "easy": "Erraza (3x3)",
+        "normal": "Normala (4x4)",
+        "hard": "Zaila (5x5)"
+      },
+      "shuffle_button": "Nahastu"
+    },
+    "global_clocks": {
+      "title": "Munduko Erlojuak",
+      "your_local_time": "Zure Ordu Lokala",
+      "add_clock": "Gehitu Erlojua",
+      "cities": {
+        "los_angeles": "Los Angeles",
+        "new_york": "New York",
+        "london": "Londres",
+        "paris": "Paris",
+        "madrid": "Madril",
+        "tokyo": "Tokio",
+        "sydney": "Sydney",
+        "mexico_city": "Mexiko Hiria",
+        "buenos_aires": "Buenos Aires",
+        "moscow": "Mosku",
+        "dubai": "Dubai",
+        "shanghai": "Shanghai"
+      }
+    },
+    "random_spinner": {
+      "title": "Ausazko Erruleta",
+      "icon_alt": "Ausazko Erruleta",
+      "default_options": [
+        { "text": "1. Aukera" },
+        { "text": "2. Aukera" },
+        { "text": "3. Aukera" }
+      ],
+      "result_overlay_text": "Egin klik berriro biratzeko",
+      "fullscreen_button_title": "Zabaldu erruleta",
+      "restore_view_button_title": "Leheneratu ikuspegia",
+      "options_header": "Aukerak",
+      "add_option_placeholder": "Gehitu aukera..."
+    },
+    "traffic_light": {
+      "title": "Semaforoa",
+      "icon_alt": "Semaforoa",
+      "tooltip": "Egin klik kolorez aldatzeko"
+    },
+    "timer": {
+      "title": "Tenporizadorea",
+      "finished": "AMAIERA!"
+    },
+    "tic_tac_toe": {
+      "title": "Hiru marratan",
+      "player_1": "1. Jokalaria",
+      "player_2": "2. Jokalaria",
+      "reset_confirm": "Ziur zaude jokoa eta markagailuak berrezarri nahi dituzula?",
+      "winner": "Irabazlea:",
+      "draw": "Berdinketa!",
+      "next_turn": "Hurrengo txanda:",
+      "next_round": "Hurrengo Erronda",
+      "reset_all": "Berrezarri dena"
+    },
+    "iframe": {
+      "title": "Web Bistaratzailea",
+      "url_placeholder": "Itsatsi URL bat hemen...",
+      "load": "Kargatu",
+      "embedded_content": "Kapsulatutako Edukia",
+      "content_placeholder": "URLaren edukia hemen erakutsiko da.",
+      "embed_notice": "Baliteke webgune batzuek kapsulatzea ez onartzea."
+    },
+    "directo_viewer": {
+      "title": "Zuzeneko Konexioa",
+      "go_to_repo": "Joan Zuzeneko Konexioaren biltegira"
+    },
+    "drawing_pad": {
+      "title": "Marrazketa Paleta",
+      "clear_confirm": "Ziur zaude marrazki osoa garbitu nahi duzula? Honek irudia eta trazuak ezabatuko ditu.",
+      "default_filename": "nire_marrazkia.png",
+      "brush": "Pintzela",
+      "eraser": "Ezabagailua",
+      "pencil": "Arkatza",
+      "marker": "Markatzailea",
+      "spray": "Spray",
+      "line": "Lerro Zuzena",
+      "rectangle": "Laukizuzena",
+      "circle": "Zirkulua/Elipsea",
+      "arrow": "Gezia",
+      "text": "Testua",
+      "select_color": "Hautatu kolorea",
+      "brush_size": "Pintzelaren tamaina",
+      "upload_image": "Irudia Igo",
+      "save_drawing": "Gorde Marrazkia",
+      "clear_all": "Garbitu dena",
+      "start_drawing": "Igo irudi bat edo hasi marrazten",
+      "pan_mode": "Aktibatu nabigazio modua",
+      "exit_pan": "Irten nabigazio modutik",
+      "center_view": "Zentratu ikuspegia"
+    },
+    "scientific_calculator": {
+      "title": "Kalkulagailu Zientifikoa",
+      "basic": "Oinarrizkoa",
+      "standard": "Estandarra",
+      "scientific": "Zientifikoa",
+      "history": "Historia",
+      "no_history": "Ez dago historiarik.",
+      "error": "Errorea",
+      "infinity": "Infinitua"
+    },
+    "calendar": {
+      "title": "Egutegia",
+      "days": ["Al", "As", "Az", "Og", "Or", "La", "Ig"],
+      "months": ["urtarrila", "otsaila", "martxoa", "apirila", "maiatza", "ekaina", "uztaila", "abuztua", "iraila", "urria", "azaroa", "abendua"]
+    },
+    "dice": {
+      "title": "3D Dadoak",
+      "num_dice": "Dado Kopurua:",
+      "rolling": "Botatzen...",
+      "roll_dice": "Bota Dadoak",
+      "total": "Guztira:"
+    }
+  }
+}

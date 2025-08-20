@@ -15,8 +15,9 @@ i18n
   .init({
     // Idioma por defecto si no se detecta ninguno
     fallbackLng: 'es',
+    supportedLngs: ['es', 'ca', 'eu', 'gl', 'pt', 'fr', 'it', 'en'],
     // Activa el modo debug en desarrollo
-    debug: true,
+    debug: false,
     // Forzar recarga
     initImmediate: false,
     // Define el namespace por defecto
@@ -31,12 +32,42 @@ i18n
         cache: 'no-cache'
       }
     },
+    // Configuración de interpolación
+    interpolation: {
+      escapeValue: false, // React ya escapa por defecto
+    },
     // Configuración para el detector de idioma
     detection: {
       // Orden de detección: querystring, cookie, localStorage, navigator, htmlTag
       order: ['querystring', 'cookie', 'localStorage', 'navigator', 'htmlTag'],
       // Caché a usar
       caches: ['localStorage', 'cookie'],
+      // Configurar detección de idioma
+      lookupQuerystring: 'lng',
+      lookupCookie: 'i18next',
+      lookupLocalStorage: 'i18nextLng',
+      // Excluir cache para ciertos valores
+      excludeCacheFor: ['cimode'],
+      // Convertir códigos de idioma
+      convertDetectedLanguage: (lng: string) => {
+        // Si es ca-ES, ca-AD, etc., devolver solo 'ca'
+        if (lng.startsWith('ca')) return 'ca';
+        // Si es gl-ES, gl, etc., devolver solo 'gl'
+        if (lng.startsWith('gl')) return 'gl';
+        // Si es eu-ES, eu, etc., devolver solo 'eu'
+        if (lng.startsWith('eu')) return 'eu';
+        // Si es es-ES, es-MX, etc., devolver solo 'es'  
+        if (lng.startsWith('es')) return 'es';
+        // Si es pt-PT, pt-BR, etc., devolver solo 'pt'
+        if (lng.startsWith('pt')) return 'pt';
+        // Si es it-IT, it, etc., devolver solo 'it'
+        if (lng.startsWith('it')) return 'it';
+        // Si es en-US, en-GB, etc., devolver solo 'en'
+        if (lng.startsWith('en')) return 'en';
+        // Si es fr-FR, fr-CA, etc., devolver solo 'fr'
+        if (lng.startsWith('fr')) return 'fr';
+        return lng;
+      }
     },
     // Configuración de react-i18next
     react: {

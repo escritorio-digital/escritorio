@@ -1,0 +1,400 @@
+{
+  "loading": "Chargement...",
+  "settings": {
+    "title": "Configuration",
+    "close": "Fermer",
+    "tabs": {
+      "general": "Général",
+      "profiles": "Profils",
+      "widgets": "Widgets",
+      "theme": "Apparence"
+    },
+    "general": {
+      "language": "Langue de l'application",
+      "languages": {
+        "en": "Anglais",
+        "es": "Espagnol",
+        "ca": "Catalan",
+        "gl": "Galicien",
+        "eu": "Basque",
+        "fr": "Français"
+      },
+      "reset_title": "Réinitialiser l'application",
+      "reset_description": "Supprime toutes les données enregistrées (profils, widgets et préférences) et redémarre comme si c'était la première fois.",
+      "reset_button": "Réinitialiser aux valeurs d'usine",
+      "reset_confirm": "Êtes-vous sûr de vouloir supprimer toutes les préférences et données locales ? Cette action est irréversible."
+    },
+    "profiles": {
+      "invalid_name_alert": "Nom de profil invalide ou déjà existant.",
+      "delete_last_alert": "Vous ne pouvez pas supprimer le dernier profil.",
+      "delete_confirm": "Êtes-vous sûr de vouloir supprimer le profil \"{{name}}\" ?",
+      "save_current_title": "Enregistrer la configuration actuelle comme nouveau profil",
+      "new_profile_placeholder": "Nom du nouveau profil...",
+      "save_button": "Enregistrer",
+      "saved_profiles_title": "Profils enregistrés",
+      "active_button": "Actif",
+      "load_button": "Charger",
+      "delete_button": "Supprimer",
+      "switcher_title": "Changer de bureau"
+    },
+    "widgets": {
+      "search": "Rechercher un widget...",
+      "pinned_info": "Sélectionnez les widgets que vous voulez dans votre barre d'outils. ({{count}}/{{max}})",
+      "add": "Ajouter",
+      "remove": "Retirer",
+      "max_widgets_alert": "Vous ne pouvez pas épingler plus de {{max}} widgets."
+    },
+    "theme": {
+      "theme_colors_title": "Couleurs du thème",
+      "colors": {
+        "desktop_bg": "Fond d'écran du bureau",
+        "widget_bg": "Fond du widget",
+        "widget_header": "En-tête du widget",
+        "accent": "Accentuation",
+        "text_light": "Texte clair",
+        "text_dark": "Texte foncé"
+      },
+      "wallpaper_title": "Fond d'écran",
+      "upload_image_button": "Télécharger une image",
+      "remove_wallpaper_button": "Supprimer le fond d'écran",
+      "reset_theme_button": "Réinitialiser le thème par défaut"
+    }
+  },
+  "toolbar": {
+    "settings": "Configuration",
+    "widgetLibrary": "Bibliothèque de widgets"
+  },
+  "credits": {
+    "title": "Crédits et Licence",
+    "original_project": "Le projet original <strong>Bureau Interactif pour la Salle de Classe</strong> et son idée appartiennent à <strong>María Teresa González</strong>.",
+    "original_link": "Vous pouvez visiter l'application originale à l'adresse suivante :",
+    "new_version": "Cette nouvelle version a été développée en collaboration par <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> et <strong>Pablo G. Guízar</strong>. Le dépôt de ce projet se trouve à l'adresse suivante :",
+    "repository_link_text": "Bureau Numérique",
+    "vibe_community": "Le projet original ainsi que cette migration sont indexés dans le <strong>Répertoire des applications éducatives</strong>, une collection de ressources créées par la communauté <strong>Vibe Coding Educativo</strong>.",
+    "vibe_apps_link_text": "Consultez d'autres applications de cette communauté sur :",
+    "vibe_apps_repo_text": "Répertoire Vibe Coding Educativo",
+    "vibe_telegram_link_text": "Rejoignez la communauté sur Telegram :",
+    "open_knowledge_adherence": "Ce projet adhère au",
+    "open_knowledge_decalogue": "Décalogue de la Connaissance Ouverte"
+  },
+  "widgets": {
+    "attendance": {
+      "title": "Contrôle des présences",
+      "badges": {
+        "excellent_work": "Excellent travail",
+        "good_participation": "Bonne participation",
+        "goal_achieved": "Objectif atteint",
+        "helps_classmates": "Aide ses camarades"
+      },
+      "alerts": {
+        "talks_in_class": "Parle en classe",
+        "doesnt_work": "Ne travaille pas",
+        "bad_behavior": "Mauvais comportement",
+        "incomplete_homework": "Devoirs incomplets"
+      },
+      "no_name": "Sans nom",
+      "new_student_placeholder": "Nouvel étudiant...",
+      "import_csv_tooltip": "Importer un CSV (remplace la liste du jour actuel)",
+      "export_records_tooltip": "Exporter tous les enregistrements",
+      "delete_all_tooltip": "Tout supprimer",
+      "reset_confirm": "Êtes-vous sûr de vouloir supprimer TOUTE la liste d'étudiants et TOUS les enregistrements ?",
+      "present": "Présent",
+      "absent": "Absent",
+      "late": "En retard",
+      "date": "Date :",
+      "attendance_tab": "Présences",
+      "badges_tab": "Badges",
+      "alerts_tab": "Alertes",
+      "no_students_message": "Aucun étudiant sur la liste pour cette date.",
+      "add_students_instruction": "Ajoutez des étudiants ou importez un fichier CSV."
+    },
+    "scientific_calculator": { "title": "Calculatrice scientifique" },
+    "calendar": { "title": "Calendrier" },
+    "image_carousel": {
+      "title": "Carrousel d'images",
+      "no_images": "Aucune image chargée.",
+      "select_images": "Sélectionner des images",
+      "slide_alt": "Diapositive {{number}}",
+      "select_new_images": "Sélectionner de nouvelles images",
+      "more_images_hint": "Chargez plus d'images pour naviguer"
+    },
+    "unit_converter": {
+      "title": "Convertisseur d'unités",
+      "icon_alt": "Convertisseur d'unités",
+      "category_label": "Catégorie :",
+      "swap_button_title": "Échanger les unités",
+      "categories": {
+        "length": "Longueur",
+        "weight": "Poids",
+        "temperature": "Température"
+      },
+      "units": {
+        "meters": "Mètres",
+        "kilometers": "Kilomètres",
+        "miles": "Miles",
+        "feet": "Pieds",
+        "kilograms": "Kilogrammes",
+        "grams": "Grammes",
+        "pounds": "Livres",
+        "ounces": "Onces",
+        "celsius": "Celsius",
+        "fahrenheit": "Fahrenheit",
+        "kelvin": "Kelvin"
+      }
+    },
+    "stopwatch": {
+      "title": "Chronomètre",
+      "pause": "Pause",
+      "start": "Démarrer",
+      "lap": "Tour",
+      "reset": "Réinitialiser"
+    },
+    "dice": { "title": "Dés 3D" },
+    "group_generator": {
+      "title": "Générateur de groupes",
+      "student_list_label": "Liste d'étudiants",
+      "placeholder": "Un nom par ligne...",
+      "load_from_file": "Charger depuis .txt",
+      "number_of_groups": "Nombre de groupes",
+      "students_per_group": "Étudiants par groupe",
+      "generate_groups": "Générer les groupes",
+      "generated_groups_label": "Groupes générés",
+      "group_title": "Groupe {{number}}",
+      "no_groups_message": "Les groupes apparaîtront ici."
+    },
+    "qr_code_generator": {
+      "title": "Générateur de QR",
+      "icon_alt": "Générateur de QR",
+      "placeholder": "Entrez du texte pour générer un code QR.",
+      "input_placeholder": "Écrivez le texte ou l'URL ici...",
+      "generate_button": "Générer le QR"
+    },
+    "work_gestures": {
+      "title": "Gestes de travail",
+      "icon_alt": "Gestes de travail",
+      "back_button": "Retour",
+      "gestures": {
+        "silence": {
+          "label": "Silence",
+          "description": "Travail individuel en silence."
+        },
+        "pairs": {
+          "label": "Binômes",
+          "description": "Travail collaboratif en binômes."
+        },
+        "teams": {
+          "label": "Équipes",
+          "description": "Travail en petits groupes."
+        },
+        "plenary": {
+          "label": "Plénière",
+          "description": "Mise en commun avec tout le groupe."
+        }
+      }
+    },
+    "html_sandbox": {
+      "title": "Bac à sable HTML",
+      "paste_code_here": "Collez votre code ici !",
+      "your_javascript": "Votre JavaScript",
+      "show_preview": "Afficher l'aperçu",
+      "show_code": "Afficher le code",
+      "preview_title": "Aperçu HTML"
+    },
+    "latex_markdown": {
+      "title": "Interpréteur (MD/LaTeX)",
+      "copy_source": "Copier le code source",
+      "copy_image": "Copier comme image",
+      "save_file": "Enregistrer le fichier (.md/.tex)",
+      "export_pdf": "Exporter en PDF (texte)",
+      "source_copied": "Code source copié",
+      "copy_failed": "La copie a échoué",
+      "image_copied": "Image copiée",
+      "copy_image_failed": "Erreur lors de la copie de l'image",
+      "sample_content": "# Théorème de Pythagore\n\nDans un triangle rectangle, le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés.\n\n$$c = \\sqrt{a^2 + b^2}$$",
+      "latex_mode_title": "Mode LaTeX exclusif",
+      "latex_mode_description": "Ce mode affiche une seule formule. Le contenu actuel semble être du texte ou du Markdown.",
+      "how_to_proceed": "Comment procéder",
+      "isolated_formula": "Pour une formule isolée, ne laissez que du LaTeX. Exemple :",
+      "text_with_formulas": "Pour du texte avec des formules, utilisez le mode",
+      "markdown": "Markdown",
+      "latex_syntax_error": "Erreur de syntaxe LaTeX :",
+      "generic_error": "Une erreur est survenue."
+    },
+    "work_list": {
+      "title": "Liste de tâches",
+      "add_task_placeholder": "Ajouter une nouvelle tâche et appuyer sur Entrée...",
+      "load_csv": "Charger un CSV",
+      "download_csv": "Télécharger en CSV",
+      "replace_list_confirm": "Voulez-vous remplacer la liste actuelle par les tâches du fichier ? \n(Cliquez sur \"Annuler\" pour les ajouter à la fin)",
+      "csv_error": "Une erreur est survenue lors de la lecture du fichier CSV. Veuillez vérifier son format.",
+      "double_click_edit": "Double-cliquez sur une tâche pour la modifier."
+    },
+    "scoreboard": {
+      "title": "Tableau des scores",
+      "icon_alt": "Tableau des scores",
+      "reset_confirm": "Êtes-vous sûr de vouloir réinitialiser tous les scores à zéro ?",
+      "empty_message": "Ajoutez une équipe ou un joueur pour commencer.",
+      "input_placeholder": "Nom de l'équipe ou du joueur...",
+      "add_button": "Ajouter",
+      "reset_button_title": "Tout réinitialiser à zéro"
+    },
+    "sound_meter": {
+      "title": "Sonomètre",
+      "silence": "Silence",
+      "conversation": "Conversation",
+      "noise": "Bruit",
+      "no_audio_support": "Votre navigateur ne prend pas en charge l'API audio nécessaire.",
+      "microphone_error": "Erreur lors de l'accès au microphone :",
+      "access_denied": "Accès au microphone refusé.",
+      "enable_browser_settings": "Vous devez autoriser l'accès dans les paramètres de votre navigateur.",
+      "permission_needed": "L'autorisation d'utiliser le microphone est requise.",
+      "activate_meter": "Activer le sonomètre"
+    },
+    "memory_game": {
+      "title": "Jeu de mémoire",
+      "min_images_alert": "Veuillez sélectionner au moins 2 images pour jouer.",
+      "upload_prompt": "Téléchargez des images pour créer le jeu de mémoire",
+      "upload_rule": "Sélectionnez de 2 à 10 images",
+      "moves": "Mouvements : {{count}}",
+      "start_over": "Recommencer",
+      "win_title": "Vous avez gagné !",
+      "win_message": "Vous avez terminé en {{moves}} mouvements.",
+      "play_again": "Rejouer",
+      "icon_alt": "Jeu de mémoire"
+    },
+    "metronome": { "title": "Métronome" },
+    "notepad": {
+      "title": "Bloc-notes",
+      "icon_alt": "Bloc-notes",
+      "initial_content": "<p>Bonjour ! Écrivez ici.</p>",
+      "default_filename": "ma-note.md",
+      "menubar": {
+        "bold": "Gras",
+        "italic": "Italique",
+        "strike": "Barré",
+        "bullet_list": "Liste à puces",
+        "ordered_list": "Liste numérotée",
+        "paragraph": "Paragraphe",
+        "h1": "Titre (H1)",
+        "h2": "Sous-titre (H2)",
+        "h3": "Sous-titre secondaire (H3)",
+        "upload": "Charger une note (.md)",
+        "download": "Télécharger la note (.md)"
+      }
+    },
+    "sliding_puzzle": {
+      "title": "Puzzle coulissant",
+      "icon_alt": "Puzzle coulissant",
+      "upload_prompt": "Téléchargez une image pour commencer",
+      "solved_overlay": "Résolu !",
+      "complexity_label": "Complexité :",
+      "difficulty": {
+        "easy": "Facile (3x3)",
+        "normal": "Normal (4x4)",
+        "hard": "Difficile (5x5)"
+      },
+      "shuffle_button": "Mélanger"
+    },
+    "global_clocks": {
+      "title": "Horloges mondiales",
+      "your_local_time": "Votre heure locale",
+      "add_clock": "Ajouter une horloge",
+      "cities": {
+        "los_angeles": "Los Angeles",
+        "new_york": "New York",
+        "london": "Londres",
+        "paris": "Paris",
+        "madrid": "Madrid",
+        "tokyo": "Tokyo",
+        "sydney": "Sydney",
+        "mexico_city": "Mexico",
+        "buenos_aires": "Buenos Aires",
+        "moscow": "Moscou",
+        "dubai": "Dubaï",
+        "shanghai": "Shanghai"
+      }
+    },
+    "random_spinner": {
+      "title": "Roue aléatoire",
+      "icon_alt": "Roue aléatoire",
+      "default_options": [
+        { "text": "Option 1" },
+        { "text": "Option 2" },
+        { "text": "Option 3" }
+      ],
+      "result_overlay_text": "Cliquez pour tourner à nouveau",
+      "fullscreen_button_title": "Agrandir la roue",
+      "restore_view_button_title": "Restaurer la vue",
+      "options_header": "Options",
+      "add_option_placeholder": "Ajouter une option..."
+    },
+    "traffic_light": {
+      "title": "Feu de signalisation",
+      "icon_alt": "Feu de signalisation",
+      "tooltip": "Cliquez pour changer de couleur"
+    },
+    "timer": {
+      "title": "Minuteur",
+      "finished": "FINI !"
+    },
+    "tic_tac_toe": {
+      "title": "Tic-Tac-Toe",
+      "player_1": "Joueur 1",
+      "player_2": "Joueur 2",
+      "reset_confirm": "Êtes-vous sûr de vouloir réinitialiser le jeu et les scores ?",
+      "winner": "Gagnant :",
+      "draw": "C'est un match nul !",
+      "next_turn": "Prochain tour :",
+      "next_round": "Prochaine manche",
+      "reset_all": "Tout réinitialiser"
+    },
+    "iframe": {
+      "title": "Visionneuse Web",
+      "url_placeholder": "Collez une URL ici...",
+      "load": "Charger",
+      "embedded_content": "Contenu intégré",
+      "content_placeholder": "Le contenu de l'URL s'affichera ici.",
+      "embed_notice": "Certains sites peuvent ne pas autoriser l'intégration."
+    },
+    "directo_viewer": {
+      "title": "Connexion en direct",
+      "go_to_repo": "Aller au dépôt de Connexion en direct"
+    },
+    "drawing_pad": {
+      "title": "Palette de dessin",
+      "clear_confirm": "Êtes-vous sûr de vouloir effacer tout le dessin ? Cela supprimera l'image et les traits.",
+      "default_filename": "mon_dessin.png",
+      "brush": "Pinceau",
+      "eraser": "Gomme",
+      "pencil": "Crayon",
+      "marker": "Marqueur",
+      "spray": "Aérosol",
+      "line": "Ligne droite",
+      "rectangle": "Rectangle",
+      "circle": "Cercle/Ellipse",
+      "arrow": "Flèche",
+      "text": "Texte",
+      "select_color": "Sélectionner une couleur",
+      "brush_size": "Taille du pinceau",
+      "upload_image": "Télécharger une image",
+      "save_drawing": "Enregistrer le dessin",
+      "clear_all": "Tout effacer",
+      "start_drawing": "Téléchargez une image ou commencez à dessiner",
+      "pan_mode": "Activer le mode navigation",
+      "exit_pan": "Quitter le mode navigation",
+      "center_view": "Centrer la vue"
+    },
+    "calendar": {
+      "title": "Calendrier",
+      "days": ["Lu", "Ma", "Me", "Je", "Ve", "Sa", "Di"],
+      "months": ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
+    },
+    "dice": {
+      "title": "Dés 3D",
+      "num_dice": "Nombre de dés :",
+      "rolling": "Lancement...",
+      "roll_dice": "Lancer les dés",
+      "total": "Total :"
+    }
+  }
+}

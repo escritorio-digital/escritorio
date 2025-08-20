@@ -56,7 +56,8 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   };
 
   const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    i18n.changeLanguage(event.target.value);
+    const newLanguage = event.target.value;
+    i18n.changeLanguage(newLanguage);
   };
 
   const handleFactoryReset = () => {
@@ -146,8 +147,15 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                       onChange={handleLanguageChange}
                       className="p-2 border rounded-lg bg-white/80 focus:ring-2 focus:ring-accent focus:outline-none"
                     >
-                      <option value="es">{t('settings.general.languages.es')}</option>
-                      <option value="en">{t('settings.general.languages.en')}</option>
+                      {/* Orden lógico: ES + cooficiales, luego románicas vecinas, y EN al final */}
+                      <option value="es">Español</option>
+                      <option value="ca">Català</option>
+                      <option value="eu">Euskara</option>
+                      <option value="gl">Galego</option>
+                      <option value="pt">Português</option>
+                      <option value="fr">Français</option>
+                      <option value="it">Italiano</option>
+                      <option value="en">English</option>
                     </select>
                   </div>
 

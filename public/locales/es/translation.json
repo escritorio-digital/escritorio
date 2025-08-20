@@ -13,7 +13,10 @@
       "language": "Idioma de la aplicación",
       "languages": {
         "en": "Inglés",
-        "es": "Español"
+        "es": "Español",
+        "ca": "Catalán",
+        "gl": "Gallego",
+        "eu": "Euskera"
       },
       "reset_title": "Restablecer aplicación",
       "reset_description": "Elimina todos los datos guardados (perfiles, widgets y preferencias) y reinicia como si fuera la primera vez.",
